@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-corvix-bg: #1A1A1A;
+  --color-corvix-surface: #2E2E2E;
+  --color-corvix-accent: #0077FF;
+  --color-corvix-accent-hover: #0066DD;
+  --color-corvix-text: #F5F5F5;
+  --color-corvix-muted: #A0A0A0;
+
+  --font-family-display: "Outfit", sans-serif;
+  --font-family-body: "Rubik", sans-serif;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
