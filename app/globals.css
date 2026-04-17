@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-corvix-bg: #1A1A1A;
-  --color-corvix-surface: #2E2E2E;
+  --color-corvix-bg: #0A0A0A;
+  --color-corvix-surface: #141414;
   --color-corvix-accent: #0077FF;
   --color-corvix-accent-hover: #0066DD;
   --color-corvix-text: #F5F5F5;
