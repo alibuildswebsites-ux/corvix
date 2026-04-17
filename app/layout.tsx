@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit, Rubik } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -28,7 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${rubik.variable}`}>
       <body className="bg-corvix-bg text-corvix-text font-body antialiased">
-        {children}
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
