@@ -5,7 +5,7 @@ import type { Service } from "@/data/services";
 
 export default function ServiceCard({ service }: { service: Service }) {
   // Dynamically resolve Lucide icon by name
-  const Icon = (Icons as Record<string, React.ComponentType<{ size?: number; className?: string }>>)[service.iconName] ?? Icons.Zap;
+  const Icon = (Icons as unknown as Record<string, React.ComponentType<{ size?: number; className?: string }>>)[service.iconName] ?? Icons.Zap;
 
   return (
     <Link

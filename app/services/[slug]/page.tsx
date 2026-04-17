@@ -26,7 +26,7 @@ export default async function ServicePage({ params }: Props) {
   const service = services.find((s) => s.slug === slug);
   if (!service) notFound();
 
-  const Icon = (Icons as Record<string, React.ComponentType<{ size?: number; className?: string }>>)[service.iconName] ?? Icons.Zap;
+  const Icon = (Icons as unknown as Record<string, React.ComponentType<{ size?: number; className?: string }>>)[service.iconName] ?? Icons.Zap;
 
   return (
     <div className="max-w-4xl mx-auto px-6 pt-12 pb-32">
