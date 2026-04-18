@@ -10,7 +10,7 @@ import { useReveal } from "@/hooks/useReveal";
 import { services } from "@/data/services";
 import { portfolioItems } from "@/data/portfolio";
 
-const HeroCanvas = dynamic(() => import("@/components/HeroCanvas"), { ssr: false });
+const RobotCanvas = dynamic(() => import("@/components/RobotCanvas"), { ssr: false });
 
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -21,7 +21,7 @@ export default function Home() {
       <div ref={pageRef}>
         {/* ── Hero ─────────────────────────────────────────────── */}
         <section className="relative max-w-6xl mx-auto px-6 pt-16 pb-32 overflow-hidden min-h-[600px]">
-          <HeroCanvas />
+          <RobotCanvas />
           <div className="relative" style={{ zIndex: 10 }}>
             <p data-reveal className="text-corvix-accent text-xs font-medium tracking-[0.25em] uppercase mb-8">
               Full-Service Digital Agency
