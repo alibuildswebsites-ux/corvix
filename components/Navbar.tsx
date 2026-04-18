@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { gsap, ScrollTrigger } from "@/lib/gsap-init";
+import { ScrollTrigger } from "@/lib/gsap-init";
 
 const navLinks = [
   { href: "/services", label: "Services" },
@@ -34,7 +34,10 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (!isHome) { setActiveSection(null); return; }
+    if (!isHome) { 
+      // Safe to not sync active section if not home, handled by condition
+      return; 
+    }
 
     const triggers = homeSections.map((id) => {
       const el = document.getElementById(id);

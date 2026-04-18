@@ -25,11 +25,11 @@ export default function StatCounter({ value, label }: Props) {
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) {
-      setDisplay(value);
+      setTimeout(() => setDisplay(value), 0);
       return;
     }
 
-    setDisplay("0" + suffix);
+    setTimeout(() => setDisplay("0" + suffix), 0);
 
     const obj = { val: 0 };
     const trigger = ScrollTrigger.create({
