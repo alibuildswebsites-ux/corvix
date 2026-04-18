@@ -50,7 +50,6 @@ export default function ContactForm({ formId }: { formId: string }) {
           <option value="">Select a service</option>
           <option value="web-development">Web Development</option>
           <option value="mobile-development">Mobile App Development</option>
-          <option value="cloud-infrastructure">Cloud Infrastructure</option>
           <option value="ai-integrations">AI Agents &amp; Chatbots</option>
           <option value="business-setup">Business Setup</option>
           <option value="other">Other / Multiple</option>

@@ -20,7 +20,7 @@ const rubik = Rubik({
 export const metadata: Metadata = {
   title: "Corvix — Build. Deploy. Scale.",
   description:
-    "Corvix is a full-service digital agency offering web development, mobile apps, cloud infrastructure, AI integrations, and business setup services.",
+    "Corvix is a full-service digital agency offering web development, mobile apps, AI integrations, and business setup services.",
 };
 
 export default function RootLayout({

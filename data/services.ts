@@ -37,20 +37,6 @@ export const services: Service[] = [
     iconName: "Smartphone",
   },
   {
-    slug: "cloud-infrastructure",
-    title: "Cloud Infrastructure",
-    tagline: "Reliable, scalable infrastructure built to last.",
-    description:
-      "We architect and deploy cloud infrastructure on AWS, GCP, and Azure. Whether you need a simple hosting setup or a full IaaS environment — we build it right.",
-    details: [
-      "AWS, GCP, Azure",
-      "Docker, Kubernetes, Terraform",
-      "CI/CD pipelines",
-      "Monitoring, alerting, cost optimization",
-    ],
-    iconName: "Cloud",
-  },
-  {
     slug: "ai-integrations",
     title: "AI Agents & Chatbots",
     tagline: "Intelligent automation built into your product.",

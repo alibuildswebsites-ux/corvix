@@ -38,7 +38,7 @@ export default function Home() {
             </h1>
             
             <p data-reveal className="text-gray-300 text-[1.25rem] max-w-2xl mx-auto leading-relaxed mb-12">
-              Corvix delivers web apps, mobile products, cloud infrastructure, and AI integrations—purpose-built for speed and scale.
+              Corvix delivers web apps, mobile products, and AI integrations—purpose-built for speed and scale.
             </p>
             
             <div data-reveal className="flex flex-col sm:flex-row gap-4 justify-center items-center">
