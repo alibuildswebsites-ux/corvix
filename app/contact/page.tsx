@@ -31,7 +31,7 @@ export default function ContactPage() {
 
   return (
     <PageWrapper>
-      <div ref={pageRef} className="max-w-6xl mx-auto px-6 pt-12 pb-32">
+      <div ref={pageRef} className="max-w-6xl mx-auto px-6 pt-12 pb-20 md:pb-32">
         <p data-reveal className="text-corvix-accent text-xs font-medium tracking-[0.25em] uppercase mb-5">
           Let&apos;s Talk
         </p>

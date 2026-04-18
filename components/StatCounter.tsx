@@ -55,11 +55,11 @@ export default function StatCounter({ value, label }: Props) {
   }, [value, num, suffix]);
 
   return (
-    <div ref={ref} className="bg-corvix-surface rounded-2xl p-6 text-center">
-      <p className="font-display font-extrabold text-4xl text-corvix-accent mb-1">
+    <div ref={ref} className="bg-corvix-surface rounded-2xl p-4 md:p-6 text-center">
+      <p className="font-display font-extrabold text-3xl md:text-4xl text-corvix-accent mb-1">
         {display}
       </p>
-      <p className="text-corvix-muted text-sm">{label}</p>
+      <p className="text-corvix-muted text-xs md:text-sm">{label}</p>
     </div>
   );
 }

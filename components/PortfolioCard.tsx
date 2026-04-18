@@ -6,7 +6,7 @@ export default function PortfolioCard({ item }: { item: PortfolioItem }) {
     <div className="group flex flex-col linear-card rounded-2xl overflow-hidden transition-all duration-300 hover:bg-[#ffffff03] cursor-pointer">
       {/* Colored placeholder image area */}
       <div className={`h-48 ${item.bgColor} flex items-center justify-center relative`}>
-        <span className="font-display font-bold text-2xl text-white/20 select-none">
+        <span className="font-display font-bold text-xl md:text-2xl text-white/20 select-none text-center px-4">
           {item.title}
         </span>
         <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
