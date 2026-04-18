@@ -42,9 +42,10 @@ export default function HeroCanvas() {
     camera.position.z = 5;
 
     // Resize handler
+    let w = 0, h = 0;
     const resize = () => {
-      const w = mount.clientWidth;
-      const h = mount.clientHeight;
+      w = mount.clientWidth;
+      h = mount.clientHeight;
       renderer.setSize(w, h);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       camera.aspect = w / h;
@@ -80,12 +81,12 @@ export default function HeroCanvas() {
     geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
-    const mat = new THREE.PointsMaterial({ size: 0.03, vertexColors: true, sizeAttenuation: true });
+    const mat = new THREE.PointsMaterial({ size: 0.03, vertexColors: true, sizeAttenuation: true, transparent: true });
     const points = new THREE.Points(geo, mat);
     scene.add(points);
 
     // Line geometry (pre-allocated for max connections)
-    const maxLines = PARTICLE_COUNT * 4;
+    const maxLines = PARTICLE_COUNT * 10; // 6000 — safer headroom
     const linePositions = new Float32Array(maxLines * 6);
     const lineColors = new Float32Array(maxLines * 6);
     const lineGeo = new THREE.BufferGeometry();
@@ -130,6 +131,10 @@ export default function HeroCanvas() {
       };
     }
 
+    // Pre-allocated scratch objects for per-frame projection (avoid O(n²) allocations)
+    const _v = new THREE.Vector3();
+    const projected = new Float32Array(PARTICLE_COUNT * 2); // [sx0, sy0, sx1, sy1, ...]
+
     // Animation loop
     let rafId: number;
     const animate = () => {
@@ -138,7 +143,6 @@ export default function HeroCanvas() {
 
       // Update particles
       const pos = geo.attributes.position as THREE.BufferAttribute;
-      const col = geo.attributes.color as THREE.BufferAttribute;
       particles.forEach((p, i) => {
         p.x += p.vx; p.y += p.vy; p.z += p.vz;
         // Wrap boundaries
@@ -146,28 +150,25 @@ export default function HeroCanvas() {
         if (p.y > 3) p.y = -3; if (p.y < -3) p.y = 3;
         if (p.z > 2) p.z = -2; if (p.z < -2) p.z = 2;
         pos.setXYZ(i, p.x, p.y, p.z);
-        col.setXYZ(i, p.color.r * p.opacity, p.color.g * p.opacity, p.color.b * p.opacity);
       });
       pos.needsUpdate = true;
-      col.needsUpdate = true;
 
       // Update constellation lines
       const lp = lineGeo.attributes.position as THREE.BufferAttribute;
       const lc = lineGeo.attributes.color as THREE.BufferAttribute;
       let lineIdx = 0;
 
-      // Project to screen to measure pixel distance
-      const w = mount.clientWidth, h = mount.clientHeight;
-      const projected = particles.map((p) => {
-        const v = new THREE.Vector3(p.x, p.y, p.z);
-        v.project(camera);
-        return { sx: (v.x * 0.5 + 0.5) * w, sy: (-v.y * 0.5 + 0.5) * h };
-      });
+      // Project to screen using pre-allocated scratch objects
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        _v.set(particles[i].x, particles[i].y, particles[i].z).project(camera);
+        projected[i * 2] = (_v.x * 0.5 + 0.5) * w;
+        projected[i * 2 + 1] = (-_v.y * 0.5 + 0.5) * h;
+      }
 
       for (let i = 0; i < PARTICLE_COUNT && lineIdx < maxLines; i++) {
         for (let j = i + 1; j < PARTICLE_COUNT && lineIdx < maxLines; j++) {
-          const dx = projected[i].sx - projected[j].sx;
-          const dy = projected[i].sy - projected[j].sy;
+          const dx = projected[i * 2] - projected[j * 2];
+          const dy = projected[i * 2 + 1] - projected[j * 2 + 1];
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONNECTION_DISTANCE) {
             const alpha = (1 - dist / CONNECTION_DISTANCE) * 0.3;
