@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const PARTICLE_COUNT = 600;
+const PARTICLE_COUNT = 1200;
 const CONNECTION_DISTANCE = 120; // pixels
 const PULSE_RADIUS = 150;         // pixels — cursor proximity boost radius
 const BLOOM_OPACITY = 0.045;
@@ -78,8 +78,8 @@ export default function HeroCanvas() {
       const opacityMult = layer === "far" ? 0.5 : layer === "near" ? 1.2 : 1.0;
       const rawOpacity = 0.3 + Math.random() * 0.7;
       return {
-        x: (Math.random() - 0.5) * 10,
-        y: (Math.random() - 0.5) * 6,
+        x: (Math.random() - 0.5) * 30,
+        y: (Math.random() - 0.5) * 15,
         z,
         vx: (Math.random() - 0.5) * 0.0006 * speedMult,
         vy: (Math.random() - 0.5) * 0.0006 * speedMult,
@@ -201,8 +201,8 @@ export default function HeroCanvas() {
       // Move all particles and wrap boundaries
       for (const p of particles) {
         p.x += p.vx; p.y += p.vy; p.z += p.vz;
-        if (p.x >  5) p.x = -5; if (p.x < -5) p.x =  5;
-        if (p.y >  3) p.y = -3; if (p.y < -3) p.y =  3;
+        if (p.x >  15) p.x = -15; if (p.x < -15) p.x =  15;
+        if (p.y >  7.5) p.y = -7.5; if (p.y < -7.5) p.y =  7.5;
         if (p.z >  2) p.z = -2; if (p.z < -2) p.z =  2;
       }
 
