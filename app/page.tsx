@@ -32,12 +32,12 @@ export default function Home() {
               <span className="text-corvix-muted text-xs font-medium tracking-wide">Corvix 2.0 is live</span>
             </div>
             
-            <h1 data-reveal className="font-display font-extrabold text-[clamp(3rem,8vw,6rem)] leading-[1.05] tracking-tight mb-8">
-              <span className="text-gradient">The product development</span><br />
-              <span className="text-gradient">system for teams</span>
+            <h1 data-reveal className="font-display font-extrabold text-[clamp(3rem,8vw,6rem)] leading-[1.05] tracking-tight mb-8 text-white [text-shadow:0_0_20px_rgba(255,255,255,0.15)]">
+              The product development<br />
+              system for teams
             </h1>
             
-            <p data-reveal className="text-corvix-muted text-[1.25rem] max-w-2xl mx-auto leading-relaxed mb-12">
+            <p data-reveal className="text-gray-300 text-[1.25rem] max-w-2xl mx-auto leading-relaxed mb-12">
               Corvix delivers web apps, mobile products, cloud infrastructure, and AI integrations—purpose-built for speed and scale.
             </p>
             

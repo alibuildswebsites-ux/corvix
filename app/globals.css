@@ -13,14 +13,6 @@
   --font-family-body: "Rubik", sans-serif;
 }
 
-@utility text-gradient {
-  background: linear-gradient(135deg, #fff 30%, rgba(255, 255, 255, 0.4) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
-
 @utility spotlight {
   background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
 }
