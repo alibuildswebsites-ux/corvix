@@ -18,17 +18,19 @@ export default function Home() {
 
   return (
     <PageWrapper>
-      <div ref={pageRef}>
-        {/* ── Hero ─────────────────────────────────────────────── */}
-        <section className="relative w-full overflow-hidden min-h-[100vh] flex flex-col items-center justify-center text-center pt-24 pb-24">
-          <div className="absolute inset-0 w-full h-full z-0">
-            <HeroCanvas />
-          </div>
-          
+      <div ref={pageRef} className="relative">
+        {/* ── Fixed/Absolute 3D Background Wallpaper ── */}
+        <div className="absolute top-0 left-0 right-0 w-full h-[100vh] overflow-hidden z-0 pointer-events-none">
+          <HeroCanvas />
           {/* Subtle background glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] sm:w-[1200px] sm:h-[1200px] spotlight rounded-full pointer-events-none z-0" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] sm:w-[1200px] sm:h-[1200px] spotlight rounded-full z-0" />
+          {/* Bottom fade out gradient */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-corvix-bg to-transparent z-10" />
+        </div>
 
-          <div className="relative z-10 w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 flex flex-col items-center">
+        {/* ── Hero Content ─────────────────────────────────────────────── */}
+        <section className="relative z-10 w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 min-h-[100vh] flex flex-col items-center justify-center text-center pt-24 pb-24">
+          <div className="flex flex-col items-center">
             <div data-reveal className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(255,255,255,0.08)] bg-white/[0.02] mb-8">
               <span className="w-2 h-2 rounded-full bg-corvix-accent animate-pulse" />
               <span className="text-corvix-muted text-xs font-medium tracking-wide">Corvix 2.0 is live</span>
@@ -58,9 +60,6 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          
-          {/* Bottom fade out gradient so the canvas blends smoothly into the next section */}
-          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-corvix-bg to-transparent pointer-events-none z-0" />
         </section>
 
         {/* ── Services ─────────────────────────────────────────── */}

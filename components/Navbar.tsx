@@ -74,10 +74,10 @@ export default function Navbar() {
         animate={{ borderRadius: open ? "24px" : "32px" }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className={[
-          "fixed top-4 left-4 right-4 z-50 border border-[rgba(255,255,255,0.08)] backdrop-blur-md overflow-hidden",
+          "fixed top-4 left-4 right-4 z-50 border border-[rgba(255,255,255,0.08)] overflow-hidden",
           scrolled || open
-            ? "bg-black/60 shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
-            : "bg-black/40",
+            ? "bg-[rgba(255,255,255,0.02)] shadow-[0_4px_24px_rgba(0,0,0,0.4)] backdrop-blur-md"
+            : "bg-transparent",
         ].join(" ")}
       >
         <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 h-14 flex items-center justify-between">
@@ -142,8 +142,6 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </motion.nav>
-
-      <div className="h-20" />
     </>
   );
 }
