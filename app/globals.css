@@ -5,8 +5,8 @@
   --color-corvix-surface: #0a0a0a;
   --color-corvix-accent: #ffffff;
   --color-corvix-accent-hover: #e0e0e0;
-  --color-corvix-text: #ffffff;
-  --color-corvix-muted: #8a8f98;
+  --color-corvix-text: #F7F8F8;
+  --color-corvix-muted: #B4BCD0;
   --color-corvix-border: rgba(255, 255, 255, 0.08);
 
   --font-family-display: "Outfit", sans-serif;
@@ -14,7 +14,7 @@
 }
 
 @utility text-gradient {
-  background: linear-gradient(180deg, #fff 0%, #8a8f98 100%);
+  background: linear-gradient(135deg, #fff 30%, rgba(255, 255, 255, 0.4) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
