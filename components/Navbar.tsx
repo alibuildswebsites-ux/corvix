@@ -80,7 +80,7 @@ export default function Navbar() {
             : "bg-black/40",
         ].join(" ")}
       >
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 h-14 flex items-center justify-between">
           <Link
             href="/"
             className="font-display font-bold text-lg tracking-widest text-corvix-text hover:text-corvix-accent transition-colors duration-200 cursor-pointer"

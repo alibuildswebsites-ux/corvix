@@ -40,7 +40,7 @@ export default function AboutPage() {
 
   return (
     <PageWrapper>
-      <div ref={pageRef} className="max-w-6xl mx-auto px-6 pt-12 pb-32">
+      <div ref={pageRef} className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 pt-12 pb-32">
         {/* Header */}
         <p data-reveal className="text-corvix-accent text-xs font-medium tracking-[0.25em] uppercase mb-5">
           Who We Are

@@ -20,7 +20,7 @@ export default function Home() {
     <PageWrapper>
       <div ref={pageRef}>
         {/* ── Hero ─────────────────────────────────────────────── */}
-        <section className="relative max-w-6xl mx-auto px-6 pt-24 md:pt-32 pb-24 md:pb-32 overflow-hidden min-h-[600px] md:min-h-[700px] flex flex-col items-center justify-center text-center">
+        <section className="relative w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 pt-24 md:pt-32 pb-24 md:pb-32 overflow-hidden min-h-[600px] md:min-h-[700px] flex flex-col items-center justify-center text-center">
           <HeroCanvas />
           
           {/* Subtle background glow */}
@@ -60,7 +60,7 @@ export default function Home() {
 
         {/* ── Services ─────────────────────────────────────────── */}
         <section id="services" className="border-t border-[rgba(255,255,255,0.08)]">
-          <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+          <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 py-16 md:py-24">
             <div className="flex items-end justify-between mb-14">
               <div>
                 <p data-reveal className="text-corvix-accent text-xs font-medium tracking-[0.25em] uppercase mb-3">
@@ -97,7 +97,7 @@ export default function Home() {
 
         {/* ── Portfolio ─────────────────────────────────────────── */}
         <section id="portfolio" className="border-t border-[rgba(255,255,255,0.08)]">
-          <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+          <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 py-16 md:py-24">
             <div className="flex items-end justify-between mb-14">
               <div>
                 <p data-reveal className="text-corvix-accent text-xs font-medium tracking-[0.25em] uppercase mb-3">
@@ -126,7 +126,7 @@ export default function Home() {
 
         {/* ── CTA ───────────────────────────────────────────────── */}
         <section id="cta" className="border-t border-[rgba(255,255,255,0.08)]">
-          <div className="max-w-6xl mx-auto px-6 py-20 md:py-32 text-center">
+          <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 py-20 md:py-32 text-center">
             <h2 data-reveal className="font-display font-extrabold text-[clamp(2.5rem,6vw,5rem)] leading-tight text-corvix-text mb-6">
               Ready to build<br />something real?
             </h2>

@@ -29,7 +29,7 @@ export default async function ServicePage({ params }: Props) {
   const Icon = (Icons as unknown as Record<string, React.ComponentType<{ size?: number; className?: string }>>)[service.iconName] ?? Icons.Zap;
 
   return (
-    <div className="max-w-4xl mx-auto px-6 pt-12 pb-20 md:pb-32">
+    <div className="w-full max-w-[1000px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 pt-12 pb-20 md:pb-32">
       <Link
         href="/services"
         className="inline-flex items-center gap-2 text-corvix-muted hover:text-corvix-accent text-sm font-medium mb-12 transition-colors duration-200 cursor-pointer"

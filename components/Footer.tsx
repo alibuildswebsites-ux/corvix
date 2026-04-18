@@ -10,7 +10,7 @@ const footerLinks = [
 export default function Footer() {
   return (
     <footer className="border-t border-[rgba(255,255,255,0.08)] mt-24">
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Wordmark */}
           <span className="font-display font-bold text-xl tracking-widest text-corvix-text">
