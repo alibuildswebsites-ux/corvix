@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { ScrollTrigger } from "@/lib/gsap-init";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { href: "/services", label: "Services" },
@@ -68,10 +69,13 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
+      <motion.nav
+        layout
+        initial={{ borderRadius: 9999 }}
+        animate={{ borderRadius: open ? 24 : 9999 }}
+        transition={{ type: "spring", stiffness: 400, damping: 30 }}
         className={[
-          "fixed top-4 left-4 right-4 z-50 border border-[rgba(255,255,255,0.08)] transition-all duration-300 backdrop-blur-md overflow-hidden",
-          open ? "rounded-3xl" : "rounded-full",
+          "fixed top-4 left-4 right-4 z-50 border border-[rgba(255,255,255,0.08)] backdrop-blur-md overflow-hidden",
           scrolled || open
             ? "bg-black/60 shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
             : "bg-black/40",
@@ -107,28 +111,38 @@ export default function Navbar() {
           </button>
         </div>
 
-        {open && (
-          <div className="md:hidden border-t border-[rgba(255,255,255,0.08)] px-6 py-4 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-corvix-muted hover:text-corvix-text text-sm font-medium transition-colors duration-200 cursor-pointer"
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href="/contact"
-              className="bg-white hover:bg-gray-200 text-black text-sm font-medium px-5 py-2 rounded-full text-center transition-colors duration-200 cursor-pointer"
-              onClick={() => setOpen(false)}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              layout
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
             >
-              Get Started
-            </Link>
-          </div>
-        )}
-      </nav>
+              <div className="md:hidden border-t border-[rgba(255,255,255,0.08)] px-6 py-4 flex flex-col gap-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-corvix-muted hover:text-corvix-text text-sm font-medium transition-colors duration-200 cursor-pointer"
+                    onClick={() => setOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <Link
+                  href="/contact"
+                  className="bg-white hover:bg-gray-200 text-black text-sm font-medium px-5 py-2 rounded-full text-center transition-colors duration-200 cursor-pointer"
+                  onClick={() => setOpen(false)}
+                >
+                  Get Started
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.nav>
 
       <div className="h-20" />
     </>
