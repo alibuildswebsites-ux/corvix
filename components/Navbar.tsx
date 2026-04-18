@@ -70,10 +70,10 @@ export default function Navbar() {
     <>
       <nav
         className={[
-          "fixed top-4 left-4 right-4 z-50 border border-corvix-surface rounded-2xl transition-all duration-300",
+          "fixed top-4 left-4 right-4 z-50 border border-[rgba(255,255,255,0.08)] rounded-full transition-all duration-300 backdrop-blur-md",
           scrolled
-            ? "bg-corvix-bg/95 shadow-lg shadow-black/20"
-            : "bg-corvix-bg/80 backdrop-blur-md",
+            ? "bg-black/60 shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
+            : "bg-black/40",
         ].join(" ")}
       >
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
@@ -91,7 +91,7 @@ export default function Navbar() {
             <Link href="/contact" className={linkClass("/contact")}>Contact</Link>
             <Link
               href="/contact"
-              className="bg-corvix-accent hover:bg-corvix-accent-hover text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors duration-200 cursor-pointer"
+              className="bg-white hover:bg-gray-200 text-black text-sm font-medium px-4 py-1.5 rounded-full transition-colors duration-200 cursor-pointer"
             >
               Get Started
             </Link>
@@ -107,7 +107,7 @@ export default function Navbar() {
         </div>
 
         {open && (
-          <div className="md:hidden border-t border-corvix-surface px-6 py-4 flex flex-col gap-4">
+          <div className="md:hidden border-t border-[rgba(255,255,255,0.08)] px-6 py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -120,7 +120,7 @@ export default function Navbar() {
             ))}
             <Link
               href="/contact"
-              className="bg-corvix-accent hover:bg-corvix-accent-hover text-white text-sm font-medium px-5 py-2 rounded-lg text-center transition-colors duration-200 cursor-pointer"
+              className="bg-white hover:bg-gray-200 text-black text-sm font-medium px-5 py-2 rounded-full text-center transition-colors duration-200 cursor-pointer"
               onClick={() => setOpen(false)}
             >
               Get Started

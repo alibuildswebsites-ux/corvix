@@ -10,10 +10,10 @@ export default function ServiceCard({ service }: { service: Service }) {
   return (
     <Link
       href={`/services/${service.slug}`}
-      className="group flex flex-col bg-corvix-surface border border-corvix-surface hover:border-corvix-accent rounded-2xl p-6 transition-colors duration-200 cursor-pointer"
+      className="group flex flex-col linear-card rounded-2xl p-6 transition-all duration-300 hover:bg-[#ffffff03] cursor-pointer"
     >
-      <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-corvix-bg mb-5">
-        <Icon size={20} className="text-corvix-accent" />
+      <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-[#ffffff08] border border-[rgba(255,255,255,0.05)] mb-6">
+        <Icon size={20} className="text-corvix-text group-hover:text-white transition-colors duration-200" />
       </div>
       <h3 className="font-display font-bold text-corvix-text text-lg mb-2 group-hover:text-corvix-accent transition-colors duration-200">
         {service.title}

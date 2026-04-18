@@ -23,7 +23,7 @@ export default function ContactForm({ formId }: { formId: string }) {
   }
 
   const inputClass =
-    "w-full bg-corvix-bg border border-corvix-surface focus:border-corvix-accent rounded-xl px-4 py-3.5 text-corvix-text placeholder:text-corvix-muted outline-none transition-colors duration-200 text-sm";
+    "w-full bg-corvix-bg border border-[rgba(255,255,255,0.08)] focus:border-corvix-accent rounded-xl px-4 py-3.5 text-corvix-text placeholder:text-corvix-muted outline-none transition-colors duration-200 text-sm";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">

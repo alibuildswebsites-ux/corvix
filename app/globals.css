@@ -1,20 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  --color-corvix-bg: #0A0A0A;
-  --color-corvix-surface: #141414;
-  --color-corvix-accent: #0077FF;
-  --color-corvix-accent-hover: #0066DD;
-  --color-corvix-text: #F5F5F5;
-  --color-corvix-muted: #A0A0A0;
+  --color-corvix-bg: #000000;
+  --color-corvix-surface: #0a0a0a;
+  --color-corvix-accent: #ffffff;
+  --color-corvix-accent-hover: #e0e0e0;
+  --color-corvix-text: #ffffff;
+  --color-corvix-muted: #8a8f98;
+  --color-corvix-border: rgba(255, 255, 255, 0.08);
 
   --font-family-display: "Outfit", sans-serif;
   --font-family-body: "Rubik", sans-serif;
 }
 
+@utility text-gradient {
+  background: linear-gradient(180deg, #fff 0%, #8a8f98 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility spotlight {
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+@utility linear-card {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
 @layer base {
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
+    font-family: var(--font-family-display);
   }
 
   @media (prefers-reduced-motion: reduce) {

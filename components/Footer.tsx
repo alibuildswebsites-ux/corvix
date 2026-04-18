@@ -9,7 +9,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-corvix-surface mt-24">
+    <footer className="border-t border-[rgba(255,255,255,0.08)] mt-24">
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Wordmark */}

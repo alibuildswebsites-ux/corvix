@@ -20,31 +20,37 @@ export default function Home() {
     <PageWrapper>
       <div ref={pageRef}>
         {/* ── Hero ─────────────────────────────────────────────── */}
-        <section className="relative max-w-6xl mx-auto px-6 pt-16 pb-32 overflow-hidden min-h-[600px]">
+        <section className="relative max-w-6xl mx-auto px-6 pt-32 pb-32 overflow-hidden min-h-[700px] flex flex-col items-center justify-center text-center">
           <HeroCanvas />
+          
+          {/* Subtle background glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] spotlight rounded-full pointer-events-none" />
+
           <div className="relative" style={{ zIndex: 10 }}>
-            <p data-reveal className="text-corvix-accent text-xs font-medium tracking-[0.25em] uppercase mb-8">
-              Full-Service Digital Agency
-            </p>
-            <h1 data-reveal className="font-display font-extrabold text-[clamp(3.5rem,10vw,8rem)] leading-[0.95] tracking-tight text-corvix-text mb-10">
-              Build.<br />
-              Deploy.<br />
-              <span className="text-corvix-accent">Scale.</span>
+            <div data-reveal className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(255,255,255,0.08)] bg-white/[0.02] mb-8">
+              <span className="w-2 h-2 rounded-full bg-corvix-accent animate-pulse" />
+              <span className="text-corvix-muted text-xs font-medium tracking-wide">Corvix 2.0 is live</span>
+            </div>
+            
+            <h1 data-reveal className="font-display font-extrabold text-[clamp(3rem,8vw,6rem)] leading-[1.05] tracking-tight mb-8">
+              <span className="text-gradient">The product development</span><br />
+              <span className="text-gradient">system for teams</span>
             </h1>
-            <p data-reveal className="text-corvix-muted text-xl max-w-lg leading-relaxed mb-12">
-              Corvix delivers web apps, mobile products, cloud infrastructure,
-              AI integrations, and business setup — under one roof.
+            
+            <p data-reveal className="text-corvix-muted text-[1.25rem] max-w-2xl mx-auto leading-relaxed mb-12">
+              Corvix delivers web apps, mobile products, cloud infrastructure, and AI integrations—purpose-built for speed and scale.
             </p>
-            <div data-reveal className="flex flex-col sm:flex-row gap-4">
+            
+            <div data-reveal className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-corvix-accent hover:bg-corvix-accent-hover text-white font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 bg-corvix-accent hover:bg-corvix-accent-hover text-black font-medium px-6 py-3 rounded-lg transition-colors duration-200 cursor-pointer text-sm shadow-[0_0_20px_rgba(255,255,255,0.2)]"
               >
-                Start a Project <ArrowRight size={18} />
+                Start a Project <ArrowRight size={16} />
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 border border-corvix-surface hover:border-corvix-accent text-corvix-text font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 bg-[#ffffff05] border border-[rgba(255,255,255,0.08)] hover:bg-[#ffffff0a] text-corvix-text font-medium px-6 py-3 rounded-lg transition-colors duration-200 cursor-pointer text-sm"
               >
                 View Services
               </Link>
@@ -53,7 +59,7 @@ export default function Home() {
         </section>
 
         {/* ── Services ─────────────────────────────────────────── */}
-        <section id="services" className="border-t border-corvix-surface">
+        <section id="services" className="border-t border-[rgba(255,255,255,0.08)]">
           <div className="max-w-6xl mx-auto px-6 py-24">
             <div className="flex items-end justify-between mb-14">
               <div>
@@ -90,7 +96,7 @@ export default function Home() {
         </section>
 
         {/* ── Portfolio ─────────────────────────────────────────── */}
-        <section id="portfolio" className="border-t border-corvix-surface">
+        <section id="portfolio" className="border-t border-[rgba(255,255,255,0.08)]">
           <div className="max-w-6xl mx-auto px-6 py-24">
             <div className="flex items-end justify-between mb-14">
               <div>
@@ -119,7 +125,7 @@ export default function Home() {
         </section>
 
         {/* ── CTA ───────────────────────────────────────────────── */}
-        <section id="cta" className="border-t border-corvix-surface">
+        <section id="cta" className="border-t border-[rgba(255,255,255,0.08)]">
           <div className="max-w-6xl mx-auto px-6 py-32 text-center">
             <h2 data-reveal className="font-display font-extrabold text-[clamp(2.5rem,6vw,5rem)] leading-tight text-corvix-text mb-6">
               Ready to build<br />something real?

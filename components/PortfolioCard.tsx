@@ -3,7 +3,7 @@ import type { PortfolioItem } from "@/data/portfolio";
 
 export default function PortfolioCard({ item }: { item: PortfolioItem }) {
   return (
-    <div className="group flex flex-col bg-corvix-surface border border-corvix-surface hover:border-corvix-accent rounded-2xl overflow-hidden transition-colors duration-200 cursor-pointer">
+    <div className="group flex flex-col linear-card rounded-2xl overflow-hidden transition-all duration-300 hover:bg-[#ffffff03] cursor-pointer">
       {/* Colored placeholder image area */}
       <div className={`h-48 ${item.bgColor} flex items-center justify-center relative`}>
         <span className="font-display font-bold text-2xl text-white/20 select-none">
