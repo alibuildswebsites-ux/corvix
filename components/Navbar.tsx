@@ -70,10 +70,9 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        layout
-        initial={{ borderRadius: 9999 }}
-        animate={{ borderRadius: open ? 24 : 9999 }}
-        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        initial={false}
+        animate={{ borderRadius: open ? "24px" : "32px" }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className={[
           "fixed top-4 left-4 right-4 z-50 border border-[rgba(255,255,255,0.08)] backdrop-blur-md overflow-hidden",
           scrolled || open
@@ -111,14 +110,14 @@ export default function Navbar() {
           </button>
         </div>
 
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {open && (
             <motion.div
-              layout
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden"
             >
               <div className="md:hidden border-t border-[rgba(255,255,255,0.08)] px-6 py-4 flex flex-col gap-4">
                 {navLinks.map((link) => (
