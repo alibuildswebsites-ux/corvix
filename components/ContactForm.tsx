@@ -82,7 +82,7 @@ export default function ContactForm({ formId }: { formId: string }) {
       </button>
 
       {status === "error" && (
-        <p className="text-red-400 text-sm text-center">
+        <p role="alert" className="text-red-400 text-sm text-center">
           Something went wrong. Please try again or email us directly.
         </p>
       )}
