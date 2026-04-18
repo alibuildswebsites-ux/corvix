@@ -20,25 +20,27 @@ export default function Home() {
     <PageWrapper>
       <div ref={pageRef}>
         {/* ── Hero ─────────────────────────────────────────────── */}
-        <section className="relative w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 pt-24 md:pt-32 pb-24 md:pb-32 overflow-hidden min-h-[600px] md:min-h-[700px] flex flex-col items-center justify-center text-center">
-          <HeroCanvas />
+        <section className="relative w-full overflow-hidden min-h-[100vh] flex flex-col items-center justify-center text-center pt-24 pb-24">
+          <div className="absolute inset-0 w-full h-full z-0">
+            <HeroCanvas />
+          </div>
           
           {/* Subtle background glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] sm:w-[800px] sm:h-[800px] spotlight rounded-full pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] sm:w-[1200px] sm:h-[1200px] spotlight rounded-full pointer-events-none z-0" />
 
-          <div className="relative" style={{ zIndex: 10 }}>
+          <div className="relative z-10 w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 flex flex-col items-center">
             <div data-reveal className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(255,255,255,0.08)] bg-white/[0.02] mb-8">
               <span className="w-2 h-2 rounded-full bg-corvix-accent animate-pulse" />
               <span className="text-corvix-muted text-xs font-medium tracking-wide">Corvix 2.0 is live</span>
             </div>
             
             <h1 data-reveal className="font-display font-extrabold text-[clamp(3rem,8vw,6rem)] leading-[1.05] tracking-tight mb-8 text-white [text-shadow:0_0_20px_rgba(255,255,255,0.15)]">
-              The product development<br />
-              system for teams
+              We build software<br />
+              that scales.
             </h1>
             
             <p data-reveal className="text-gray-300 text-[1.25rem] max-w-2xl mx-auto leading-relaxed mb-12">
-              Corvix delivers web apps, mobile products, and AI integrations—purpose-built for speed and scale.
+              Corvix delivers web apps, mobile products, AI integrations, and business setup — under one roof purpose-built for speed and scale.
             </p>
             
             <div data-reveal className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -56,6 +58,9 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          
+          {/* Bottom fade out gradient so the canvas blends smoothly into the next section */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-corvix-bg to-transparent pointer-events-none z-0" />
         </section>
 
         {/* ── Services ─────────────────────────────────────────── */}
