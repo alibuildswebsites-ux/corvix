@@ -70,8 +70,9 @@ export default function Navbar() {
     <>
       <nav
         className={[
-          "fixed top-4 left-4 right-4 z-50 border border-[rgba(255,255,255,0.08)] rounded-full transition-all duration-300 backdrop-blur-md",
-          scrolled
+          "fixed top-4 left-4 right-4 z-50 border border-[rgba(255,255,255,0.08)] transition-all duration-300 backdrop-blur-md overflow-hidden",
+          open ? "rounded-3xl" : "rounded-full",
+          scrolled || open
             ? "bg-black/60 shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
             : "bg-black/40",
         ].join(" ")}

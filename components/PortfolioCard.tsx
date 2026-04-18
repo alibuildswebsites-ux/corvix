@@ -11,7 +11,7 @@ export default function PortfolioCard({ item }: { item: PortfolioItem }) {
         </span>
         <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <div className="bg-corvix-accent rounded-full p-1.5">
-            <ArrowUpRight size={14} className="text-white" />
+            <ArrowUpRight size={14} className="text-black" />
           </div>
         </div>
       </div>

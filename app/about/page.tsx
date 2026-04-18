@@ -98,7 +98,7 @@ export default function AboutPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-corvix-accent hover:bg-corvix-accent-hover text-white font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer"
+            className="inline-flex items-center gap-2 bg-corvix-accent hover:bg-corvix-accent-hover text-black font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer"
           >
             Get in Touch <ArrowRight size={18} />
           </Link>

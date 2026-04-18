@@ -74,7 +74,7 @@ export default function ContactForm({ formId }: { formId: string }) {
       <button
         type="submit"
         disabled={status === "sending" || status === "success"}
-        className="w-full inline-flex items-center justify-center gap-2 bg-corvix-accent hover:bg-corvix-accent-hover disabled:opacity-60 text-white font-semibold py-4 rounded-xl transition-colors duration-200 cursor-pointer"
+        className="w-full inline-flex items-center justify-center gap-2 bg-corvix-accent hover:bg-corvix-accent-hover disabled:opacity-60 text-black font-semibold py-4 rounded-xl transition-colors duration-200 cursor-pointer"
       >
         {status === "sending" ? "Sending..." : status === "success" ? "Message Sent!" : (
           <><Send size={16} /> Send Message</>
