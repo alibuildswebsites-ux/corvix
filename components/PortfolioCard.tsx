@@ -3,11 +3,9 @@ import type { PortfolioItem } from "@/data/portfolio";
 
 export default function PortfolioCard({ item }: { item: PortfolioItem }) {
   return (
-    <div className="group flex flex-col glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.15)] cursor-pointer relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(255,255,255,0.03)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0" />
-      
+    <div className="group flex flex-col linear-card rounded-2xl overflow-hidden transition-all duration-300 hover:bg-[#ffffff03] cursor-pointer">
       {/* Colored placeholder image area */}
-      <div className={`h-48 ${item.bgColor} flex items-center justify-center relative z-10`}>
+      <div className={`h-48 ${item.bgColor} flex items-center justify-center relative`}>
         <span className="font-display font-bold text-2xl text-white/20 select-none">
           {item.title}
         </span>
@@ -18,7 +16,7 @@ export default function PortfolioCard({ item }: { item: PortfolioItem }) {
         </div>
       </div>
 
-      <div className="p-6 flex flex-col flex-1 relative z-10">
+      <div className="p-6 flex flex-col flex-1">
         <p className="text-corvix-muted text-xs font-medium tracking-widest uppercase mb-2">
           {item.client}
         </p>
