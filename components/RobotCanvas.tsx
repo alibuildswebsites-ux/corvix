@@ -1,23 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-
-// ── Material helpers ──────────────────────────────────────────────────────────
-function stdMat(color: number, roughness = 0.6, metalness = 0.4) {
-  return new THREE.MeshStandardMaterial({ color, roughness, metalness });
-}
-function basicMat(color: number, opacity = 1) {
-  return new THREE.MeshBasicMaterial({
-    color,
-    transparent: opacity < 1,
-    opacity,
-  });
-}
-
-// ── Geometry helpers ──────────────────────────────────────────────────────────
-function box(w: number, h: number, d: number) { return new THREE.BoxGeometry(w, h, d); }
-function cyl(rt: number, rb: number, h: number, seg = 8) { return new THREE.CylinderGeometry(rt, rb, h, seg); }
-function sph(r: number, seg = 16) { return new THREE.SphereGeometry(r, seg, seg); }
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 export default function RobotCanvas() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -73,14 +57,17 @@ export default function RobotCanvas() {
     // ── Renderer ────────────────────────────────────────────────────────────
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setClearColor(0x000000, 0);
-    renderer.shadowMap.enabled = false;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     mount.appendChild(renderer.domElement);
 
     // ── Scene + Camera ──────────────────────────────────────────────────────
     const scene = new THREE.Scene();
     let w = mount.clientWidth, h = mount.clientHeight;
-    const camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
-    camera.position.set(0, 0.3, 6);
+    // Lower camera slightly and point it up to frame the robot nicely
+    const camera = new THREE.PerspectiveCamera(45, w / h, 0.25, 100);
+    camera.position.set(0, 1.5, 8);
+    camera.lookAt(0, 1.5, 0);
 
     const resize = () => {
       w = mount.clientWidth;
@@ -95,141 +82,87 @@ export default function RobotCanvas() {
     ro.observe(mount);
 
     // ── Lights ──────────────────────────────────────────────────────────────
-    scene.add(new THREE.AmbientLight(0xffffff, 0.3));
-    const blueKey = new THREE.PointLight(0x0077ff, 2.5, 20);
-    blueKey.position.set(-3, 3, 4);
-    scene.add(blueKey);
-    const fillLight = new THREE.PointLight(0xf5f5f5, 0.8, 20);
-    fillLight.position.set(3, -1, 3);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+    
+    const dirLight = new THREE.DirectionalLight(0x0077ff, 2.5);
+    dirLight.position.set(-3, 10, 10);
+    dirLight.castShadow = true;
+    scene.add(dirLight);
+    
+    const fillLight = new THREE.PointLight(0xffffff, 1.5);
+    fillLight.position.set(5, 2, -2);
     scene.add(fillLight);
 
-    // ── Robot geometry ──────────────────────────────────────────────────────
-    const DARK   = 0x141414;
-    const STEEL  = 0x1a1a2e;
-    const BLUE   = 0x0077ff;
+    // ── GLTF Loader ─────────────────────────────────────────────────────────
+    let mixer: THREE.AnimationMixer;
+    let modelGroup = new THREE.Group();
+    scene.add(modelGroup);
 
-    // Collect all disposables
-    const geos: THREE.BufferGeometry[] = [];
-    const mats: THREE.Material[] = [];
+    // Add a platform/shadow catcher
+    const planeGeo = new THREE.PlaneGeometry(100, 100);
+    const planeMat = new THREE.ShadowMaterial({ opacity: 0.2 });
+    const plane = new THREE.Mesh(planeGeo, planeMat);
+    plane.rotation.x = -Math.PI / 2;
+    plane.position.y = -0.5;
+    plane.receiveShadow = true;
+    scene.add(plane);
 
-    function mesh(geo: THREE.BufferGeometry, mat: THREE.Material): THREE.Mesh {
-      geos.push(geo); mats.push(mat);
-      return new THREE.Mesh(geo, mat);
+    if (prefersReduced) {
+      // Don't load the heavy model for reduced motion
+      renderer.render(scene, camera);
+    } else {
+      const loader = new GLTFLoader();
+      loader.load('/RobotExpressive.glb', (gltf) => {
+        const model = gltf.scene;
+        // Position and scale to fit our scene nicely
+        model.position.set(0, -0.5, 0);
+        model.scale.set(0.6, 0.6, 0.6);
+        
+        // Enable shadows
+        model.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+        });
+
+        modelGroup.add(model);
+
+        // Animations
+        mixer = new THREE.AnimationMixer(model);
+        const animations = gltf.animations;
+
+        // Find standard animations
+        const idleClip = THREE.AnimationClip.findByName(animations, 'Idle');
+        const waveClip = THREE.AnimationClip.findByName(animations, 'Wave');
+
+        if (idleClip && waveClip) {
+          const idleAction = mixer.clipAction(idleClip);
+          const waveAction = mixer.clipAction(waveClip);
+
+          // Start idle
+          idleAction.play();
+
+          // Play wave after a small delay
+          setTimeout(() => {
+            waveAction.reset();
+            waveAction.setLoop(THREE.LoopOnce, 1);
+            waveAction.clampWhenFinished = true;
+            waveAction.crossFadeFrom(idleAction, 0.2, true);
+            waveAction.play();
+
+            // When wave finishes, crossfade back to idle
+            mixer.addEventListener('finished', (e) => {
+              if (e.action === waveAction) {
+                idleAction.reset();
+                idleAction.crossFadeFrom(waveAction, 0.5, true);
+                idleAction.play();
+              }
+            });
+          }, 300);
+        }
+      });
     }
-
-    // ── Robot group (root) ──────────────────────────────────────────────────
-    const robotGroup = new THREE.Group();
-    robotGroup.position.set(1.2, 0, 0);
-    scene.add(robotGroup);
-
-    // Head pivot (for mouse tracking)
-    const headPivot = new THREE.Group();
-    headPivot.position.set(0, 1.05, 0); // top of neck
-    robotGroup.add(headPivot);
-
-    const headMesh = mesh(box(0.7, 0.65, 0.65), stdMat(STEEL));
-    headPivot.add(headMesh);
-
-    const leftEye = mesh(sph(0.08), basicMat(BLUE));
-    leftEye.position.set(-0.17, 0.05, 0.33);
-    headPivot.add(leftEye);
-
-    const rightEye = mesh(sph(0.08), basicMat(BLUE));
-    rightEye.position.set(0.17, 0.05, 0.33);
-    headPivot.add(rightEye);
-
-    // Antenna
-    const antennaPivot = new THREE.Group();
-    antennaPivot.position.set(0, 0.35, 0);
-    headPivot.add(antennaPivot);
-
-    const antennaBase = mesh(cyl(0.03, 0.03, 0.25, 8), stdMat(BLUE, 0.3, 0.8));
-    antennaBase.position.set(0, 0.125, 0);
-    antennaPivot.add(antennaBase);
-
-    const antennaTip = mesh(sph(0.06), basicMat(BLUE));
-    antennaTip.position.set(0, 0.265, 0);
-    antennaPivot.add(antennaTip);
-
-    // Neck
-    const neck = mesh(cyl(0.1, 0.1, 0.15, 8), stdMat(DARK));
-    neck.position.set(0, 0.775, 0);
-    robotGroup.add(neck);
-
-    // Body
-    const body = mesh(box(1.0, 1.1, 0.55), stdMat(DARK));
-    body.position.set(0, 0.1, 0);
-    robotGroup.add(body);
-
-    // Chest panel
-    const chestPanel = mesh(box(0.5, 0.35, 0.02), basicMat(BLUE, 0.6));
-    chestPanel.position.set(0, 0.15, 0.28);
-    robotGroup.add(chestPanel);
-
-    // Left arm
-    const leftShoulderPivot = new THREE.Group();
-    leftShoulderPivot.position.set(-0.65, 0.45, 0);
-    robotGroup.add(leftShoulderPivot);
-
-    const leftUpperArm = mesh(cyl(0.1, 0.09, 0.55, 8), stdMat(STEEL));
-    leftUpperArm.rotation.z = Math.PI / 2;
-    leftUpperArm.position.set(-0.275, 0, 0);
-    leftShoulderPivot.add(leftUpperArm);
-
-    const leftElbowPivot = new THREE.Group();
-    leftElbowPivot.position.set(-0.55, 0, 0);
-    leftShoulderPivot.add(leftElbowPivot);
-
-    const leftForearm = mesh(cyl(0.08, 0.07, 0.45, 8), stdMat(DARK));
-    leftForearm.rotation.z = Math.PI / 2;
-    leftForearm.position.set(-0.225, 0, 0);
-    leftElbowPivot.add(leftForearm);
-
-    // Right arm (wave pivot)
-    const rightShoulderPivot = new THREE.Group();
-    rightShoulderPivot.position.set(0.65, 0.45, 0);
-    rightShoulderPivot.rotation.z = -0.3;
-    robotGroup.add(rightShoulderPivot);
-
-    const rightUpperArm = mesh(cyl(0.1, 0.09, 0.55, 8), stdMat(STEEL));
-    rightUpperArm.rotation.z = Math.PI / 2;
-    rightUpperArm.position.set(0.275, 0, 0);
-    rightShoulderPivot.add(rightUpperArm);
-
-    const rightElbowPivot = new THREE.Group();
-    rightElbowPivot.position.set(0.55, 0, 0);
-    rightShoulderPivot.add(rightElbowPivot);
-
-    const rightForearm = mesh(cyl(0.08, 0.07, 0.45, 8), stdMat(DARK));
-    rightForearm.rotation.z = Math.PI / 2;
-    rightForearm.position.set(0.225, 0, 0);
-    rightElbowPivot.add(rightForearm);
-
-    // Left leg
-    const leftHipPivot = new THREE.Group();
-    leftHipPivot.position.set(-0.28, -0.55, 0);
-    robotGroup.add(leftHipPivot);
-
-    const leftLeg = mesh(cyl(0.11, 0.09, 0.7, 8), stdMat(STEEL));
-    leftLeg.position.set(0, -0.35, 0);
-    leftHipPivot.add(leftLeg);
-
-    const leftFoot = mesh(box(0.18, 0.12, 0.28), stdMat(DARK));
-    leftFoot.position.set(0, -0.76, 0.05);
-    leftHipPivot.add(leftFoot);
-
-    // Right leg
-    const rightHipPivot = new THREE.Group();
-    rightHipPivot.position.set(0.28, -0.55, 0);
-    robotGroup.add(rightHipPivot);
-
-    const rightLeg = mesh(cyl(0.11, 0.09, 0.7, 8), stdMat(STEEL));
-    rightLeg.position.set(0, -0.35, 0);
-    rightHipPivot.add(rightLeg);
-
-    const rightFoot = mesh(box(0.18, 0.12, 0.28), stdMat(DARK));
-    rightFoot.position.set(0, -0.76, 0.05);
-    rightHipPivot.add(rightFoot);
 
     // ── Mouse tracking ──────────────────────────────────────────────────────
     let mouseNX = 0, mouseNY = 0;
@@ -247,19 +180,11 @@ export default function RobotCanvas() {
     );
     observer.observe(mount);
 
-    // ── Wave state ──────────────────────────────────────────────────────────
-    const waveState = { active: false, startTime: 0 };
-
     // ── Clock ───────────────────────────────────────────────────────────────
     const clock = new THREE.Clock();
 
-    // ── Static snapshot for reduced motion ──────────────────────────────────
     if (prefersReduced) {
-      renderer.render(scene, camera);
       return () => {
-        geos.forEach(g => g.dispose());
-        mats.forEach(m => m.dispose());
-        renderer.dispose();
         ro.disconnect();
         observer.disconnect();
         window.removeEventListener("mousemove", onMouseMove);
@@ -267,57 +192,28 @@ export default function RobotCanvas() {
       };
     }
 
-    // Schedule wave start
-    const waveTimeout = setTimeout(() => {
-      waveState.active = true;
-      waveState.startTime = clock.getElapsedTime();
-    }, 300);
-
     // ── Animation loop ──────────────────────────────────────────────────────
     let rafId: number;
     const animate = () => {
       rafId = requestAnimationFrame(animate);
       if (!isVisible) return;
 
-      const t = clock.getElapsedTime();
+      const delta = clock.getDelta();
+      if (mixer) mixer.update(delta);
 
-      // Idle bob
-      robotGroup.position.y = Math.sin(t * 1.2) * 0.12;
-
-      // Wave animation
-      if (waveState.active) {
-        const elapsed = t - waveState.startTime;
-        const progress = Math.min(elapsed / 1.5, 1.0);
-        // ease in-out quad
-        const eased = progress < 0.5
-          ? 2 * progress * progress
-          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-        rightShoulderPivot.rotation.z = -0.3 + Math.sin(eased * Math.PI) * -1.5;
-        if (progress >= 1.0) {
-          waveState.active = false;
-          rightShoulderPivot.rotation.z = -0.3;
-        }
-      }
-
-      // Head mouse tracking (lerp)
-      headPivot.rotation.y += (mouseNX * 0.25 - headPivot.rotation.y) * 0.06;
-      headPivot.rotation.x += (-mouseNY * 0.15 - headPivot.rotation.x) * 0.06;
-
-      // Antenna subtle wobble
-      antennaPivot.rotation.z = Math.sin(t * 2.5) * 0.08;
+      // Subtly rotate the entire model group towards the mouse
+      modelGroup.rotation.y += (mouseNX * 0.5 - modelGroup.rotation.y) * 0.05;
+      modelGroup.rotation.x += (-mouseNY * 0.1 - modelGroup.rotation.x) * 0.05;
 
       renderer.render(scene, camera);
     };
     animate();
 
     return () => {
-      clearTimeout(waveTimeout);
       cancelAnimationFrame(rafId);
       observer.disconnect();
       ro.disconnect();
       window.removeEventListener("mousemove", onMouseMove);
-      geos.forEach(g => g.dispose());
-      mats.forEach(m => m.dispose());
       renderer.dispose();
       if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
     };
