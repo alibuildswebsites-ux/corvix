@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const PARTICLE_COUNT = 1200;
+const PARTICLE_COUNT = 2000;
 const CONNECTION_DISTANCE = 120; // pixels
 const PULSE_RADIUS = 150;         // pixels — cursor proximity boost radius
 const BLOOM_OPACITY = 0.045;
@@ -78,8 +78,8 @@ export default function HeroCanvas() {
       const opacityMult = layer === "far" ? 0.5 : layer === "near" ? 1.2 : 1.0;
       const rawOpacity = 0.3 + Math.random() * 0.7;
       return {
-        x: (Math.random() - 0.5) * 30,
-        y: (Math.random() - 0.5) * 15,
+        x: (Math.random() - 0.5) * 100,
+        y: (Math.random() - 0.5) * 50,
         z,
         vx: (Math.random() - 0.5) * 0.0006 * speedMult,
         vy: (Math.random() - 0.5) * 0.0006 * speedMult,
@@ -201,8 +201,8 @@ export default function HeroCanvas() {
       // Move all particles and wrap boundaries
       for (const p of particles) {
         p.x += p.vx; p.y += p.vy; p.z += p.vz;
-        if (p.x >  15) p.x = -15; if (p.x < -15) p.x =  15;
-        if (p.y >  7.5) p.y = -7.5; if (p.y < -7.5) p.y =  7.5;
+        if (p.x >  50) p.x = -50; if (p.x < -50) p.x =  50;
+        if (p.y >  25) p.y = -25; if (p.y < -25) p.y =  25;
         if (p.z >  2) p.z = -2; if (p.z < -2) p.z =  2;
       }
 
@@ -268,6 +268,11 @@ export default function HeroCanvas() {
       camera.lookAt(0, 0, 0);
 
       renderer.render(scene, camera);
+      
+      // Fade in the canvas after the first frame is rendered
+      if (mountRef.current && mountRef.current.style.opacity !== '1') {
+        mountRef.current.style.opacity = '1';
+      }
     };
     animate();
 
@@ -290,7 +295,7 @@ export default function HeroCanvas() {
     <div
       ref={mountRef}
       aria-hidden="true"
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none opacity-0 transition-opacity duration-[1500ms] ease-out"
       style={{ zIndex: 0 }}
     />
   );
