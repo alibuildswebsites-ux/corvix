@@ -268,17 +268,16 @@ export default function HeroCanvas() {
       camera.lookAt(0, 0, 0);
 
       renderer.render(scene, camera);
-      
-      // Fade in the canvas after a micro-delay to prevent batching
-      if (mountRef.current && mountRef.current.style.opacity !== '1') {
-        setTimeout(() => {
-          if (mountRef.current) mountRef.current.style.opacity = '1';
-        }, 50);
-      }
     };
     animate();
 
+    // Trigger fade-in after a micro-delay to prevent CSS batching
+    const fadeTimeout = setTimeout(() => {
+      if (mountRef.current) mountRef.current.style.opacity = '1';
+    }, 50);
+
     return () => {
+      clearTimeout(fadeTimeout);
       cancelAnimationFrame(rafId);
       observer.disconnect();
       ro.disconnect();
