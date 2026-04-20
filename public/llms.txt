@@ -1,16 +1,15 @@
-# Corvix SEO Platform
+# Corvix
 
-Full-service SEO optimization and visibility engine for modern web applications.
+> Full-service digital agency specialized in scalable software, AI agents, and US business setup.
 
-## Core Features
-- AI Search Optimization (GEO/AEO)
-- Technical SEO Audits
-- Schema Markup Generation
-- Automated Keyword Research
-- Content Gap Analysis
+## Core Services
+- [Web Development](/services/web-development): Production-grade apps with Next.js, React, and modern stacks.
+- [Mobile Development](/services/mobile-development): Cross-platform iOS/Android apps via React Native and Flutter.
+- [AI Agents & Chatbots](/services/ai-integrations): Custom LLM integrations, RAG pipelines, and workflow automation.
+- [Business Setup](/services/business-setup): US LLC formation, EIN registration, and banking resolution.
 
-## Resources
-- [Full Specification](/llms-full.txt)
-- [Documentation](https://docs.corvix.ai)
-- [API Reference](https://api.corvix.ai)
-- [Support](https://support.corvix.ai)
+## Technical Excellence
+Corvix emphasizes performance, engineering discipline, and purely professional delivery.
+
+- [Full Details](/llms-full.txt)
+- [Contact](/contact)

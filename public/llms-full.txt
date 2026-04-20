@@ -1,20 +1,35 @@
-# Corvix Technical Specification
+# Corvix — Technical Breakdown
 
-Detailed breakdown of the Corvix SEO platform architecture and capabilities for AI agents and developers.
+## Engineering Philosophy
+Purely professional, technical delivery. We prioritize performance, maintainability, and scalability.
 
-## Architecture
-Corvix is built as a modular SEO engine that integrates with modern web frameworks (Next.js, React, Vue) to provide real-time optimization.
+## Tech Stack
+- Frontend: Next.js 16+, React 19, Tailwind CSS 4.
+- Animation: GSAP, Framer Motion.
+- 3D: Three.js / React Three Fiber.
+- Backend/Infrastructure: Scalable cloud architectures, RAG pipelines for AI.
 
-### Modules
-1. **Crawler Engine**: Distributed web crawler for technical audits.
-2. **Analysis Pipeline**: LLM-powered content and structure analysis.
-3. **Markup Generator**: Automated JSON-LD and microdata injection.
-4. **Visibility Monitor**: Real-time tracking across Google AI Overviews, Perplexity, and ChatGPT.
+## Detailed Service Specs
 
-## Optimization Patterns
-- **Standalone Answer Blocks**: Content structured for easy extraction by RAG systems.
-- **Data-First Evidence**: High density of statistics and expert citations.
-- **Structural Integrity**: Semantic HTML5 with comprehensive ARIA and Schema.org mapping.
+### Web Development
+Production-grade websites and web applications.
+- Frameworks: Next.js, React, Vue, Laravel, Django.
+- Features: Responsive, mobile-first, SEO optimized, performance tuned.
+- CMS: Sanity, Contentful, Strapi.
 
-## Integration
-Developers can integrate Corvix via our CLI, GitHub Action, or direct API access.
+### AI Agents & Chatbots
+Intelligent automation built into products.
+- LLMs: Custom GPT, Claude, and open-source models.
+- Capabilities: RAG pipelines, autonomous agents, workflow automation.
+- Platforms: Slack, WhatsApp, Web integrations.
+
+### Business Setup
+Legal and administrative readiness for US ventures.
+- LLC Formation: All 50 states.
+- Compliance: EIN registration, Operating Agreements, Bylaws.
+- Banking: Resolution letters for business accounts.
+
+## Portfolio Highlights
+- FinTrack Dashboard: Real-time financial analytics (Next.js, Supabase).
+- ShopMate: E-commerce mobile app (React Native, Stripe).
+- SupportBot AI: Customer support agent (GPT-4, Custom RAG).
