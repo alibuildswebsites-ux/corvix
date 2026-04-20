@@ -11,7 +11,7 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@corvix.io",
+    value: "alibuildswebsites@gmail.com",
   },
   {
     icon: Clock,
