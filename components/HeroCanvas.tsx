@@ -2,8 +2,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const PARTICLE_COUNT = 1500;
-const CONNECTION_DISTANCE = 150; // pixels
+const PARTICLE_COUNT = 1000;
+const CONNECTION_DISTANCE = 165; // pixels
 const PULSE_RADIUS = 200;         // pixels — cursor proximity boost radius
 const BLOOM_OPACITY = 0.045;
 const BLOOM_LERP = 0.08;
