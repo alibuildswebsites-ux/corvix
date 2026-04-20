@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     creator: "@corvix",
   },
   verification: {
-    google: "aBLTqQdqZbEWtvS9P-MkFIkPi4rH-UM7bEdHpBPYn8U",
+    google: "ERq6avX3oinIrgvwQwQGesI9r5EMvHMJk_3z02BYVIE",
   },
 };
 
