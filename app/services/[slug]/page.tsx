@@ -1,4 +1,5 @@
 import { services } from "@/data/services";
+import { blogPosts } from "@/data/blogs";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Check } from "lucide-react";
@@ -96,7 +97,7 @@ export default async function ServicePage({ params }: Props) {
         ))}
       </ul>
 
-      <div className="bg-corvix-surface border border-corvix-surface rounded-2xl p-10 text-center">
+      <div className="bg-corvix-surface border border-corvix-surface rounded-2xl p-10 text-center mb-12">
         <h3 className="font-display font-bold text-2xl text-corvix-text mb-3">
           Ready to get started?
         </h3>
@@ -110,6 +111,18 @@ export default async function ServicePage({ params }: Props) {
           Contact Us
         </Link>
       </div>
+
+      {/* Silent Internal Linking to Blog */}
+      {blogPosts.find(p => p.slug.includes(service.slug)) && (
+        <div className="border-t border-white/5 pt-12">
+          <h3 className="text-white font-bold text-lg mb-4">Technical Insight</h3>
+          {blogPosts.filter(p => p.slug.includes(service.slug)).slice(0, 1).map(post => (
+            <Link key={post.slug} href={`/blog/${post.slug}`} className="text-corvix-muted hover:text-corvix-accent text-sm transition-colors">
+              Read our technical breakdown: {post.title} →
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
