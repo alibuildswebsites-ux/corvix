@@ -48,6 +48,16 @@ export const metadata: Metadata = {
   verification: {
     google: "ERq6avX3oinIrgvwQwQGesI9r5EMvHMJk_3z02BYVIE",
   },
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/site.webmanifest",
 };
 
 const jsonLd = {
@@ -55,7 +65,7 @@ const jsonLd = {
   "@type": "Organization",
   name: "Corvix",
   url: "https://corvix-pi.vercel.app",
-  logo: "https://corvix-pi.vercel.app/logo.png",
+  logo: "https://corvix-pi.vercel.app/apple-touch-icon.png",
   sameAs: [
     "https://twitter.com/corvix",
     "https://github.com/corvix",
