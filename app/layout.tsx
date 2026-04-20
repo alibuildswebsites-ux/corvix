@@ -18,23 +18,9 @@ const rubik = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: "Corvix — We build software that scales.",
+  title: "Corvix — Build. Deploy. Scale.",
   description:
-    "Elite digital agency for founders. We deliver web apps, mobile products, and AI integrations — purpose-built for speed and scale.",
-  metadataBase: new URL('https://alibuildswebsites.me'),
-  openGraph: {
-    title: "Corvix — We build software that scales.",
-    description: "Elite digital agency for founders. We deliver web apps, mobile products, and AI integrations.",
-    images: '/og-image.png',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    images: ['/og-image.png'],
-  },
-  icons: {
-    apple: '/apple-touch-icon.png',
-  },
+    "Corvix is a full-service digital agency offering web development, mobile apps, AI integrations, and business setup services.",
 };
 
 export default function RootLayout({
