@@ -29,6 +29,17 @@ Legal and administrative readiness for US ventures.
 - Compliance: EIN registration, Operating Agreements, Bylaws.
 - Banking: Resolution letters for business accounts.
 
+## Technical Standards & Compliance
+
+### Operational Security
+- **Data Sovereignty:** Private RAG pipelines ensuring client data never trains public LLMs.
+- **Protocol:** HTTPS/TLS 1.3 enforced; secure JWT-based authentication layers.
+
+### Deployment Lifecycle
+- **CI/CD:** Automated GitHub Actions workflows for linting, testing, and deployment.
+- **Environment:** Edge-optimized rendering via Vercel for global low-latency performance.
+- **Observability:** Error tracking and performance monitoring integrated at the core.
+
 ## Portfolio Highlights
 - FinTrack Dashboard: Real-time financial analytics (Next.js, Supabase).
 - ShopMate: E-commerce mobile app (React Native, Stripe).

@@ -56,6 +56,35 @@ export default function AboutPage() {
           We serve clients across the USA and internationally — fully remote, always reliable.
         </p>
 
+        {/* Engineering Standards Expansion */}
+        <div data-reveal className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32 border-t border-white/5 pt-16">
+          <div>
+            <h2 className="font-display font-bold text-3xl text-corvix-text mb-6">
+              The Corvix Engineering Standard
+            </h2>
+            <p className="text-corvix-muted text-lg leading-relaxed mb-6">
+              We don&apos;t just build websites; we architect digital infrastructure. Every project at Corvix follows a strictly type-safe, component-driven methodology.
+            </p>
+            <p className="text-corvix-muted text-lg leading-relaxed">
+              By leveraging Next.js 15 and React 19, we ensure our clients&apos; products are ready for the Series A growth phase from day one.
+            </p>
+          </div>
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Performance Targets</h3>
+              <p className="text-corvix-muted leading-relaxed">Sub-second LCP (Largest Contentful Paint) targets on all production builds.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Reliability</h3>
+              <p className="text-corvix-muted leading-relaxed">Automated QA pipelines and 100% test coverage for mission-critical logic.</p>
+            </div>
+            <div>
+              <h3 className="text-white font-bold text-lg mb-2">Security</h3>
+              <p className="text-corvix-muted leading-relaxed">SOC2-ready architectural patterns for AI and Fintech integrations.</p>
+            </div>
+          </div>
+        </div>
+
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24">
           {stats.map((stat) => (

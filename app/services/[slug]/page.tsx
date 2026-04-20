@@ -54,6 +54,17 @@ export default async function ServicePage({ params }: Props) {
       "@type": "Organization",
       "name": "Corvix",
     },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Technical Stack",
+      "itemListElement": service.details.map((detail) => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": detail,
+        },
+      })),
+    },
   };
 
   return (

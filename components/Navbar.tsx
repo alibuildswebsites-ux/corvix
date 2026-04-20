@@ -104,7 +104,7 @@ export default function Navbar() {
           <button
             className="md:hidden text-corvix-muted hover:text-corvix-text transition-colors duration-200 cursor-pointer"
             onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
+            aria-label={open ? "Close menu" : "Open menu"}
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
