@@ -2,8 +2,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const PARTICLE_COUNT = 1000;
-const CONNECTION_DISTANCE = 165; // pixels
+const PARTICLE_COUNT = 500;
+const CONNECTION_DISTANCE = 275; // pixels
 const PULSE_RADIUS = 200;         // pixels — cursor proximity boost radius
 const BLOOM_OPACITY = 0.045;
 const BLOOM_LERP = 0.08;
@@ -116,9 +116,9 @@ export default function HeroCanvas() {
       return { geo, mat, pts };
     }
 
-    const far  = buildPoints(farParticles,  0.018);
-    const mid  = buildPoints(midParticles,  0.030);
-    const near = buildPoints(nearParticles, 0.045);
+    const far  = buildPoints(farParticles,  0.025);
+    const mid  = buildPoints(midParticles,  0.045);
+    const near = buildPoints(nearParticles, 0.065);
     scene.add(far.pts);
     scene.add(mid.pts);
     scene.add(near.pts);
@@ -242,7 +242,7 @@ export default function HeroCanvas() {
             const proximityBoost = cursorDist < PULSE_RADIUS
               ? (1 - cursorDist / PULSE_RADIUS) * 0.4
               : 0;
-            const alpha = Math.min((1 - dist / CONNECTION_DISTANCE) * 0.3 + proximityBoost, 0.7);
+            const alpha = Math.min((1 - dist / CONNECTION_DISTANCE) * 0.25 + proximityBoost, 0.4);
 
             lp.setXYZ(lineIdx * 2,     particles[i].x, particles[i].y, particles[i].z);
             lp.setXYZ(lineIdx * 2 + 1, particles[j].x, particles[j].y, particles[j].z);
