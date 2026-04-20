@@ -43,7 +43,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <article className="min-h-screen bg-corvix-bg text-corvix-text pt-32 pb-20">
       {/* Reading Progress Bar (Visual Only for now) */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-corvix-accent/20 z-[60]">
+      <div className="fixed top-0 left-0 w-full h-1 z-[60]">
         <div className="h-full bg-corvix-accent w-0 transition-all duration-300" id="progress-bar" />
       </div>
 
