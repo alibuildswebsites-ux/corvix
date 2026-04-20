@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import PortfolioCard from "@/components/PortfolioCard";
@@ -14,14 +14,15 @@ const HeroCanvas = dynamic(() => import("@/components/HeroCanvas"), { ssr: false
 
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
   useReveal(pageRef);
 
   return (
     <PageWrapper>
       <div ref={pageRef} className="relative">
         {/* ── Fixed/Absolute 3D Background Wallpaper ── */}
-        <div className="absolute top-0 left-0 right-0 w-full h-[100vh] overflow-hidden z-0 pointer-events-none">
-          <HeroCanvas />
+        <div className={`absolute top-0 left-0 right-0 w-full h-[100vh] overflow-hidden z-0 pointer-events-none transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}>
+          <HeroCanvas onReady={() => setReady(true)} />
           {/* Subtle background glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] sm:w-[1200px] sm:h-[1200px] spotlight rounded-full z-0" />
           {/* Bottom fade out gradient */}
@@ -29,7 +30,7 @@ export default function Home() {
         </div>
 
         {/* ── Hero Content ─────────────────────────────────────────────── */}
-        <section className="relative z-10 w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 min-h-[100vh] flex flex-col items-center justify-center text-center pt-24 pb-24">
+        <section className={`relative z-10 w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 min-h-[100vh] flex flex-col items-center justify-center text-center pt-24 pb-24 transition-all duration-1000 delay-300 ${ready ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           <div className="flex flex-col items-center">
             <div data-reveal className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(255,255,255,0.08)] bg-white/[0.02] mb-8">
               <span className="w-2 h-2 rounded-full bg-corvix-accent animate-pulse" />

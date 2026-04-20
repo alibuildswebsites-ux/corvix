@@ -29,8 +29,9 @@ function layerOf(z: number): Layer {
   return "mid";
 }
 
-export default function HeroCanvas() {
+export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
   const mountRef = useRef<HTMLDivElement>(null);
+  const readyCalledRef = useRef(false);
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -268,6 +269,10 @@ export default function HeroCanvas() {
       camera.lookAt(0, 0, 0);
 
       renderer.render(scene, camera);
+      if (onReady && !readyCalledRef.current) {
+        readyCalledRef.current = true;
+        onReady();
+      }
     };
     animate();
 
