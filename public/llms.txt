@@ -1,0 +1,16 @@
+# Corvix SEO Platform
+
+Full-service SEO optimization and visibility engine for modern web applications.
+
+## Core Features
+- AI Search Optimization (GEO/AEO)
+- Technical SEO Audits
+- Schema Markup Generation
+- Automated Keyword Research
+- Content Gap Analysis
+
+## Resources
+- [Full Specification](/llms-full.txt)
+- [Documentation](https://docs.corvix.ai)
+- [API Reference](https://api.corvix.ai)
+- [Support](https://support.corvix.ai)

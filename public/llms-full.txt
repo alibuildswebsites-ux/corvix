@@ -1,0 +1,20 @@
+# Corvix Technical Specification
+
+Detailed breakdown of the Corvix SEO platform architecture and capabilities for AI agents and developers.
+
+## Architecture
+Corvix is built as a modular SEO engine that integrates with modern web frameworks (Next.js, React, Vue) to provide real-time optimization.
+
+### Modules
+1. **Crawler Engine**: Distributed web crawler for technical audits.
+2. **Analysis Pipeline**: LLM-powered content and structure analysis.
+3. **Markup Generator**: Automated JSON-LD and microdata injection.
+4. **Visibility Monitor**: Real-time tracking across Google AI Overviews, Perplexity, and ChatGPT.
+
+## Optimization Patterns
+- **Standalone Answer Blocks**: Content structured for easy extraction by RAG systems.
+- **Data-First Evidence**: High density of statistics and expert citations.
+- **Structural Integrity**: Semantic HTML5 with comprehensive ARIA and Schema.org mapping.
+
+## Integration
+Developers can integrate Corvix via our CLI, GitHub Action, or direct API access.
