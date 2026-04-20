@@ -45,6 +45,9 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
     creator: "@corvix",
   },
+  verification: {
+    google: "aBLTqQdqZbEWtvS9P-MkFIkPi4rH-UM7bEdHpBPYn8U",
+  },
 };
 
 const jsonLd = {
