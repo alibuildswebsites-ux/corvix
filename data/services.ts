@@ -15,10 +15,11 @@ export const services: Service[] = [
     description:
       "We build production-grade websites and web applications using modern frameworks. From marketing sites to complex SaaS dashboards — we ship clean, maintainable code.",
     details: [
-      "Next.js, React, Vue, Laravel, Django",
-      "Responsive, mobile-first design",
-      "SEO optimized and performance tuned",
-      "CMS integrations (Sanity, Contentful, Strapi)",
+      "Next.js 16+, React 19, Vue, Laravel, Django",
+      "High-performance, mobile-first responsive architecture",
+      "Advanced SEO optimization and Core Web Vitals tuning",
+      "Headless CMS integrations (Sanity, Contentful, Strapi)",
+      "Custom API development and third-party integrations",
     ],
     iconName: "Globe",
   },
@@ -29,10 +30,11 @@ export const services: Service[] = [
     description:
       "We design and build cross-platform mobile applications using React Native and Flutter. Fast to market, native feel, single codebase.",
     details: [
-      "React Native and Flutter",
-      "iOS and Android",
-      "App Store and Play Store submission",
-      "Push notifications, offline support, biometrics",
+      "Cross-platform optimization with React Native and Flutter",
+      "Native-feel iOS and Android application development",
+      "Real-time push notification systems and offline support",
+      "Biometric authentication and secure data encryption",
+      "End-to-end App Store and Play Store lifecycle management",
     ],
     iconName: "Smartphone",
   },
@@ -43,10 +45,11 @@ export const services: Service[] = [
     description:
       "We build custom AI agents and chatbot integrations using the latest LLMs. From customer support bots to autonomous agents that run business workflows.",
     details: [
-      "Custom GPT and Claude-powered agents",
-      "Chatbot integrations (Slack, WhatsApp, web)",
-      "RAG pipelines and knowledge bases",
-      "Workflow automation with AI",
+      "Enterprise-grade RAG (Retrieval-Augmented Generation) pipelines",
+      "Custom LLM orchestration (GPT-4o, Claude 3.5, Gemini 1.5)",
+      "Autonomous agentic workflow automation",
+      "Cross-platform chatbot deployment (Slack, WhatsApp, Web)",
+      "Vector database integration and knowledge base management",
     ],
     iconName: "Bot",
   },
@@ -57,10 +60,11 @@ export const services: Service[] = [
     description:
       "We handle the legal and administrative side of launching a US business. LLC formation, EIN registration, bank resolution, operating agreements, and bylaws — done for you.",
     details: [
-      "LLC formation in any US state",
-      "EIN (Employer Identification Number) registration",
-      "Bank account resolution letter",
-      "Operating agreement and bylaws drafting",
+      "Strategic US LLC formation and legal structuring",
+      "EIN (Employer Identification Number) and tax compliance registration",
+      "Corporate governance documentation (Operating Agreements, Bylaws)",
+      "Banking resolution letters and fintech stack advisory",
+      "Ongoing compliance and registered agent support",
     ],
     iconName: "Building2",
   },
