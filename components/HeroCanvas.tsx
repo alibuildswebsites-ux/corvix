@@ -125,7 +125,7 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
     scene.add(near.pts);
 
     // ── Constellation lines ────────────────────────────────────────────────
-    const maxLines = PARTICLE_COUNT * 15; // Balanced for 500 particles
+    const maxLines = PARTICLE_COUNT * 15;
     const linePositions = new Float32Array(maxLines * 6);
     const lineColors    = new Float32Array(maxLines * 6);
     const lineGeo = new THREE.BufferGeometry();
@@ -189,6 +189,11 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
       };
     }
 
+    // ── Spatial Grid Pre-allocations ────────────────────────────────────────
+    const GRID_COLS = 6;
+    const GRID_ROWS = 3;
+    const grid: number[][] = Array.from({ length: GRID_COLS * GRID_ROWS }, () => []);
+    
     // ── Pre-allocated scratch for per-frame projection ─────────────────────
     const _v = new THREE.Vector3();
     const projected = new Float32Array(PARTICLE_COUNT * 2);
@@ -199,12 +204,23 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
       rafId = requestAnimationFrame(animate);
       if (!isVisible) return;
 
-      // Move all particles and wrap boundaries
-      for (const p of particles) {
+      // Reset Grid
+      for (let i = 0; i < grid.length; i++) grid[i].length = 0;
+
+      // Move all particles and wrap boundaries + Binning
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const p = particles[i];
         p.x += p.vx; p.y += p.vy; p.z += p.vz;
         if (p.x >  12.5) p.x = -12.5; if (p.x < -12.5) p.x =  12.5;
         if (p.y >  5) p.y = -5; if (p.y < -5) p.y =  5;
         if (p.z >  2) p.z = -2; if (p.z < -2) p.z =  2;
+
+        // Binning Pass
+        const gx = Math.floor(((p.x + 12.5) / 25) * GRID_COLS);
+        const gy = Math.floor(((p.y + 5) / 10) * GRID_ROWS);
+        const clampedX = Math.max(0, Math.min(gx, GRID_COLS - 1));
+        const clampedY = Math.max(0, Math.min(gy, GRID_ROWS - 1));
+        grid[clampedY * GRID_COLS + clampedX].push(i);
       }
 
       // Update geometry positions per layer
@@ -212,44 +228,66 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
       updateLayerPositions(midParticles,  mid.geo);
       updateLayerPositions(nearParticles, near.geo);
 
-      // Project all particles to screen space (pre-allocated, no allocations)
+      // Project all particles to screen space
       for (let i = 0; i < PARTICLE_COUNT; i++) {
         _v.set(particles[i].x, particles[i].y, particles[i].z).project(camera);
         projected[i * 2]     = (_v.x *  0.5 + 0.5) * w;
         projected[i * 2 + 1] = (-_v.y * 0.5 + 0.5) * h;
       }
 
-      // Cursor screen position for proximity boost
       const cursorSx = (mouseX *  0.5 + 0.5) * w;
       const cursorSy = (-mouseY * 0.5 + 0.5) * h;
 
-      // Draw constellation lines with proximity pulse
       const lp = lineGeo.attributes.position as THREE.BufferAttribute;
       const lc = lineGeo.attributes.color    as THREE.BufferAttribute;
       let lineIdx = 0;
 
-      for (let i = 0; i < PARTICLE_COUNT && lineIdx < maxLines; i++) {
-        for (let j = i + 1; j < PARTICLE_COUNT && lineIdx < maxLines; j++) {
-          const dx   = projected[i * 2]     - projected[j * 2];
-          const dy   = projected[i * 2 + 1] - projected[j * 2 + 1];
-          const dist = Math.sqrt(dx * dx + dy * dy);
+      // Optimized Connection Pass using Spatial Grid
+      for (let gy = 0; gy < GRID_ROWS; gy++) {
+        for (let gx = 0; gx < GRID_COLS; gx++) {
+          const cellIdx = gy * GRID_COLS + gx;
+          const cellParticles = grid[cellIdx];
 
-          if (dist < CONNECTION_DISTANCE) {
-            const midSx = (projected[i * 2]     + projected[j * 2])     * 0.5;
-            const midSy = (projected[i * 2 + 1] + projected[j * 2 + 1]) * 0.5;
-            const cdx = midSx - cursorSx;
-            const cdy = midSy - cursorSy;
-            const cursorDist = Math.sqrt(cdx * cdx + cdy * cdy);
-            const proximityBoost = cursorDist < PULSE_RADIUS
-              ? (1 - cursorDist / PULSE_RADIUS) * 0.4
-              : 0;
-            const alpha = Math.min((1 - dist / CONNECTION_DISTANCE) * 0.25 + proximityBoost, 0.4);
+          // Check against particles in same cell and adjacent cells (right, down-left, down, down-right)
+          // This ensures we only check each pair once
+          const neighbors = [
+            [gx, gy], [gx + 1, gy], 
+            [gx - 1, gy + 1], [gx, gy + 1], [gx + 1, gy + 1]
+          ];
 
-            lp.setXYZ(lineIdx * 2,     particles[i].x, particles[i].y, particles[i].z);
-            lp.setXYZ(lineIdx * 2 + 1, particles[j].x, particles[j].y, particles[j].z);
-            lc.setXYZ(lineIdx * 2,     ACCENT.r * alpha, ACCENT.g * alpha, ACCENT.b * alpha);
-            lc.setXYZ(lineIdx * 2 + 1, ACCENT.r * alpha, ACCENT.g * alpha, ACCENT.b * alpha);
-            lineIdx++;
+          for (const p1Idx of cellParticles) {
+            for (const [nx, ny] of neighbors) {
+              if (nx < 0 || nx >= GRID_COLS || ny >= GRID_ROWS) continue;
+              const nextCellParticles = grid[ny * GRID_COLS + nx];
+              
+              for (const p2Idx of nextCellParticles) {
+                if (p1Idx >= p2Idx) continue; // Skip same particle and avoid double checks
+
+                const dx   = projected[p1Idx * 2]     - projected[p2Idx * 2];
+                const dy   = projected[p1Idx * 2 + 1] - projected[p2Idx * 2 + 1];
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < CONNECTION_DISTANCE && lineIdx < maxLines) {
+                  const midSx = (projected[p1Idx * 2]     + projected[p2Idx * 2])     * 0.5;
+                  const midSy = (projected[p1Idx * 2 + 1] + projected[p2Idx * 2 + 1]) * 0.5;
+                  const cdx = midSx - cursorSx;
+                  const cdy = midSy - cursorSy;
+                  const cursorDist = Math.sqrt(cdx * cdx + cdy * cdy);
+                  const proximityBoost = cursorDist < PULSE_RADIUS
+                    ? (1 - cursorDist / PULSE_RADIUS) * 0.4
+                    : 0;
+                  const alpha = Math.min((1 - dist / CONNECTION_DISTANCE) * 0.25 + proximityBoost, 0.4);
+
+                  const p1 = particles[p1Idx];
+                  const p2 = particles[p2Idx];
+                  lp.setXYZ(lineIdx * 2,     p1.x, p1.y, p1.z);
+                  lp.setXYZ(lineIdx * 2 + 1, p2.x, p2.y, p2.z);
+                  lc.setXYZ(lineIdx * 2,     ACCENT.r * alpha, ACCENT.g * alpha, ACCENT.b * alpha);
+                  lc.setXYZ(lineIdx * 2 + 1, ACCENT.r * alpha, ACCENT.g * alpha, ACCENT.b * alpha);
+                  lineIdx++;
+                }
+              }
+            }
           }
         }
       }
@@ -257,11 +295,9 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
       lp.needsUpdate = true;
       lc.needsUpdate = true;
 
-      // Bloom: unproject cursor to world space, lerp bloom mesh toward it
       bloomTarget.set(mouseX, mouseY, 0.5).unproject(camera);
       bloom.position.lerp(bloomTarget, BLOOM_LERP);
 
-      // Camera parallax
       camOffsetX += (mouseX * 0.2 - camOffsetX) * 0.05;
       camOffsetY += (mouseY * 0.1 - camOffsetY) * 0.05;
       camera.position.x = camOffsetX;
@@ -276,7 +312,6 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
     };
     animate();
 
-    // Trigger fade-in after a micro-delay to prevent CSS batching
     const fadeTimeout = setTimeout(() => {
       if (mountRef.current) mountRef.current.style.opacity = '1';
     }, 50);
