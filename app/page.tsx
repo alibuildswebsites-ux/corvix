@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useRef, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import PortfolioCard from "@/components/PortfolioCard";
@@ -29,7 +29,9 @@ export default function Home() {
       <div ref={pageRef} className="relative">
         {/* ── Fixed/Absolute 3D Background Wallpaper ── */}
         <div className={`absolute top-0 left-0 right-0 w-full h-[100vh] overflow-hidden z-0 pointer-events-none transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}>
-          <HeroCanvas onReady={() => setReady(true)} />
+          <Suspense fallback={null}>
+            <HeroCanvas onReady={() => setReady(true)} />
+          </Suspense>
           {/* Subtle background glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] sm:w-[1200px] sm:h-[1200px] spotlight rounded-full z-0" />
           {/* Bottom fade out gradient */}
@@ -50,7 +52,7 @@ export default function Home() {
             </h1>
             
             <p data-reveal className="text-gray-300 text-[1.25rem] max-w-2xl mx-auto leading-relaxed mb-12">
-              Corvix delivers web apps, mobile products, AI integrations, and business setup — under one roof purpose-built for speed and scale.
+              Corvix delivers web apps, mobile products, AI integrations, and business setup, all under one roof purpose-built for speed and scale.
             </p>
             
             <div data-reveal className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -153,7 +155,7 @@ export default function Home() {
                 href="/contact"
                 className="inline-flex items-center gap-2 bg-corvix-accent hover:bg-corvix-accent-hover text-black font-semibold px-10 py-4 rounded-xl transition-colors duration-200 cursor-pointer"
               >
-                Get in Touch <ArrowRight size={18} />
+                Start a Project <ArrowRight size={18} />
               </Link>
             </div>
           </div>

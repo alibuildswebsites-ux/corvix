@@ -19,8 +19,9 @@ export default function PortfolioPage() {
           Portfolio
         </h1>
         <p data-reveal className="text-corvix-muted text-xl max-w-2xl mb-20 leading-relaxed">
-          A selection of projects we&apos;ve built — from web apps to AI agents to mobile products.
+          A selection of projects we&apos;ve built, from web apps to AI agents to mobile products.
         </p>
+        <h2 className="sr-only">Our Work</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {portfolioItems.map((item) => (
             <div key={item.id} data-reveal>

@@ -44,7 +44,7 @@ export default async function BlogPostPage({ params }: Props) {
     <article className="min-h-screen bg-corvix-bg text-corvix-text pt-32 pb-20">
       {/* Reading Progress Bar (Visual Only for now) */}
       <div className="fixed top-0 left-0 w-full h-1 z-[60]">
-        <div className="h-full bg-corvix-accent w-0 transition-all duration-300" id="progress-bar" />
+        <div className="h-full bg-corvix-accent w-0 transition-[width] duration-300" id="progress-bar" />
       </div>
 
       <div className="w-full max-w-[800px] mx-auto px-5 sm:px-8">
@@ -102,7 +102,7 @@ export default async function BlogPostPage({ params }: Props) {
                 <Link
                   key={p.slug}
                   href={`/blog/${p.slug}`}
-                  className="group p-6 rounded-2xl bg-corvix-surface border border-white/5 hover:border-corvix-accent/30 transition-all"
+                  className="group p-6 rounded-2xl bg-corvix-surface border border-white/5 hover:border-corvix-accent/30 transition-colors"
                 >
                   <p className="text-corvix-accent text-xs font-bold uppercase mb-2">{p.category}</p>
                   <h3 className="text-white font-bold group-hover:text-corvix-accent transition-colors mb-3">

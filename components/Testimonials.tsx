@@ -172,7 +172,7 @@ export default function Testimonials() {
           </p>
         </div>
 
-        {/* 3-column infinite scroll — fade top & bottom edges */}
+        {/* 3-column infinite scroll: fade top & bottom edges */}
         <div
           className="relative"
           style={{
@@ -184,17 +184,17 @@ export default function Testimonials() {
           }}
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
-            {/* Column 1 — slowest */}
+            {/* Column 1: slowest */}
             <TestimonialsColumn items={col1} duration={18} />
 
-            {/* Column 2 — medium, offset start (hidden on mobile) */}
+            {/* Column 2: medium, offset start (hidden on mobile) */}
             <TestimonialsColumn
               items={col2}
               duration={14}
               className="hidden md:block"
             />
 
-            {/* Column 3 — fastest, hidden on tablet and below */}
+            {/* Column 3: fastest, hidden on tablet and below */}
             <TestimonialsColumn
               items={col3}
               duration={22}

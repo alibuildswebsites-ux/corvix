@@ -19,8 +19,9 @@ export default function ServicesPage() {
           Services
         </h1>
         <p data-reveal className="text-corvix-muted text-xl max-w-2xl mb-20 leading-relaxed">
-          From idea to infrastructure — we handle every layer of your digital product and business.
+          From idea to infrastructure, we handle every layer of your digital product and business.
         </p>
+        <h2 className="sr-only">Our Services</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((s) => (
             <div key={s.slug} data-reveal>

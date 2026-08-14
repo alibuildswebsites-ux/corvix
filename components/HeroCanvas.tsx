@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 const PARTICLE_COUNT = 500;
 const CONNECTION_DISTANCE = 275; // pixels
-const PULSE_RADIUS = 200;         // pixels — cursor proximity boost radius
+const PULSE_RADIUS = 200;         // pixels: cursor proximity boost radius
 const BLOOM_OPACITY = 0.045;
 const BLOOM_LERP = 0.08;
 const FAR_Z_MAX = -1.0;

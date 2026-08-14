@@ -1,12 +1,77 @@
 import { services } from "@/data/services";
-import { blogPosts } from "@/data/blogs";
+import { blogPosts, type BlogPost } from "@/data/blogs";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Check } from "lucide-react";
-import * as Icons from "lucide-react";
+import { ArrowLeft, Bot, Building2, Check, ChevronRight, Globe, Smartphone, Zap, type LucideIcon } from "lucide-react";
 import type { Metadata } from "next";
 
 type Props = { params: Promise<{ slug: string }> };
+
+const ICONS: Record<string, LucideIcon> = {
+  Globe,
+  Smartphone,
+  Bot,
+  Building2,
+};
+
+// Keyword terms used to relate a service to relevant blog posts.
+// Matching is a soft tag/keyword overlap so it never depends on slug shape.
+const SERVICE_TERMS: Record<string, string[]> = {
+  "web-development": [
+    "next.js",
+    "react",
+    "web",
+    "ui",
+    "performance",
+    "cls",
+    "layout",
+    "enterprise",
+    "scaling",
+  ],
+  "mobile-development": ["mobile", "react native", "flutter", "app"],
+  "ai-integrations": [
+    "ai",
+    "llm",
+    "rag",
+    "agent",
+    "chatbot",
+    "autonomous",
+    "gpt",
+    "orchestration",
+    "knowledge",
+  ],
+  "business-setup": [
+    "llc",
+    "ein",
+    "business",
+    "compliance",
+    "non-resident",
+    "founder",
+    "startup",
+    "irs",
+  ],
+};
+
+// Relate a service to blog posts by keyword overlap, ranked by score.
+// Falls back to the latest posts so the section is never empty.
+function getRelatedPosts(serviceSlug: string, limit: number): BlogPost[] {
+  const terms = SERVICE_TERMS[serviceSlug] ?? [];
+  const scored = blogPosts
+    .map((post) => {
+      const haystack = [post.slug, post.title, post.excerpt, ...post.keywords]
+        .join(" ")
+        .toLowerCase();
+      const score = terms.reduce((acc, term) => acc + (haystack.includes(term) ? 1 : 0), 0);
+      return { post, score };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  if (scored.length > 0) {
+    return scored.slice(0, limit).map(({ post }) => post);
+  }
+  return blogPosts.slice(0, limit);
+}
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -16,7 +81,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) return { title: "Not Found" };
-  const title = `${service.title} — Corvix`;
+  const title = `${service.title} | Corvix`;
   const description = service.description;
 
   return {
@@ -43,7 +108,7 @@ export default async function ServicePage({ params }: Props) {
   const service = services.find((s) => s.slug === slug);
   if (!service) notFound();
 
-  const Icon = (Icons as unknown as Record<string, React.ComponentType<{ size?: number; className?: string }>>)[service.iconName] ?? Icons.Zap;
+  const Icon = ICONS[service.iconName] ?? Zap;
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -113,27 +178,39 @@ export default async function ServicePage({ params }: Props) {
           Ready to get started?
         </h3>
         <p className="text-corvix-muted mb-8">
-          Tell us about your project — we&apos;ll respond within 24 hours.
+          Tell us about your project. We&apos;ll respond within 24 hours.
         </p>
         <Link
           href="/contact"
           className="inline-flex items-center gap-2 bg-corvix-accent hover:bg-corvix-accent-hover text-black font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer"
         >
-          Contact Us
+          Start a Project
         </Link>
       </div>
 
-      {/* Silent Internal Linking to Blog */}
-      {blogPosts.find(p => p.slug.includes(service.slug)) && (
-        <div className="border-t border-white/5 pt-12">
-          <h3 className="text-white font-bold text-lg mb-4">Technical Insight</h3>
-          {blogPosts.filter(p => p.slug.includes(service.slug)).slice(0, 1).map(post => (
-            <Link key={post.slug} href={`/blog/${post.slug}`} className="text-corvix-muted hover:text-corvix-accent text-sm transition-colors">
-              Read our technical breakdown: {post.title} →
+      {/* Technical Insight | Related Reading */}
+      <div className="border-t border-white/5 pt-12">
+        <h3 className="text-white font-bold text-lg mb-6">Technical Insight</h3>
+        <div className="flex flex-col gap-4">
+          {getRelatedPosts(service.slug, 3).map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group flex items-start justify-between gap-4 p-5 rounded-2xl bg-white/[0.03] border border-[rgba(255,255,255,0.08)] hover:border-corvix-accent/30 transition-colors cursor-pointer"
+            >
+              <div className="min-w-0">
+                <p className="text-corvix-accent text-xs font-bold uppercase tracking-wider mb-2">
+                  {post.category}
+                </p>
+                <p className="text-corvix-text font-semibold group-hover:text-white transition-colors duration-200">
+                  {post.title}
+                </p>
+              </div>
+              <ChevronRight size={16} className="text-corvix-muted mt-1 shrink-0 group-hover:translate-x-1 transition-transform" />
             </Link>
           ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }

@@ -17,7 +17,7 @@ const methodology = [
     step: "02",
     title: "Execute",
     description:
-      "We build in focused sprints with frequent communication. No black-box development — you see progress at every stage.",
+      "We build in focused sprints with frequent communication. No black-box development. You see progress at every stage.",
   },
   {
     step: "03",
@@ -53,7 +53,7 @@ export default function AboutPage() {
           We combine technical depth with fast execution.
         </p>
         <p data-reveal className="text-corvix-muted text-xl leading-relaxed mb-24 max-w-2xl">
-          We serve clients across the USA and internationally — fully remote, always reliable.
+          We serve clients across the USA and internationally, fully remote and always reliable.
         </p>
 
         {/* Engineering Standards Expansion */}
@@ -123,13 +123,13 @@ export default function AboutPage() {
             Let&apos;s build something together
           </h3>
           <p className="text-corvix-muted text-lg mb-8 max-w-sm mx-auto">
-            Tell us what you&apos;re working on — we&apos;ll respond within 24 hours.
+            Tell us what you&apos;re working on. We&apos;ll respond within 24 hours.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 bg-corvix-accent hover:bg-corvix-accent-hover text-black font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer"
           >
-            Get in Touch <ArrowRight size={18} />
+            Start a Project <ArrowRight size={18} />
           </Link>
         </div>
       </div>

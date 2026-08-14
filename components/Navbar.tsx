@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { ScrollTrigger } from "@/lib/gsap-init";
@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const navLinks = [
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
+  { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -20,8 +21,30 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const firstMenuLinkRef = useRef<HTMLAnchorElement>(null);
   const pathname = usePathname();
   const isHome = pathname === "/";
+
+  useEffect(() => {
+    if (!open) return;
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+
+    // Move focus to the first menu link once the panel is mounted
+    const t = window.setTimeout(() => firstMenuLinkRef.current?.focus(), 0);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+      window.clearTimeout(t);
+    };
+  }, [open]);
 
   useEffect(() => {
     // Scroll effect
@@ -81,29 +104,38 @@ export default function Navbar() {
         ].join(" ")}
       >
         <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 h-14 flex items-center justify-between">
-          <Link
-            href="/"
-            className="font-display font-bold text-lg tracking-widest text-corvix-text hover:text-corvix-accent transition-colors duration-200 cursor-pointer"
+          <div
+            inert={open ? true : undefined}
+            aria-hidden={open}
+            className="flex items-center justify-between flex-1"
           >
-            CORVIX
-          </Link>
-
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/services" className={linkClass("/services")}>Services</Link>
-            <Link href="/portfolio" className={linkClass("/portfolio")}>Portfolio</Link>
-            <Link href="/about" className={linkClass("/about")}>About</Link>
-            <Link href="/contact" className={linkClass("/contact")}>Contact</Link>
             <Link
-              href="/contact"
-              className="bg-white hover:bg-gray-200 text-black text-sm font-medium px-4 py-1.5 rounded-full transition-colors duration-200 cursor-pointer"
+              href="/"
+              className="font-display font-bold text-lg tracking-widest text-corvix-text hover:text-corvix-accent transition-colors duration-200 cursor-pointer"
             >
-              Get Started
+              CORVIX
             </Link>
+
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="/services" className={linkClass("/services")}>Services</Link>
+              <Link href="/portfolio" className={linkClass("/portfolio")}>Portfolio</Link>
+              <Link href="/blog" className={linkClass("/blog")}>Blog</Link>
+              <Link href="/about" className={linkClass("/about")}>About</Link>
+              <Link href="/contact" className={linkClass("/contact")}>Contact</Link>
+              <Link
+                href="/contact"
+                className="bg-white hover:bg-gray-200 text-black text-sm font-medium px-4 py-1.5 rounded-full transition-colors duration-200 cursor-pointer"
+              >
+                Start a Project
+              </Link>
+            </div>
           </div>
 
           <button
-            className="md:hidden text-corvix-muted hover:text-corvix-text transition-colors duration-200 cursor-pointer"
+            className="md:hidden -ml-2 p-2.5 -mr-2 flex items-center justify-center min-w-11 min-h-11 text-corvix-muted hover:text-corvix-text transition-colors duration-200 cursor-pointer"
             onClick={() => setOpen(!open)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
           >
             {open ? <X size={20} /> : <Menu size={20} />}
@@ -113,6 +145,7 @@ export default function Navbar() {
         <AnimatePresence initial={false}>
           {open && (
             <motion.div
+              id="mobile-menu"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
@@ -120,9 +153,10 @@ export default function Navbar() {
               className="overflow-hidden"
             >
               <div className="md:hidden border-t border-[rgba(255,255,255,0.08)] px-6 py-4 flex flex-col gap-4">
-                {navLinks.map((link) => (
+                {navLinks.map((link, i) => (
                   <Link
                     key={link.href}
+                    ref={i === 0 ? firstMenuLinkRef : undefined}
                     href={link.href}
                     className="text-corvix-muted hover:text-corvix-text text-sm font-medium transition-colors duration-200 cursor-pointer"
                     onClick={() => setOpen(false)}
@@ -135,7 +169,7 @@ export default function Navbar() {
                   className="bg-white hover:bg-gray-200 text-black text-sm font-medium px-5 py-2 rounded-full text-center transition-colors duration-200 cursor-pointer"
                   onClick={() => setOpen(false)}
                 >
-                  Get Started
+                  Start a Project
                 </Link>
               </div>
             </motion.div>

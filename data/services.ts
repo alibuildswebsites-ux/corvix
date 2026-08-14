@@ -4,7 +4,7 @@ export type Service = {
   tagline: string;
   description: string;
   details: string[];
-  iconName: string; // Lucide icon name — NO emojis
+  iconName: string; // Lucide icon name: NO emojis
 };
 
 export const services: Service[] = [
@@ -13,7 +13,7 @@ export const services: Service[] = [
     title: "Web Development",
     tagline: "Fast, scalable websites and web apps.",
     description:
-      "We build production-grade websites and web applications using modern frameworks. From marketing sites to complex SaaS dashboards — we ship clean, maintainable code.",
+      "We build production-grade websites and web applications using modern frameworks. From marketing sites to complex SaaS dashboards. We ship clean, maintainable code.",
     details: [
       "Next.js 16+, React 19, Vue, Laravel, Django",
       "High-performance, mobile-first responsive architecture",
@@ -58,7 +58,7 @@ export const services: Service[] = [
     title: "Business Setup",
     tagline: "Get your US business legally ready, fast.",
     description:
-      "We handle the legal and administrative side of launching a US business. LLC formation, EIN registration, bank resolution, operating agreements, and bylaws — done for you.",
+      "We handle the legal and administrative side of launching a US business. LLC formation, EIN registration, bank resolution, operating agreements, and bylaws, done for you.",
     details: [
       "Strategic US LLC formation and legal structuring",
       "EIN (Employer Identification Number) and tax compliance registration",

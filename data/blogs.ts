@@ -29,7 +29,7 @@ export const blogPosts: BlogPost[] = [
     content: `
 The Engineering Logic Behind Wyoming LLCs for Global Founders
 
-In the world of software architecture, we prioritize scalability, security, and low latency. When shifting perspective to business architecture, the choice of jurisdiction is the foundation. For global tech founders looking to establish a US presence, Wyoming has emerged as the 'Rust' of legal frameworks—efficient, secure, and built for the long term.
+In the world of software architecture, we prioritize scalability, security, and low latency. When shifting perspective to business architecture, the choice of jurisdiction is the foundation. For global tech founders looking to establish a US presence, Wyoming has emerged as the 'Rust' of legal frameworks: efficient, secure, and built for the long term.
 
 1. Legal Scalability
 Just as a well-designed database allows for horizontal scaling, a Wyoming LLC provides the flexibility to grow from a single-member entity to a complex international operation with minimal friction.
@@ -41,7 +41,7 @@ Wyoming offers robust privacy protections that serve as a 'firewall' for founder
 With no state corporate income tax and low annual filing fees, Wyoming offers the best ROI for early-stage ventures focused on capital efficiency.
 
 Conclusion
-For the technical founder, Wyoming isn't just a state—it's a strategic infrastructure choice.
+For the technical founder, Wyoming isn't just a state. It's a strategic infrastructure choice.
     `
   },
   {
@@ -86,7 +86,7 @@ The next shift is from passive assistants to active agents. We design agents cap
     content: `
 Miami’s Fintech Evolution: Why Performance Engineering is the Competitive Edge
 
-Miami has rapidly transformed into a global hub for financial technology. In this high-stakes environment, performance isn't just a feature—it's a requirement for survival.
+Miami has rapidly transformed into a global hub for financial technology. In this high-stakes environment, performance isn't just a feature. It's a requirement for survival.
 
 1. Latency as a Business Metric
 In fintech, a 100ms delay in data visualization can impact decision-making. We leverage Next.js Server Components to minimize bundle sizes and maximize TTI (Time to Interactive).
@@ -251,7 +251,7 @@ Agents use LLMs to break down complex goals into smaller, executable steps. This
 The 'Intelligence' of an agent is quantified by its ability to interact with the real world via APIs, database queries, and specialized software tools.
 
 3. Feedback Loops
-Unlike static chatbots, agents operate in loops—constantly evaluating the outcome of their actions and adjusting their next move until the goal is achieved.
+Unlike static chatbots, agents operate in loops, constantly evaluating the outcome of their actions and adjusting their next move until the goal is achieved.
     `
   },
   {
@@ -277,7 +277,7 @@ We utilize advanced composition patterns to keep UI components pure and testable
 Leveraging Tailwind CSS 4 ensures that our styling has zero impact on the JavaScript bundle, leading to faster paint times and cleaner DOM structures.
 
 3. Semantic Integrity
-A production app isn't just for users—it's for crawlers and accessibility tools. We strictly adhere to HTML5 semantics and ARIA standards to ensure universal reach.
+A production app isn't just for users. It's for crawlers and accessibility tools. We strictly adhere to HTML5 semantics and ARIA standards to ensure universal reach.
     `
   },
 ];
