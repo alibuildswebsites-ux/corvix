@@ -5,66 +5,66 @@ import React, { useEffect, useRef } from "react";
 /* ── Testimonial data ── */
 const testimonials = [
   {
-    text: 'Tabs cleaned up three years of messy books in under a month. I finally know what my business is actually worth — and it is a lot more than I thought.',
-    name: 'Marcus T.',
-    role: 'Owner, BluePeak Construction',
-    initials: 'MT',
+    text: 'Corvix rebuilt our Next.js app and cut page load from 4.2 seconds to 0.8. Signups doubled within the month. They fixed our Core Web Vitals too, something our SEO agency chased for a year.',
+    name: 'Daniel W.',
+    role: 'Founder, Looply',
+    initials: 'DW',
     color: 'bg-white/10',
   },
   {
-    text: 'Having a fractional CFO from Tabs helped us close our Series A. They built our financial model, prepped our data room, and were in every investor call. Invaluable.',
+    text: 'Corvix shipped our React Native app in six weeks. It feels native on iOS and Android, and they handled the App Store submission end to end. Push notifications brought back more repeat customers than our email list ever did.',
     name: 'Priya S.',
-    role: 'CEO, Nova Ventures',
+    role: 'CEO, Nova Retail',
     initials: 'PS',
     color: 'bg-white/15',
   },
   {
-    text: 'Our payroll used to take a full day every two weeks. Now I approve it in minutes. The team set everything up perfectly and are always available when we need them.',
-    name: 'James R.',
-    role: 'Director of Operations, Summit Enterprises',
-    initials: 'JR',
+    text: 'Corvix built an internal agent that handles our weekly reporting. It pulls the support metrics and files the summary. That used to take me a full day.',
+    name: 'Kevin B.',
+    role: 'Head of Operations, GreenPath Software',
+    initials: 'KB',
     color: 'bg-white/5',
   },
   {
-    text: 'As a real estate investor with a complex portfolio, I needed someone who actually understood the numbers. Tabs gets it — they speak my language and make reporting effortless.',
-    name: 'Sandra K.',
-    role: 'Principal, Meridian Real Estate',
-    initials: 'SK',
+    text: 'I\u2019m based in Ho Chi Minh City and needed a US entity to take payments. Corvix set up my LLC and EIN in five days while I kept building. The banking resolution letter was done the same week.',
+    name: 'Elise M.',
+    role: 'Founder, Voyage Commerce',
+    initials: 'EM',
     color: 'bg-white/10',
   },
   {
-    text: 'Tax planning with Tabs saved us over $40,000 last year through entity restructuring alone. Best financial decision we made. Wish we had done it sooner.',
-    name: 'Daniel W.',
-    role: 'Founder, Apex Development',
-    initials: 'DW',
+    text: 'Our store rebuilt on Next.js went from 6 second loads to 1.1. Checkout completion jumped 18% in the first week.',
+    name: 'Sandra K.',
+    role: 'Founder, Meridian Goods',
+    initials: 'SK',
     color: 'bg-white/15',
   },
   {
-    text: 'The financial dashboard they set up changed how we run our weekly leadership meetings. Everyone is looking at the same numbers and making faster, smarter decisions.',
-    name: 'Rachel L.',
-    role: 'COO, Cornerstone Group',
-    initials: 'RL',
+    text: 'Corvix took our app from Figma to the Play Store in five weeks. They wired up biometric login, offline sync, and push notifications. We hit a 4.8 rating within two months of launch.',
+    name: 'Marcus T.',
+    role: 'Founder, BluePeak Fitness',
+    initials: 'MT',
     color: 'bg-white/5',
   },
   {
-    text: 'We switched from a big regional firm to Tabs and the difference is night and day. Responsive, proactive, and they actually understand our construction business.',
+    text: 'We used to burn three hours a day answering setup questions. Corvix built an agent on our knowledge base and routed it through Slack and our site. That time went back into shipping.',
     name: 'Tom A.',
-    role: 'President, Frontier Capital Builders',
+    role: 'COO, Frontier Analytics',
     initials: 'TA',
     color: 'bg-white/10',
   },
   {
-    text: 'Tabs handled our M&A due diligence from start to finish. They found issues the seller had glossed over and saved us from a bad deal. Worth every penny.',
-    name: 'Elise M.',
-    role: 'Managing Partner, BluePeak Realty',
-    initials: 'EM',
+    text: 'Corvix handled our LLC formation, operating agreement, and EIN. From kickoff to a funded bank account took nine days, without me touching a single form.',
+    name: 'James R.',
+    role: 'Founder, Summit Studio',
+    initials: 'JR',
     color: 'bg-white/15',
   },
   {
-    text: 'I was drowning in compliance tasks before Tabs. Now I have one call a month, a clean compliance calendar, and zero surprises. It has completely changed my stress level.',
-    name: 'Kevin B.',
-    role: 'CEO, GreenPath Startups',
-    initials: 'KB',
+    text: 'Our WhatsApp AI agent deflects 60% of tickets before they reach a human. Corvix trained it on our docs and support history. My team works on real issues instead of the same three questions.',
+    name: 'Rachel L.',
+    role: 'Head of Support, Compass CRM',
+    initials: 'RL',
     color: 'bg-white/5',
   },
 ];
@@ -164,11 +164,11 @@ export default function Testimonials() {
               Happy Clients
             </p>
             <h2 data-reveal className="font-display font-bold text-5xl text-corvix-text">
-              Businesses That Trusted the Numbers
+              Teams That Ship With Corvix
             </h2>
           </div>
           <p data-reveal className="hidden md:block text-corvix-muted text-sm text-right max-w-xs leading-relaxed">
-            200+ businesses have made smarter financial decisions with Corvix by their side.
+            60+ products and AI agents shipped for startups across 14 countries.
           </p>
         </div>
 
