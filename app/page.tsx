@@ -20,6 +20,12 @@ export default function Home() {
 
   return (
     <PageWrapper>
+      <style>{`
+        @keyframes heroRise {
+          from { opacity: 0; transform: translateY(12px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
       <div ref={pageRef} className="relative">
         {/* ── Fixed/Absolute 3D Background Wallpaper ── */}
         <div className={`absolute top-0 left-0 right-0 w-full h-[100vh] overflow-hidden z-0 pointer-events-none transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}>
@@ -31,7 +37,7 @@ export default function Home() {
         </div>
 
         {/* ── Hero Content ─────────────────────────────────────────────── */}
-        <section className={`relative z-10 w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 min-h-[100vh] flex flex-col items-center justify-center text-center pt-24 pb-24 transition-all duration-1000 delay-300 ${ready ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+        <section className="relative z-10 w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 min-h-[100vh] flex flex-col items-center justify-center text-center pt-24 pb-24" style={{ animation: "heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1)" }}>
           <div className="flex flex-col items-center">
             <div data-reveal className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(255,255,255,0.08)] bg-white/[0.02] mb-8">
               <span className="w-2 h-2 rounded-full bg-corvix-accent animate-pulse" />

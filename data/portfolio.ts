@@ -15,7 +15,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "A real-time financial analytics dashboard for a fintech startup. Built with Next.js, Tailwind, and Supabase. Includes transaction tracking, charts, and CSV export.",
     tags: ["Web Dev", "Next.js", "Supabase"],
-    bgColor: "bg-blue-900/30",
+    bgColor: "bg-white/[0.04]",
   },
   {
     id: "shopmate-app",
@@ -24,7 +24,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "Cross-platform e-commerce mobile app for an SMB retailer. Built with React Native, integrated with Stripe payments and real-time inventory sync.",
     tags: ["Mobile", "React Native", "Stripe"],
-    bgColor: "bg-violet-900/30",
+    bgColor: "bg-white/[0.07]",
   },
   {
     id: "supportbot-ai",
@@ -33,6 +33,6 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "An AI-powered customer support agent for a SaaS company. Built on GPT-4 with a custom knowledge base, integrated into their existing Intercom setup.",
     tags: ["AI Agent", "GPT-4", "Intercom"],
-    bgColor: "bg-emerald-900/30",
+    bgColor: "bg-white/[0.1]",
   },
 ];

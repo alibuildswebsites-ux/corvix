@@ -41,8 +41,12 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
     try {
       const testCanvas = document.createElement("canvas");
       const ctx = testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl");
-      if (!ctx) return;
+      if (!ctx) {
+        onReady?.();
+        return;
+      }
     } catch {
+      onReady?.();
       return;
     }
 
@@ -175,6 +179,7 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
     // ── Static snapshot for reduced motion ─────────────────────────────────
     if (prefersReduced) {
       renderer.render(scene, camera);
+      onReady?.();
       return () => {
         far.geo.dispose();  far.mat.dispose();
         mid.geo.dispose();  mid.mat.dispose();
