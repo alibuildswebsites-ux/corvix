@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import PortfolioCard from "@/components/PortfolioCard";
+import Testimonials from "@/components/Testimonials";
 import PageWrapper from "@/components/PageWrapper";
 import { useReveal } from "@/hooks/useReveal";
 import { services } from "@/data/services";
@@ -62,6 +63,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ── Testimonials ───────────────────────────────────────── */}
+        <Testimonials />
 
         {/* ── Services ─────────────────────────────────────────── */}
         <section id="services" className="border-t border-[rgba(255,255,255,0.08)]">
