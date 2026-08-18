@@ -27,7 +27,7 @@ export default function ServiceCard({ service }: { service: Service }) {
       <p className="text-corvix-muted text-sm leading-relaxed flex-1">
         {service.tagline}
       </p>
-      <div className="flex items-center gap-1 mt-5 text-white text-sm font-medium opacity-100 pointer-fine:opacity-0 pointer-fine:group-hover:opacity-100 transition-opacity duration-200">
+      <div className="flex items-center gap-1 mt-5 text-corvix-accent text-sm font-medium group-hover:translate-x-1 transition-transform duration-200">
         Learn more <ArrowRight size={14} />
       </div>
     </Link>

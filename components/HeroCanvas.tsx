@@ -181,6 +181,7 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
       renderer.render(scene, camera);
       onReady?.();
       return () => {
+        window.removeEventListener("mousemove", onMouseMove);
         far.geo.dispose();  far.mat.dispose();
         mid.geo.dispose();  mid.mat.dispose();
         near.geo.dispose(); near.mat.dispose();
@@ -189,7 +190,6 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
         renderer.dispose();
         ro.disconnect();
         observer.disconnect();
-        window.removeEventListener("mousemove", onMouseMove);
         if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
       };
     }
