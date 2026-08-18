@@ -67,17 +67,7 @@ export default function PortfolioCard({ item }: { item: PortfolioItem }) {
           ))}
         </div>
 
-        {item.liveUrl && (
-          <a
-            href={item.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-white hover:text-corvix-accent transition-colors mt-auto"
-          >
-            <span>Visit Live Website</span>
-            <ExternalLink size={13} />
-          </a>
-        )}
+
       </div>
     </div>
   );
