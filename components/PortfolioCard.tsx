@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function PortfolioCard({ item }: { item: PortfolioItem }) {
   return (
-    <div className="flex flex-col linear-card rounded-2xl overflow-hidden group">
+    <div className="flex flex-col linear-card rounded-2xl overflow-hidden group active:scale-[0.99] transition-transform duration-200">
       {/* Visual Header with Real Project Image Preview */}
       <div className="h-56 relative overflow-hidden border-b border-[rgba(255,255,255,0.06)] bg-corvix-bg">
         <Image
