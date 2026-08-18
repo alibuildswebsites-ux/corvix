@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Corvix Agency & Ecosystem Hub
 
-## Getting Started
+Welcome to **Corvix**, a high-performance agency website built with Next.js, TypeScript, Tailwind CSS, Three.js, GSAP, and Framer Motion.
 
-First, run the development server:
+## Connected Ecosystem & Repositories
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Corvix acts as a central hub connecting our agency projects and tools across GitHub (`alibuildswebsites-ux`):
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Repository | Description | Tech Stack | URL |
+| :--- | :--- | :--- | :--- |
+| **corvix** | Agency Website & Ecosystem Hub | Next.js, TS, Tailwind, Three.js, GSAP | [GitHub](https://github.com/alibuildswebsites-ux/corvix) |
+| **maham-portfolio** | Clinical Dietitian & Nutritionist Portfolio | Next.js, Tailwind, GSAP, Motion | [GitHub](https://github.com/alibuildswebsites-ux/maham-portfolio) |
+| **jailbreak-detector** | LLM Jailbreak Prompt Detection System | TypeScript, TF-IDF / ML | [GitHub](https://github.com/alibuildswebsites-ux/jailbreak-detector) |
+| **nsct-prep** | HEC National Skills Competency Test Prep | TypeScript, Pixel-art UI | [GitHub](https://github.com/alibuildswebsites-ux/nsct-prep) |
+| **train-ur-llm** | LLM Training / Fine-Tuning Skill for AI Agents | Python | [GitHub](https://github.com/alibuildswebsites-ux/train-ur-llm) |
+| **vcc-simulation** | Interactive Simulation Tool | TypeScript | [GitHub](https://github.com/alibuildswebsites-ux/vcc-simulation) |
+| **patient-health-risk-predictor**| Predictive Health Risk Modeling | TypeScript | [GitHub](https://github.com/alibuildswebsites-ux/patient-health-risk-predictor) |
+| **astar-pathfinding-game** | Interactive A* Pathfinding Visualizer | TypeScript | [GitHub](https://github.com/alibuildswebsites-ux/astar-pathfinding-game) |
+| **lofton** / **lofton1** | Client & Partner Platforms | TypeScript | [GitHub](https://github.com/alibuildswebsites-ux/lofton) |
+| **cloudvault-file-storage** | Secure Cloud File Storage | JavaScript | [GitHub](https://github.com/alibuildswebsites-ux/cloudvault-file-storage) |
+| **python-prep-editor** | Interactive Python Code Editor | JavaScript | [GitHub](https://github.com/alibuildswebsites-ux/python-prep-editor) |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Managed via GitHub MCP integration.*
