@@ -13,18 +13,18 @@ export default function PortfolioPage() {
     <PageWrapper>
       <div ref={pageRef} className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 pt-40 md:pt-48 pb-20 md:pb-32">
         <p data-reveal className="text-corvix-accent text-xs font-medium tracking-[0.25em] uppercase mb-5">
-          Our Work
+          Our Work & Ecosystem
         </p>
         <h1 data-reveal className="font-display font-extrabold text-[clamp(3rem,8vw,6rem)] leading-[0.95] tracking-tight text-corvix-text mb-8">
           Portfolio
         </h1>
         <p data-reveal className="text-corvix-muted text-xl max-w-2xl mb-20 leading-relaxed">
-          A selection of projects we&apos;ve built, from web apps to AI agents to mobile products.
+          Explore our client projects and ecosystem products, featuring Raza Portfolio, Lofton, Tabs, Health Predictor, and more.
         </p>
         <h2 className="sr-only">Our Work</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {portfolioItems.map((item) => (
-            <div key={item.id} data-reveal>
+            <div key={item.id} data-reveal className="flex flex-col">
               <PortfolioCard item={item} />
             </div>
           ))}
