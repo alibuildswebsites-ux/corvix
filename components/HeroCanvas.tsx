@@ -152,14 +152,21 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
     const bloomTarget = new THREE.Vector3();
     if (!prefersReduced) scene.add(bloom);
 
-    // ── Mouse parallax ─────────────────────────────────────────────────────
+    // ── Mouse & Touch parallax ─────────────────────────────────────────────
     let mouseX = 0, mouseY = 0;
     let camOffsetX = 0, camOffsetY = 0;
     const onMouseMove = (e: MouseEvent) => {
       mouseX = (e.clientX / window.innerWidth  - 0.5) * 2;
       mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
     };
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        mouseX = (e.touches[0].clientX / window.innerWidth  - 0.5) * 2;
+        mouseY = -(e.touches[0].clientY / window.innerHeight - 0.5) * 2;
+      }
+    };
     window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
 
     // ── IntersectionObserver ───────────────────────────────────────────────
     let isVisible = true;
@@ -182,6 +189,7 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
       onReady?.();
       return () => {
         window.removeEventListener("mousemove", onMouseMove);
+        window.removeEventListener("touchmove", onTouchMove);
         far.geo.dispose();  far.mat.dispose();
         mid.geo.dispose();  mid.mat.dispose();
         near.geo.dispose(); near.mat.dispose();
@@ -327,6 +335,7 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
       observer.disconnect();
       ro.disconnect();
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchmove", onTouchMove);
       far.geo.dispose();  far.mat.dispose();
       mid.geo.dispose();  mid.mat.dispose();
       near.geo.dispose(); near.mat.dispose();

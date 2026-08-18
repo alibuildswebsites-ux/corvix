@@ -41,7 +41,7 @@ export default function Home() {
         {/* ── Hero Content ─────────────────────────────────────────────── */}
         <section className="relative z-10 w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 min-h-[100vh] flex flex-col items-center justify-center text-center pt-24 pb-24" style={{ animation: "heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1)" }}>
           <div className="flex flex-col items-center">
-            <div data-reveal className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(255,255,255,0.08)] bg-white/[0.02] mb-8">
+            <div data-reveal className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(255,255,255,0.08)] bg-white/[0.02] mb-8 animate__animated animate__fadeInDown">
               <span className="w-2 h-2 rounded-full bg-corvix-accent animate-pulse" />
               <span className="text-corvix-muted text-xs font-medium tracking-wide">Corvix 2.0 is live</span>
             </div>
