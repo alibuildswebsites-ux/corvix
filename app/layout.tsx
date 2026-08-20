@@ -24,18 +24,19 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://corvix-pi.vercel.app/"),
   title: {
-    default: "Corvix | Software Development & AI Agency Austin, TX",
-    template: "%s | Corvix Austin",
+    default: "Corvix | Software Development & AI Engineering Agency",
+    template: "%s | Corvix",
   },
-  description: "Corvix is a premier custom software development, AI agent engineering, and business setup agency based in Austin, TX. We build web apps, mobile products, and LLM integrations.",
+  description: "Corvix is an Austin-based software development and AI engineering agency building web apps, mobile products, AI agents, and business setup solutions for startups and growing companies.",
   keywords: [
-    "Web Development Austin TX",
-    "AI Agency Austin Texas",
-    "Custom Software Development Austin",
-    "Mobile App Developers Austin",
-    "LLC Formation Texas",
-    "AI Agent Engineering",
-    "Next.js Development Agency"
+    "software development agency",
+    "AI engineering agency",
+    "custom software development",
+    "AI agent development",
+    "web application development",
+    "mobile app development",
+    "software development Austin",
+    "AI development Austin"
   ],
   alternates: {
     canonical: "/",
@@ -46,16 +47,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: "Corvix",
-    title: "Corvix | Software Development & AI Agency Austin, TX",
-    description: "Custom web development, mobile apps, custom AI agent integrations, and Texas business setup in Austin, TX.",
+    title: "Corvix | Software Development & AI Engineering Agency",
+    description: "Custom software, web and mobile development, AI agent engineering, and business setup support from an Austin-based team.",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Corvix Austin TX" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Corvix | Software Development & AI Agency Austin, TX",
+    title: "Corvix | Software Development & AI Engineering Agency",
     description: "Custom software engineering, AI agent workflows, and US business formation.",
     images: ["/og-image.png"],
-    creator: "@corvix",
   },
   verification: {
     google: "ERq6avX3oinIrgvwQwQGesI9r5EMvHMJk_3z02BYVIE",
@@ -79,43 +79,14 @@ const jsonLd = {
   url: "https://corvix-pi.vercel.app",
   logo: "https://corvix-pi.vercel.app/apple-touch-icon.png",
   image: "https://corvix-pi.vercel.app/og-image.png",
-  telephone: "+1-512-555-0199",
   email: "alibuildswebsites@gmail.com",
-  priceRange: "$$$",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Austin",
-    addressRegion: "TX",
-    addressCountry: "US",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 30.2672,
-    longitude: -97.7431,
-  },
   areaServed: [
-    {
-      "@type": "City",
-      name: "Austin",
-      sameAs: "https://en.wikipedia.org/wiki/Austin,_Texas",
-    },
-    {
-      "@type": "State",
-      name: "Texas",
-    },
-    {
-      "@type": "Country",
-      name: "United States",
-    },
-  ],
-  sameAs: [
-    "https://twitter.com/corvix",
-    "https://github.com/corvix",
-    "https://linkedin.com/company/corvix",
-    "https://instagram.com/corvix",
+    { "@type": "City", name: "Austin" },
+    { "@type": "State", name: "Texas" },
+    { "@type": "Country", name: "United States" },
   ],
   description:
-    "Corvix is a software development and AI engineering agency in Austin, TX building custom web applications, mobile apps, enterprise RAG AI agents, and Texas business formations.",
+    "Corvix is a software development, AI engineering, and business setup agency based in Austin, Texas.",
 };
 
 export default function RootLayout({

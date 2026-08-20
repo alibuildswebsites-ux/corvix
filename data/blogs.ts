@@ -244,7 +244,7 @@ An EIN is useless without a bank account. We prepare the 'Bank Resolution' docum
     content: `
 Zero-Shift UI: Managing Layout Stability in High-Animation Sites
 
-High-fidelity animation shouldn't come at the cost of performance metrics. Achieving a 0.0 CLS score in an animation-heavy site like Corvix requires precise engineering.
+High-fidelity animation should not come at the cost of layout stability. In animation-heavy interfaces, careful sizing and transform-based motion help keep layout shifts under control.
 
 1. Aspect Ratio Containers
 By pre-defining the dimensions of WebGL canvases and animation containers, we prevent the browser from recalculating layout as assets load.

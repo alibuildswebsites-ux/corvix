@@ -56,15 +56,15 @@ export const services: Service[] = [
   {
     slug: "business-setup",
     title: "Business Setup",
-    tagline: "Get your US business legally ready, fast.",
+    tagline: "Get your U.S. business setup organized, fast.",
     description:
-      "We handle the legal and administrative side of launching a US business. LLC formation, EIN registration, bank resolution, operating agreements, and bylaws, done for you.",
+      "We provide business-formation and administrative support for launching a U.S. business, including entity filing coordination, EIN assistance, governance documentation, banking paperwork, and related setup tasks.",
     details: [
-      "Strategic US LLC formation and legal structuring",
-      "EIN (Employer Identification Number) and tax compliance registration",
+      "U.S. LLC formation and entity filing coordination",
+      "EIN (Employer Identification Number) application assistance",
       "Corporate governance documentation (Operating Agreements, Bylaws)",
       "Banking resolution letters and fintech stack advisory",
-      "Ongoing compliance and registered agent support",
+      "Registered-agent coordination and administrative support",
     ],
     iconName: "Building2",
   },

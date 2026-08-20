@@ -1,15 +1,15 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, ShieldCheck, Zap } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Zap } from "lucide-react";
 import PageWrapper from "@/components/PageWrapper";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mobile App Development Austin, TX | React Native & Flutter | Corvix",
+  title: "Mobile App Development Austin, TX | React Native & Flutter",
   description:
     "Corvix is a mobile app development agency in Austin, TX. We engineer iOS and Android applications with native performance, offline sync, and biometric security.",
   alternates: { canonical: "/locations/austin-tx/mobile-app-development" },
   openGraph: {
-    title: "Mobile App Development Austin, TX | Corvix",
+    title: "Mobile App Development Austin, TX",
     description:
       "Cross-platform iOS and Android app development in Austin, Texas using React Native and Flutter.",
   },
@@ -31,16 +31,7 @@ export default function AustinMobileDevPage() {
     "@context": "https://schema.org",
     "@type": "Service",
     name: "Mobile App Development Austin, TX",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "Corvix Austin",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Austin",
-        addressRegion: "TX",
-        addressCountry: "US",
-      },
-    },
+    provider: { "@type": "Organization", name: "Corvix" },
     areaServed: "Austin, Texas",
     description:
       "iOS and Android mobile app development in Austin, TX built with React Native and Flutter.",
@@ -81,7 +72,7 @@ export default function AustinMobileDevPage() {
             Why choose React Native or Flutter for an Austin mobile app?
           </h2>
           <p className="text-corvix-muted leading-relaxed text-base">
-            React Native and Flutter allow Austin startups to publish native iOS and Android apps simultaneously from one codebase. This reduces development costs by ~40%, speeds up time-to-market in competitive Texas startup ecosystems, and simplifies long-term feature iteration without sacrificing native gesture performance or device hardware access.
+            React Native and Flutter allow Austin startups to publish native iOS and Android apps simultaneously from one codebase. This can reduce duplicated platform work, simplify long-term feature iteration, and preserve access to native device capabilities when the product requires them.
           </p>
         </div>
 

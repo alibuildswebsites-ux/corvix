@@ -344,7 +344,7 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
       renderer.dispose();
       if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
     };
-  }, []);
+  }, [onReady]);
 
   return (
     <div

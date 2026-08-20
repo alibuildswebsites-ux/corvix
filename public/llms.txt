@@ -4,10 +4,10 @@
 
 ## Core Capabilities & Services
 
-- **Web Development Agency Austin, TX**: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Node.js, Laravel, Django. Sub-second performance, Core Web Vitals optimization, zero-shift animations (GSAP/Three.js), and headless CMS integration.
+- **Web Development Agency Austin, TX**: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Node.js, Laravel, Django. Performance-focused engineering, Core Web Vitals optimization, layout-stable animations (GSAP/Three.js), and headless CMS integration.
 - **AI Agent & Custom LLM Engineering**: Enterprise RAG (Retriever-Augmented Generation) architectures, vector databases (PGVector, Pinecone, Weaviate), multi-model orchestration (GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro), and autonomous agent workflows.
 - **Mobile App Development**: React Native and Flutter cross-platform mobile applications for iOS and Android with biometrics, real-time WebSockets, offline sync, and App Store lifecycle management.
-- **Texas Business Setup & Compliance**: LLC formation in Texas and Wyoming, IRS EIN registration, corporate governance docs (Operating Agreements, Bylaws), banking resolutions, and registered agent services for US and non-resident founders.
+- **U.S. Business Setup Support**: Entity formation coordination, EIN application assistance, governance documentation, banking-resolution paperwork, registered-agent coordination, and current FinCEN BOI-status guidance when applicable. U.S.-created companies are currently exempt from BOI reporting under FinCEN's August 11, 2026 final rule.
 
 ## Location & Contact
 

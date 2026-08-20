@@ -4,9 +4,9 @@ import { ArrowRight, Calendar, Clock } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog | Engineering & AI Insights",
+  title: "Engineering, AI & Business Insights | Corvix Blog",
   description:
-    "Technical breakdowns and strategic thinking from the Corvix team. Performance engineering, AI agents, and US business setup.",
+    "Practical guides on software engineering, AI agents, web performance, mobile development, and U.S. business setup from the Corvix team.",
   alternates: { canonical: "/blog" },
 };
 
@@ -20,8 +20,8 @@ export default function BlogPage() {
         Blog
       </h1>
       <p className="text-corvix-muted text-xl max-w-2xl mb-20 leading-relaxed">
-        Technical breakdowns and strategic thinking from the Corvix team. Scaling, performance,
-        AI agents, and business setup.
+        Practical guides on software engineering, AI agents, performance, mobile development,
+        and U.S. business setup—written to help founders make better technical and operational decisions.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

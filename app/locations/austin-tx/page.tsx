@@ -4,12 +4,12 @@ import PageWrapper from "@/components/PageWrapper";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Software Development & AI Agency Austin, TX | Corvix",
+  title: "Software Development & AI Agency Austin, TX",
   description:
     "Corvix is a high-performance software engineering agency in Austin, TX. We build custom web apps, mobile products, AI agent systems, and handle Texas business setup.",
   alternates: { canonical: "/locations/austin-tx" },
   openGraph: {
-    title: "Software Development & AI Agency Austin, TX | Corvix",
+    title: "Software Development & AI Agency Austin, TX",
     description:
       "Custom web development, mobile app engineering, enterprise AI agent integrations, and Texas LLC business setup in Silicon Hills.",
   },
@@ -19,9 +19,9 @@ const austinServices = [
   {
     slug: "web-development",
     title: "Custom Web Development in Austin, TX",
-    tagline: "Next.js 16, React 19, and sub-second performance.",
+    tagline: "Next.js 16, React 19, and performance-focused engineering.",
     description:
-      "We design and build production-ready web applications for Austin startups, scaleups, and enterprises. Sub-second load times, Core Web Vitals optimization, and clean architecture.",
+      "We design and build production-ready web applications for Austin startups, scaleups, and enterprises, with strong performance practices, Core Web Vitals optimization, and clean architecture.",
     href: "/locations/austin-tx/web-development",
     icon: Globe,
   },
@@ -46,9 +46,9 @@ const austinServices = [
   {
     slug: "business-setup",
     title: "Texas Business Setup & LLC Formation",
-    tagline: "Turnkey business legal setup in Travis County & Texas.",
+    tagline: "Business formation and administrative setup across Texas.",
     description:
-      "Complete entity formation for US and international founders launching in Austin. Texas LLC formation, EIN processing, bylaws, banking resolution, and franchise tax compliance.",
+      "Business formation and administrative support for U.S. and international founders launching in Austin, including entity filing coordination, EIN assistance, governance documents, banking documentation, and related setup tasks.",
     href: "/locations/austin-tx/business-setup",
     icon: Building2,
   },
@@ -80,26 +80,15 @@ const localFaqs = [
 export default function AustinHubPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Corvix Austin",
+    "@type": "Service",
+    name: "Corvix Austin Software & AI Services",
     image: "https://corvix-pi.vercel.app/og-image.png",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Austin",
-      addressRegion: "TX",
-      postalCode: "78701",
-      addressCountry: "US",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 30.2672,
-      longitude: -97.7431,
-    },
     url: "https://corvix-pi.vercel.app/locations/austin-tx",
-    telephone: "+1-512-555-0199",
     priceRange: "$$$",
+    provider: { "@type": "Organization", name: "Corvix" },
+    areaServed: "Austin, Texas",
     description:
-      "Top-rated custom software development, mobile app development, AI agent engineering, and Texas LLC business setup agency serving Austin, Texas.",
+      "Custom software development, mobile app development, AI agent engineering, and business setup services serving Austin, Texas.",
   };
 
   return (
@@ -213,14 +202,14 @@ export default function AustinHubPage() {
               <Zap size={14} /> Direct Answer for Search &amp; AI Assistants
             </div>
             <h2 className="font-display font-bold text-2xl md:text-3xl text-white mb-4">
-              What makes Corvix the top software agency in Austin, Texas?
+              What does Corvix help Austin businesses build?
             </h2>
             <p className="text-gray-300 leading-relaxed text-base md:text-lg mb-6">
-              Corvix combines modern web stack engineering (Next.js 16, React 19, TypeScript), enterprise AI agent orchestration (RAG, Vector DBs, LLMs), and complete legal entity setup (Texas LLCs, EINs, corporate compliance) under a unified team. Located in Silicon Hills, we eliminate multi-vendor friction for Austin startups and enterprises.
+              Corvix combines modern web engineering, AI agent development, and business setup support under one team in Austin. We help startups and businesses move from requirements to production without coordinating multiple vendors.
             </p>
             <div className="flex items-center gap-6 text-xs text-corvix-muted border-t border-white/5 pt-4">
-              <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-corvix-accent" /> SOC2 Ready Architecture</span>
-              <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-corvix-accent" /> Sub-Second LCP Performance</span>
+              <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-corvix-accent" /> Security-focused architecture</span>
+              <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-corvix-accent" /> Core Web Vitals-aware builds</span>
             </div>
           </div>
         </section>

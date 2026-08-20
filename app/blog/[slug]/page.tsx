@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: post.date,
       authors: [post.author],
+      url: `https://corvix-pi.vercel.app/blog/${post.slug}`,
     },
   };
 }
@@ -40,8 +41,31 @@ export default async function BlogPostPage({ params }: Props) {
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 2);
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.metaDescription,
+    datePublished: post.date,
+    author: { "@type": "Organization", name: post.author },
+    publisher: { "@type": "Organization", name: "Corvix", url: "https://corvix-pi.vercel.app" },
+    mainEntityOfPage: `https://corvix-pi.vercel.app/blog/${post.slug}`,
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://corvix-pi.vercel.app/" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://corvix-pi.vercel.app/blog" },
+      { "@type": "ListItem", position: 3, name: post.title, item: `https://corvix-pi.vercel.app/blog/${post.slug}` },
+    ],
+  };
+
   return (
     <article className="min-h-screen bg-corvix-bg text-corvix-text pt-32 pb-20">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       {/* Reading Progress Bar (Visual Only for now) */}
       <div className="fixed top-0 left-0 w-full h-1 z-[60]">
         <div className="h-full bg-corvix-accent w-0 transition-[width] duration-300" id="progress-bar" />
@@ -86,11 +110,25 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Blog Content */}
         <div className="prose prose-invert prose-lg max-w-none prose-headings:font-display prose-headings:text-white prose-p:text-gray-300 prose-strong:text-corvix-accent prose-a:text-corvix-accent hover:prose-a:underline">
-          {/* In a real scenario, we'd use a Markdown parser like next-mdx-remote or react-markdown */}
-          {/* For this specific task, I will render the content directly with basic formatting */}
-          <div className="whitespace-pre-wrap leading-relaxed">
-            {post.content}
-          </div>
+          {post.content
+            .trim()
+            .split(/\n\s*\n/)
+            .map((block, index) => {
+              const lines = block.trim().split("\n").map((line) => line.trim()).filter(Boolean);
+              if (!lines.length) return null;
+              const first = lines[0];
+              const numbered = /^(\d+)\.\s+(.+)$/.exec(first);
+              if (numbered) {
+                return (
+                  <section key={index} className="mt-10 first:mt-0">
+                    <h2>{numbered[2]}</h2>
+                    {lines.slice(1).map((line) => <p key={line}>{line}</p>)}
+                  </section>
+                );
+              }
+              if (index === 0) return null;
+              return <p key={index}>{lines.join(" ")}</p>;
+            })}
         </div>
 
         {/* Related Posts */}

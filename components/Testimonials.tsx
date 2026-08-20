@@ -168,7 +168,7 @@ export default function Testimonials() {
             </h2>
           </div>
           <p data-reveal className="hidden md:block text-corvix-muted text-sm text-right max-w-xs leading-relaxed">
-            60+ products and AI agents shipped for startups across 14 countries.
+            Real client experiences from teams that have shipped with Corvix.
           </p>
         </div>
 

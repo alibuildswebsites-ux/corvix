@@ -4,12 +4,12 @@ import PageWrapper from "@/components/PageWrapper";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Custom Web Development Agency Austin, TX | Next.js 16 & React 19 | Corvix",
+  title: "Custom Web Development Agency Austin, TX | Next.js 16 & React 19",
   description:
     "Corvix is a custom web development agency in Austin, TX. We engineer fast, scalable Next.js and React 19 web applications for Austin startups and enterprises.",
   alternates: { canonical: "/locations/austin-tx/web-development" },
   openGraph: {
-    title: "Custom Web Development Agency Austin, TX | Corvix",
+    title: "Custom Web Development Agency Austin, TX",
     description:
       "High-performance Next.js 16, React 19, and Tailwind CSS 4 web development in Austin, Texas. Sub-second load times and zero layout shifts.",
   },
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 const features = [
   "Next.js 16 App Router & Server Actions architecture",
   "React 19 Server Components for instant page transitions",
-  "Sub-second Largest Contentful Paint (LCP) performance",
-  "0.0 Cumulative Layout Shift (CLS) with GSAP & WebGL animations",
+  "Core Web Vitals and LCP performance optimization",
+  "Layout-stable animation architecture with GSAP & WebGL",
   "Headless CMS integration (Sanity, Contentful, Strapi)",
   "Custom REST & GraphQL API integrations",
   "Tailwind CSS 4 zero-runtime styling engine",
@@ -31,16 +31,7 @@ export default function AustinWebDevPage() {
     "@context": "https://schema.org",
     "@type": "Service",
     name: "Custom Web Development Austin, TX",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "Corvix Austin",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Austin",
-        addressRegion: "TX",
-        addressCountry: "US",
-      },
-    },
+    provider: { "@type": "Organization", name: "Corvix" },
     areaServed: "Austin, Texas",
     description:
       "High-performance web application development services in Austin, TX using Next.js 16, React 19, and modern TypeScript stack.",
@@ -69,7 +60,7 @@ export default function AustinWebDevPage() {
         </h1>
 
         <p className="text-gray-300 text-xl leading-relaxed mb-12">
-          We architect production-grade web applications for Austin tech ventures, VC-backed startups, and Texas businesses. Built on Next.js 16, React 19, and TypeScript, our web products combine sub-second performance with interactive visual polish.
+          We architect production-grade web applications for Austin tech ventures, VC-backed startups, and Texas businesses. Built on Next.js 16, React 19, and TypeScript, our web products combine performance-focused engineering with interactive visual polish.
         </p>
 
         {/* GEO Direct Answer Box */}
@@ -81,7 +72,7 @@ export default function AustinWebDevPage() {
             How does Corvix build custom websites in Austin?
           </h2>
           <p className="text-corvix-muted leading-relaxed text-base">
-            Corvix engineers web applications in Austin, TX using Next.js 16, React 19, and Tailwind CSS 4. We focus on sub-second Largest Contentful Paint (LCP) speeds, zero Cumulative Layout Shift (CLS), and modular component architecture. Every build includes technical SEO schema, headless CMS support, and enterprise API integrations.
+            Corvix engineers web applications in Austin, TX using Next.js 16, React 19, and Tailwind CSS 4. We focus on Core Web Vitals, layout stability, modular architecture, technical SEO, headless CMS support, and API integrations.
           </p>
         </div>
 

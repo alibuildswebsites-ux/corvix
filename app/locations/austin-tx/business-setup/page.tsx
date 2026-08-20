@@ -4,46 +4,37 @@ import PageWrapper from "@/components/PageWrapper";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Texas Business Setup & LLC Formation Austin, TX | Corvix",
+  title: "Texas Business Setup & LLC Formation Support in Austin, TX",
   description:
-    "Corvix provides business formation, Texas LLC filing, IRS EIN registration, operating agreements, and banking setup for US and global founders in Austin, TX.",
+    "Business formation and administrative setup support for founders in Austin, Texas, including entity filing coordination, EIN assistance, governance documents, and banking documentation.",
   alternates: { canonical: "/locations/austin-tx/business-setup" },
   openGraph: {
-    title: "Texas Business Setup & LLC Formation Austin, TX | Corvix",
+    title: "Texas Business Setup & LLC Formation Support in Austin, TX",
     description:
-      "Turnkey Texas LLC formation, EIN registration, corporate compliance, and banking resolution in Austin, Texas.",
+      "Business formation and administrative setup support in Austin, Texas, including entity filing coordination, EIN assistance, governance documentation, and banking paperwork.",
   },
 };
 
 const businessFeatures = [
-  "Strategic Texas LLC formation with Texas Secretary of State",
-  "Wyoming & Delaware entity structuring for tech founders",
-  "IRS EIN (Employer Identification Number) processing for US & international founders",
-  "Custom Corporate Governance Docs (Operating Agreements, Bylaws)",
+  "Texas LLC formation and entity filing coordination with the Texas Secretary of State",
+  "Wyoming & Delaware entity formation coordination for tech founders",
+  "IRS EIN (Employer Identification Number) application assistance for U.S. and international founders",
+  "Governance document preparation support (Operating Agreements, Bylaws)",
   "Banking Resolution letters and fintech stack advisory (Mercury, Relay)",
-  "Texas Franchise Tax registration & compliance setup",
+  "Administrative support for Texas business-tax registrations and related records",
   "Registered Agent service coordination in Travis County & Texas",
-  "BOI (Beneficial Ownership Information) filing compliance",
+  "Current FinCEN BOI-status guidance and coordination when a reporting obligation applies",
 ];
 
 export default function AustinBusinessSetupPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Texas Business Setup & LLC Formation Austin, TX",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "Corvix Austin",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Austin",
-        addressRegion: "TX",
-        addressCountry: "US",
-      },
-    },
+    name: "Texas Business Setup & LLC Formation Support in Austin, TX",
+    provider: { "@type": "Organization", name: "Corvix" },
     areaServed: "Austin, Texas",
     description:
-      "Turnkey LLC business formation, IRS EIN processing, and compliance documentation for startups in Austin, TX.",
+      "Business formation, EIN assistance, governance documentation, and administrative setup support for startups in Austin, TX.",
   };
 
   return (
@@ -69,7 +60,7 @@ export default function AustinBusinessSetupPage() {
         </h1>
 
         <p className="text-gray-300 text-xl leading-relaxed mb-12">
-          Launching a business in Texas requires precise legal legal structuring, federal EIN compliance, and banking readiness. Corvix handles the entire corporate setup lifecycle for local Austin founders and international entrepreneurs moving to Silicon Hills.
+          Launching a business in Texas involves entity formation, federal identification, governance documentation, and banking readiness. Corvix provides administrative setup support for Austin founders and coordinates qualified professional assistance when legal or tax advice is required.
         </p>
 
         {/* GEO Direct Answer Box */}
@@ -81,13 +72,16 @@ export default function AustinBusinessSetupPage() {
             How do non-resident founders establish a business in Austin, Texas?
           </h2>
           <p className="text-corvix-muted leading-relaxed text-base">
-            International and out-of-state founders establish a business in Austin by filing a Texas LLC (or foreign qualification) with the Texas Secretary of State, registering a local Texas Registered Agent, obtaining an IRS Employer Identification Number (EIN) via Form SS-4, drafting an Operating Agreement, and submitting BOI reports. Corvix manages this entire process remotely.
+            International and out-of-state founders can establish a business in Austin through entity formation or foreign qualification, registered-agent coordination, EIN assistance, governance documentation, and banking setup. Under the current FinCEN rule, U.S.-created companies are exempt from BOI reporting; certain foreign entities registered to do business in the U.S. may still have reporting obligations. Review current FinCEN guidance or consult qualified counsel for case-specific advice.
           </p>
         </div>
 
         <h2 className="font-display font-bold text-2xl text-white mb-8">
-          Business Setup &amp; Legal Compliance Included
+          Business Setup &amp; Administrative Support
         </h2>
+        <p className="text-corvix-muted text-sm leading-relaxed mb-8 max-w-3xl">
+          Corvix provides administrative business-setup assistance and coordinates qualified third-party professionals when legal or tax advice is required. Information on this page is general and is not legal or tax advice.
+        </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
           {businessFeatures.map((item, idx) => (
@@ -113,7 +107,7 @@ export default function AustinBusinessSetupPage() {
           </p>
           <div className="flex flex-wrap gap-4 text-xs text-corvix-muted">
             <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-corvix-accent" /> IRS SS-4 Processing</span>
-            <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-corvix-accent" /> Texas Franchise Tax Setup</span>
+            <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-corvix-accent" /> Texas business-tax setup support</span>
           </div>
         </div>
 
@@ -123,7 +117,7 @@ export default function AustinBusinessSetupPage() {
             Form Your Texas LLC in Austin
           </h3>
           <p className="text-corvix-muted mb-8 max-w-md mx-auto">
-            Get your US company legally compliant and bank-ready. Contact our Austin business setup specialists today.
+            Get your U.S. business setup organized and bank-ready. Contact our Austin team for administrative support and professional coordination where needed.
           </p>
           <Link
             href="/contact"

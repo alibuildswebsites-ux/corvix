@@ -4,12 +4,12 @@ import PageWrapper from "@/components/PageWrapper";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "AI Agent & Custom LLM Development Austin, TX | Corvix",
+  title: "AI Agent & Custom LLM Development Austin, TX",
   description:
     "Corvix is an AI agent engineering agency in Austin, TX. We build custom RAG pipelines, LLM orchestrations, and autonomous workflow bots for Texas tech companies.",
   alternates: { canonical: "/locations/austin-tx/ai-development" },
   openGraph: {
-    title: "AI Agent & Custom LLM Development Austin, TX | Corvix",
+    title: "AI Agent & Custom LLM Development Austin, TX",
     description:
       "Enterprise-grade AI agent development, custom vector database search (PGVector, Pinecone), and LLM orchestration in Austin, Texas.",
   },
@@ -31,16 +31,7 @@ export default function AustinAiDevPage() {
     "@context": "https://schema.org",
     "@type": "Service",
     name: "AI Agent & Custom LLM Development Austin, TX",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "Corvix Austin",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Austin",
-        addressRegion: "TX",
-        addressCountry: "US",
-      },
-    },
+    provider: { "@type": "Organization", name: "Corvix" },
     areaServed: "Austin, Texas",
     description:
       "Custom AI agent development, RAG pipelines, vector search, and LLM orchestration for enterprises in Austin, TX.",
@@ -113,7 +104,7 @@ export default function AustinAiDevPage() {
           </p>
           <div className="flex flex-wrap gap-4 text-xs text-corvix-muted">
             <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-corvix-accent" /> Private RAG Deployment</span>
-            <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-corvix-accent" /> SOC2 Compliant Data Pipelines</span>
+            <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-corvix-accent" /> Security-focused data pipelines</span>
           </div>
         </div>
 

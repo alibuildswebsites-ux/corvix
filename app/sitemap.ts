@@ -1,14 +1,16 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 import { services } from "@/data/services";
 import { blogPosts } from "@/data/blogs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://corvix-pi.vercel.app";
 
+  const lastModified = "2026-08-20";
+
   // Static routes
   const routes = ["", "/about", "/services", "/portfolio", "/contact", "/blog"].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: "monthly" as const,
     priority: route === "" ? 1.0 : 0.8,
   }));
@@ -22,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/locations/austin-tx/business-setup",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: "weekly" as const,
     priority: 0.9,
   }));
@@ -30,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic service routes
   const serviceRoutes = services.map((service) => ({
     url: `${baseUrl}/services/${service.slug}`,
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));

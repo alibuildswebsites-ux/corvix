@@ -30,7 +30,7 @@ const methodology = [
 const stats = [
   { value: "5+", label: "Services" },
   { value: "24h", label: "Response Time" },
-  { value: "100%", label: "Tested Code" },
+  { value: "3", label: "Delivery Steps" },
   { value: "Global", label: "Client Reach" },
 ];
 
@@ -66,21 +66,21 @@ export default function AboutPage() {
               We don&apos;t just build websites; we architect digital infrastructure. Every project at Corvix follows a strictly type-safe, component-driven methodology.
             </p>
             <p className="text-corvix-muted text-lg leading-relaxed">
-              By leveraging Next.js 15 and React 19, we ensure our clients&apos; products are ready for the Series A growth phase from day one.
+              By leveraging modern Next.js and React architecture, we ensure our clients&apos; products are ready for the Series A growth phase from day one.
             </p>
           </div>
           <div className="space-y-8">
             <div>
               <h3 className="text-white font-bold text-lg mb-2">Performance Targets</h3>
-              <p className="text-corvix-muted leading-relaxed">Sub-second LCP (Largest Contentful Paint) targets on all production builds.</p>
+              <p className="text-corvix-muted leading-relaxed">Performance-focused builds with Core Web Vitals and page-speed optimization in the engineering workflow.</p>
             </div>
             <div>
               <h3 className="text-white font-bold text-lg mb-2">Reliability</h3>
-              <p className="text-corvix-muted leading-relaxed">Automated QA pipelines and 100% test coverage for mission-critical logic.</p>
+              <p className="text-corvix-muted leading-relaxed">Automated QA practices and targeted testing for critical application logic.</p>
             </div>
             <div>
               <h3 className="text-white font-bold text-lg mb-2">Security</h3>
-              <p className="text-corvix-muted leading-relaxed">SOC2-ready architectural patterns for AI and Fintech integrations.</p>
+              <p className="text-corvix-muted leading-relaxed">Security-conscious architectural patterns for AI and fintech integrations.</p>
             </div>
           </div>
         </div>

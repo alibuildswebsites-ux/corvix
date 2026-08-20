@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useCallback, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import PortfolioCard from "@/components/PortfolioCard";
@@ -16,6 +16,7 @@ const HeroCanvas = dynamic(() => import("@/components/HeroCanvas"), { ssr: false
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
+  const handleHeroReady = useCallback(() => setReady(true), []);
   useReveal(pageRef);
 
   return (
@@ -30,7 +31,7 @@ export default function Home() {
         {/* ── Fixed/Absolute 3D Background Wallpaper ── */}
         <div className={`absolute top-0 left-0 right-0 w-full h-[100vh] overflow-hidden z-0 pointer-events-none transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}>
           <Suspense fallback={null}>
-            <HeroCanvas onReady={() => setReady(true)} />
+            <HeroCanvas onReady={handleHeroReady} />
           </Suspense>
           {/* Subtle background glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] sm:w-[1200px] sm:h-[1200px] spotlight rounded-full z-0" />
