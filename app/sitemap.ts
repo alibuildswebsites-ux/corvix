@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://corvix-pi.vercel.app";
 
   // Static routes
-  const routes = ["", "/about", "/services", "/portfolio", "/contact"].map((route) => ({
+  const routes = ["", "/about", "/services", "/portfolio", "/contact", "/blog"].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
