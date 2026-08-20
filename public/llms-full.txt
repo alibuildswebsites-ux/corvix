@@ -1,13 +1,13 @@
 # Corvix Agency & Ecosystem - Full Technical Overview
 
 ## Agency Overview
-Corvix is a full-service custom software development, AI engineering, and corporate formation agency headquartered with primary regional focus in Austin, Texas. We build end-to-end digital infrastructure for founders, VC-backed startups, and mid-market enterprises.
+Corvix is a software development, AI engineering, and business setup support agency headquartered with primary regional focus in Austin, Texas. We build digital products and technical systems for founders, startups, and growing businesses.
 
 ## Technical Stack & Architecture
 
 ### Web Engineering
 - **Frameworks**: Next.js 16 (App Router, Server Actions, Partial Prerendering), React 19, Vue 3, Laravel, Django.
-- **Styling & Motion**: Tailwind CSS v4 (Zero-runtime CSS), GSAP 3 (ScrollTrigger), Three.js (WebGL interactive visualizers), Framer Motion.
+- **Styling & Motion**: Tailwind CSS v4 (Zero-runtime CSS), CSS animations, Three.js (WebGL interactive visualizers), and Framer Motion.
 - **Performance Approach**: Core Web Vitals optimization, layout stability, responsive rendering, and performance-focused engineering.
 
 ### AI Engineering & LLM Orchestration
@@ -21,10 +21,10 @@ Corvix is a full-service custom software development, AI engineering, and corpor
 
 ### Business Setup Support
 - **Entity Formation Support**: Texas LLC formation coordination, Wyoming LLC formation coordination, and Delaware C-Corp formation coordination.
-- **Business Setup Support**: EIN application assistance, Texas business-tax setup support, governance documentation, banking-resolution documentation, registered-agent coordination, and current FinCEN BOI-status guidance when applicable. U.S.-created companies are currently exempt from BOI reporting under FinCEN's August 11, 2026 final rule.
+- **Business Setup Support**: EIN application assistance, Texas business-tax setup support, governance documentation, banking-resolution documentation, registered-agent coordination, and current FinCEN BOI-status guidance when applicable. Corvix provides administrative support and directs customers to current official guidance for compliance questions.
 
 ## Regional Specialization: Austin, Texas (Silicon Hills)
-Austin has emerged as a premier technology capital driven by semiconductor engineering heritage, venture capital expansion, and relocating enterprise tech leaders. Corvix serves the Austin ecosystem with custom software development and AI engineering specifically tailored to local tech standards:
+Austin has emerged as a premier technology capital driven by semiconductor engineering heritage, venture capital expansion, and relocating enterprise tech leaders. Corvix serves the Austin ecosystem with custom software development and AI engineering tailored to Austin-based businesses and remote clients:
 - **Location Hub**: https://corvix-pi.vercel.app/locations/austin-tx
 - **Austin Web Development**: https://corvix-pi.vercel.app/locations/austin-tx/web-development
 - **Austin AI Development**: https://corvix-pi.vercel.app/locations/austin-tx/ai-development

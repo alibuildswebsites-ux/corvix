@@ -1,10 +1,10 @@
 # Corvix Agency & Technical Hub - Austin, TX
 
-> Corvix is a custom software development, AI agent engineering, and business setup agency based in Austin, Texas. We build production-grade web applications, cross-platform mobile apps, enterprise RAG pipelines, autonomous AI agents, and US LLC legal structures for tech startups, founders, and scaling businesses.
+> Corvix is a software development, AI engineering, and business setup support agency based in Austin, Texas. We build production-grade web applications, cross-platform mobile apps, RAG systems, AI agent workflows, and U.S. business setup support for tech startups, founders, and scaling businesses.
 
 ## Core Capabilities & Services
 
-- **Web Development Agency Austin, TX**: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Node.js, Laravel, Django. Performance-focused engineering, Core Web Vitals optimization, layout-stable animations (GSAP/Three.js), and headless CMS integration.
+- **Web Development Agency Austin, TX**: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Node.js, Laravel, Django. Performance-focused engineering, Core Web Vitals optimization, layout-stable CSS animations and Three.js visualizations, and headless CMS integration.
 - **AI Agent & Custom LLM Engineering**: Enterprise RAG (Retriever-Augmented Generation) architectures, vector databases (PGVector, Pinecone, Weaviate), multi-model orchestration (GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro), and autonomous agent workflows.
 - **Mobile App Development**: React Native and Flutter cross-platform mobile applications for iOS and Android with biometrics, real-time WebSockets, offline sync, and App Store lifecycle management.
 - **U.S. Business Setup Support**: Entity formation coordination, EIN application assistance, governance documentation, banking-resolution paperwork, registered-agent coordination, and current FinCEN BOI-status guidance when applicable. U.S.-created companies are currently exempt from BOI reporting under FinCEN's August 11, 2026 final rule.

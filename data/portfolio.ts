@@ -17,7 +17,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "A high-performance professional portfolio powered by Firebase. Features dynamic project showcases, secure authentication, and seamless cloud data sync.",
     tags: ["React", "Firebase", "TypeScript", "Tailwind"],
-    imageUrl: "/portfolio/raza-portfolio.png",
+    imageUrl: "/portfolio/raza-portfolio.webp",
     liveUrl: "https://www.alibuildswebsites.me",
     githubUrl: "https://github.com/alibuildswebsites-ux/Raza---Portfolio---Firebase",
   },
@@ -28,7 +28,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "A robust client and partner management platform built with TypeScript. Features real-time state management, secure modular architecture, and sleek dark mode UI.",
     tags: ["TypeScript", "Next.js", "Enterprise", "UI/UX"],
-    imageUrl: "/portfolio/lofton.png",
+    imageUrl: "/portfolio/lofton.webp",
     liveUrl: "https://lofton-psi.vercel.app",
     githubUrl: "https://github.com/alibuildswebsites-ux/lofton",
   },
@@ -39,7 +39,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "A lightning-fast tab management and workspace organization tool. Designed to boost developer productivity with keyboard navigation and zero-latency switching.",
     tags: ["TypeScript", "React", "Productivity", "Extension"],
-    imageUrl: "/portfolio/tabs.png",
+    imageUrl: "/portfolio/tabs.webp",
     liveUrl: "https://tabs-two-opal.vercel.app",
     githubUrl: "https://github.com/alibuildswebsites-ux/tabs",
   },
@@ -50,7 +50,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "An advanced clinical machine learning dashboard for predicting patient health risks based on vitals, history, and real-time biomedical telemetry.",
     tags: ["AI / ML", "TypeScript", "Healthcare", "Analytics"],
-    imageUrl: "/portfolio/health-predictor.png",
+    imageUrl: "/portfolio/health-predictor.webp",
     liveUrl: "https://health-predictor-two.vercel.app",
     githubUrl: "https://github.com/alibuildswebsites-ux/patient-health-risk-predictor",
   },

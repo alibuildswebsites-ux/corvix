@@ -27,8 +27,8 @@ export default function PortfolioCard({ item }: { item: PortfolioItem }) {
                 href={item.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub Repository"
-                className="w-8 h-8 rounded-full bg-black/60 backdrop-blur-md hover:bg-white/20 flex items-center justify-center text-white border border-white/10 transition-colors"
+                aria-label={`Open ${item.title} GitHub repository`}
+                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md hover:bg-white/20 flex items-center justify-center text-white border border-white/10 transition-colors"
               >
                 <Code2 size={14} />
               </a>
@@ -38,8 +38,8 @@ export default function PortfolioCard({ item }: { item: PortfolioItem }) {
                 href={item.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Live Preview"
-                className="w-8 h-8 rounded-full bg-corvix-accent hover:bg-corvix-accent-hover flex items-center justify-center text-black border border-white/10 transition-colors"
+                aria-label={`Open ${item.title} live preview`}
+                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 w-8 h-8 rounded-full bg-corvix-accent hover:bg-corvix-accent-hover flex items-center justify-center text-black border border-white/10 transition-colors"
               >
                 <ExternalLink size={14} />
               </a>

@@ -19,7 +19,7 @@ const features = [
   "Next.js 16 App Router & Server Actions architecture",
   "React 19 Server Components for instant page transitions",
   "Core Web Vitals and LCP performance optimization",
-  "Layout-stable animation architecture with GSAP & WebGL",
+  "Layout-stable animation architecture with CSS and WebGL",
   "Headless CMS integration (Sanity, Contentful, Strapi)",
   "Custom REST & GraphQL API integrations",
   "Tailwind CSS 4 zero-runtime styling engine",

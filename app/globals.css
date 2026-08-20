@@ -28,6 +28,30 @@
     font-family: var(--font-display);
   }
 
+
+  .testimonial-track {
+    animation: testimonial-marquee var(--marquee-duration, 18s) linear infinite;
+  }
+
+  @keyframes testimonial-marquee {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
+
+  .reveal-on-scroll {
+    animation: reveal-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-play-state: paused;
+  }
+
+  .reveal-visible {
+    animation-play-state: running;
+  }
+
+  @keyframes reveal-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * {
       animation-duration: 0.01ms !important;
