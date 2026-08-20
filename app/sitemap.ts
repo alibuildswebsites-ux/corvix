@@ -13,6 +13,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === "" ? 1.0 : 0.8,
   }));
 
+  // Austin location hub routes
+  const austinRoutes = [
+    "/locations/austin-tx",
+    "/locations/austin-tx/web-development",
+    "/locations/austin-tx/ai-development",
+    "/locations/austin-tx/mobile-app-development",
+    "/locations/austin-tx/business-setup",
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
   // Dynamic service routes
   const serviceRoutes = services.map((service) => ({
     url: `${baseUrl}/services/${service.slug}`,
@@ -29,5 +43,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...routes, ...serviceRoutes, ...blogRoutes];
+  return [...routes, ...austinRoutes, ...serviceRoutes, ...blogRoutes];
 }

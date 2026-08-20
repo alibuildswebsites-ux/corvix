@@ -1,15 +1,32 @@
-# Corvix
+# Corvix Agency & Technical Hub - Austin, TX
 
-> Full-service digital agency specialized in scalable software, AI agents, and US business setup.
+> Corvix is a custom software development, AI agent engineering, and business setup agency based in Austin, Texas. We build production-grade web applications, cross-platform mobile apps, enterprise RAG pipelines, autonomous AI agents, and US LLC legal structures for tech startups, founders, and scaling businesses.
 
-## Core Services
-- [Web Development](/services/web-development): Production-grade apps with Next.js, React, and modern stacks.
-- [Mobile Development](/services/mobile-development): Cross-platform iOS/Android apps via React Native and Flutter.
-- [AI Agents & Chatbots](/services/ai-integrations): Custom LLM integrations, RAG pipelines, and workflow automation.
-- [Business Setup](/services/business-setup): US LLC formation, EIN registration, and banking resolution.
+## Core Capabilities & Services
 
-## Technical Excellence
-Corvix emphasizes performance, engineering discipline, and purely professional delivery.
+- **Web Development Agency Austin, TX**: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Node.js, Laravel, Django. Sub-second performance, Core Web Vitals optimization, zero-shift animations (GSAP/Three.js), and headless CMS integration.
+- **AI Agent & Custom LLM Engineering**: Enterprise RAG (Retriever-Augmented Generation) architectures, vector databases (PGVector, Pinecone, Weaviate), multi-model orchestration (GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro), and autonomous agent workflows.
+- **Mobile App Development**: React Native and Flutter cross-platform mobile applications for iOS and Android with biometrics, real-time WebSockets, offline sync, and App Store lifecycle management.
+- **Texas Business Setup & Compliance**: LLC formation in Texas and Wyoming, IRS EIN registration, corporate governance docs (Operating Agreements, Bylaws), banking resolutions, and registered agent services for US and non-resident founders.
 
-- [Full Details](/llms-full.txt)
-- [Contact](/contact)
+## Location & Contact
+
+- **Primary Market**: Austin, Texas, USA (Silicon Hills, Capital Factory Ecosystem, Downtown Austin, The Domain)
+- **Service Area**: USA & Global Remote
+- **Website**: https://corvix-pi.vercel.app
+- **Location Hub**: https://corvix-pi.vercel.app/locations/austin-tx
+- **Direct Contact**: alibuildswebsites@gmail.com
+- **Response SLA**: Within 24 business hours
+
+## Key Pages & Resources
+
+- [Home](https://corvix-pi.vercel.app/)
+- [Austin, TX Agency Hub](https://corvix-pi.vercel.app/locations/austin-tx)
+- [Austin Web Development](https://corvix-pi.vercel.app/locations/austin-tx/web-development)
+- [Austin AI Agent Development](https://corvix-pi.vercel.app/locations/austin-tx/ai-development)
+- [Austin Mobile App Development](https://corvix-pi.vercel.app/locations/austin-tx/mobile-app-development)
+- [Austin Business Setup & LLCs](https://corvix-pi.vercel.app/locations/austin-tx/business-setup)
+- [Services Directory](https://corvix-pi.vercel.app/services)
+- [Portfolio & Case Studies](https://corvix-pi.vercel.app/portfolio)
+- [Technical Blog & AI Insights](https://corvix-pi.vercel.app/blog)
+- [Contact & Project Intake](https://corvix-pi.vercel.app/contact)

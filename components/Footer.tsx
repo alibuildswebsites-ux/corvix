@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const footerLinks = [
+  { href: "/locations/austin-tx", label: "Austin Hub" },
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/blog", label: "Blog" },

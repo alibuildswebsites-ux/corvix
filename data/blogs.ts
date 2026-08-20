@@ -15,6 +15,60 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "austin-tech-stack-nextjs-16-rag-pipelines",
+    title: "The Austin Tech Stack: Why Series A Founders Choose Next.js 16 & Custom RAG",
+    excerpt: "An engineering analysis of how venture-backed startups in Silicon Hills build scalable web platforms and private AI search architectures.",
+    date: "2026-04-22",
+    author: "Corvix Engineering",
+    category: "Engineering",
+    targetLocation: "Austin",
+    readingTime: "9 min",
+    metaTitle: "Austin Tech Stack | Next.js 16 & Custom RAG Pipelines",
+    metaDescription: "Technical guide for Austin startups on pairing Next.js 16 Partial Prerendering with private RAG vector pipelines for enterprise software performance.",
+    keywords: ["Austin Web Development", "Next.js 16 Austin", "RAG Pipelines", "Austin Startups", "Silicon Hills Tech"],
+    content: `
+The Austin Tech Stack: Why Series A Founders Choose Next.js 16 & Custom RAG
+
+Austin's Silicon Hills startup ecosystem moves fast. Between seed rounds and Series A milestones, founders cannot afford technical rewrites caused by brittle web frameworks or insecure AI plugins.
+
+1. Partial Prerendering (PPR) for Instant Core Web Vitals
+Next.js 16 Partial Prerendering gives Austin SaaS apps static shell rendering speeds while keeping dynamic user data hydration fast. LCP metrics stay under 0.8s even on heavy dashboard routes.
+
+2. Private Vector Search Infrastructure
+Connecting LLMs to proprietary business logic requires private vector indexing. Using PGVector alongside PostgreSQL keeps data inside your cloud VPC without leaking customer telemetry to public AI training sets.
+
+3. Modular API Boundaries
+Decoupling frontend Next.js Server Actions from underlying microservices ensures your engineering team can swap model providers (GPT-4o to Claude 3.5 Sonnet) in minutes without touching the UI layer.
+    `
+  },
+  {
+    slug: "texas-llc-formation-austin-startup-guide",
+    title: "Forming a Texas LLC in Austin: Legal Costs, Franchise Tax, and Non-Resident Strategy",
+    excerpt: "A practical guide for US and international tech founders setting up a legal corporate entity in Travis County and Texas.",
+    date: "2026-04-21",
+    author: "Corvix Business",
+    category: "Business",
+    targetLocation: "Austin",
+    readingTime: "8 min",
+    metaTitle: "Forming a Texas LLC in Austin | Complete Founder Guide",
+    metaDescription: "Step-by-step breakdown of Texas LLC formation in Austin. Learn about Secretary of State filings, IRS EIN SS-4 processing, and Texas Franchise Tax rules.",
+    keywords: ["Texas LLC Austin", "Austin Business Setup", "EIN Registration", "Texas Franchise Tax", "Austin Startups"],
+    content: `
+Forming a Texas LLC in Austin: Legal Costs, Franchise Tax, and Non-Resident Strategy
+
+Establishing a legal business entity in Austin gives tech founders zero personal state income tax, access to Texas capital networks, and reputational trust.
+
+1. Secretary of State Filings & Certificates
+Filing Form 205 (Certificate of Formation) with the Texas Secretary of State establishes your business entity. Having a Travis County registered agent ensures compliance notices are handled cleanly.
+
+2. Obtaining an IRS EIN Without an SSN
+International and non-resident founders can secure an IRS Employer Identification Number (EIN) using Form SS-4. Proper formatting prevents weeks of IRS processing delays.
+
+3. Texas Franchise Tax & No-Tax-Due Filings
+Even though Texas has no personal state income tax, LLCs must complete annual Texas Franchise Tax reports. Understanding public information reports (PIR) keeps your corporate status active and bank-ready.
+    `
+  },
+  {
     slug: "engineering-logic-wyoming-llc-global-founders",
     title: "The Engineering Logic Behind Wyoming LLCs for Global Founders",
     excerpt: "Why technical founders are choosing Wyoming for their US-based ventures, analyzed through the lens of legal scalability.",

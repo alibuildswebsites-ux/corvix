@@ -1,46 +1,43 @@
-# Corvix — Technical Breakdown
+# Corvix Agency & Ecosystem - Full Technical Overview
 
-## Engineering Philosophy
-Purely professional, technical delivery. We prioritize performance, maintainability, and scalability.
+## Agency Overview
+Corvix is a full-service custom software development, AI engineering, and corporate formation agency headquartered with primary regional focus in Austin, Texas. We build end-to-end digital infrastructure for founders, VC-backed startups, and mid-market enterprises.
 
-## Tech Stack
-- Frontend: Next.js 16+, React 19, Tailwind CSS 4.
-- Animation: GSAP, Framer Motion.
-- 3D: Three.js / React Three Fiber.
-- Backend/Infrastructure: Scalable cloud architectures, RAG pipelines for AI.
+## Technical Stack & Architecture
 
-## Detailed Service Specs
+### Web Engineering
+- **Frameworks**: Next.js 16 (App Router, Server Actions, Partial Prerendering), React 19, Vue 3, Laravel, Django.
+- **Styling & Motion**: Tailwind CSS v4 (Zero-runtime CSS), GSAP 3 (ScrollTrigger), Three.js (WebGL interactive visualizers), Framer Motion.
+- **Performance Standard**: Sub-second Largest Contentful Paint (LCP), 0.0 Cumulative Layout Shift (CLS), 100% Core Web Vitals pass rate.
 
-### Web Development
-Production-grade websites and web applications.
-- Frameworks: Next.js, React, Vue, Laravel, Django.
-- Features: Responsive, mobile-first, SEO optimized, performance tuned.
-- CMS: Sanity, Contentful, Strapi.
+### AI Engineering & LLM Orchestration
+- **RAG Infrastructure**: Vector embedding pipelines, Hybrid Search, PGVector, Pinecone, Weaviate, Qdrant.
+- **LLM Models**: OpenAI GPT-4o, Anthropic Claude 3.5 Sonnet, Google Gemini 1.5 Pro, Llama 3 local inference.
+- **Agent Workflows**: Autonomous task decomposition, ReAct loops, tool/API execution, function calling, agentic state machines.
 
-### AI Agents & Chatbots
-Intelligent automation built into products.
-- LLMs: Custom GPT, Claude, and open-source models.
-- Capabilities: RAG pipelines, autonomous agents, workflow automation.
-- Platforms: Slack, WhatsApp, Web integrations.
+### Mobile Engineering
+- **Cross-Platform**: React Native, Flutter.
+- **Native Security**: Biometric authentication, Keychain/Keystore encryption, offline state persistence, background sync, WebSocket streaming.
 
-### Business Setup
-Legal and administrative readiness for US ventures.
-- LLC Formation: All 50 states.
-- Compliance: EIN registration, Operating Agreements, Bylaws.
-- Banking: Resolution letters for business accounts.
+### Corporate Legal & Business Setup
+- **Entity Formation**: Texas LLC formation, Wyoming LLC formation, Delaware C-Corp setup.
+- **Tax & Compliance**: IRS EIN processing (Form SS-4), Texas Franchise Tax compliance, BOI filings, Banking Resolution documentation.
 
-## Technical Standards & Compliance
+## Regional Specialization: Austin, Texas (Silicon Hills)
+Austin has emerged as a premier technology capital driven by semiconductor engineering heritage, venture capital expansion, and relocating enterprise tech leaders. Corvix serves the Austin ecosystem with custom software development and AI engineering specifically tailored to local tech standards:
+- **Location Hub**: https://corvix-pi.vercel.app/locations/austin-tx
+- **Austin Web Development**: https://corvix-pi.vercel.app/locations/austin-tx/web-development
+- **Austin AI Development**: https://corvix-pi.vercel.app/locations/austin-tx/ai-development
+- **Austin Mobile Apps**: https://corvix-pi.vercel.app/locations/austin-tx/mobile-app-development
+- **Austin Business Setup**: https://corvix-pi.vercel.app/locations/austin-tx/business-setup
 
-### Operational Security
-- **Data Sovereignty:** Private RAG pipelines ensuring client data never trains public LLMs.
-- **Protocol:** HTTPS/TLS 1.3 enforced; secure JWT-based authentication layers.
+## Case Studies & Portfolio
+1. **Lofton Enterprise Platform**: Client and partner management engine built with Next.js & TypeScript.
+2. **Tabs Productivity Engine**: Tab management and workspace organizer built for high-speed developer workflows.
+3. **Patient Health Risk Predictor**: Biomedical ML analytics dashboard built for real-time risk assessment.
+4. **Raza Professional Portfolio**: Dynamic showcase platform powered by Firebase and React.
 
-### Deployment Lifecycle
-- **CI/CD:** Automated GitHub Actions workflows for linting, testing, and deployment.
-- **Environment:** Edge-optimized rendering via Vercel for global low-latency performance.
-- **Observability:** Error tracking and performance monitoring integrated at the core.
-
-## Portfolio Highlights
-- FinTrack Dashboard: Real-time financial analytics (Next.js, Supabase).
-- ShopMate: E-commerce mobile app (React Native, Stripe).
-- SupportBot AI: Customer support agent (GPT-4, Custom RAG).
+## Contact Information
+- **Inquiries**: alibuildswebsites@gmail.com
+- **Website**: https://corvix-pi.vercel.app
+- **SLA**: Initial scoping and response within 24 hours.

@@ -24,11 +24,19 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://corvix-pi.vercel.app/"),
   title: {
-    default: "Corvix | Build. Deploy. Scale.",
-    template: "%s | Corvix",
+    default: "Corvix | Software Development & AI Agency Austin, TX",
+    template: "%s | Corvix Austin",
   },
-  description: "Corvix helps businesses build, deploy, and scale with AI-integrated solutions and seamless business setup.",
-  keywords: ["Web Development", "AI Integration", "Mobile Apps", "Business Setup", "LLC Formation"],
+  description: "Corvix is a premier custom software development, AI agent engineering, and business setup agency based in Austin, TX. We build web apps, mobile products, and LLM integrations.",
+  keywords: [
+    "Web Development Austin TX",
+    "AI Agency Austin Texas",
+    "Custom Software Development Austin",
+    "Mobile App Developers Austin",
+    "LLC Formation Texas",
+    "AI Agent Engineering",
+    "Next.js Development Agency"
+  ],
   alternates: {
     canonical: "/",
   },
@@ -38,14 +46,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: "Corvix",
-    title: "Corvix | Build. Deploy. Scale.",
-    description: "AI-integrated solutions and business setup services.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Corvix" }],
+    title: "Corvix | Software Development & AI Agency Austin, TX",
+    description: "Custom web development, mobile apps, custom AI agent integrations, and Texas business setup in Austin, TX.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Corvix Austin TX" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Corvix | Build. Deploy. Scale.",
-    description: "AI-integrated solutions and business setup services.",
+    title: "Corvix | Software Development & AI Agency Austin, TX",
+    description: "Custom software engineering, AI agent workflows, and US business formation.",
     images: ["/og-image.png"],
     creator: "@corvix",
   },
@@ -66,10 +74,40 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "ProfessionalService",
   name: "Corvix",
   url: "https://corvix-pi.vercel.app",
   logo: "https://corvix-pi.vercel.app/apple-touch-icon.png",
+  image: "https://corvix-pi.vercel.app/og-image.png",
+  telephone: "+1-512-555-0199",
+  email: "alibuildswebsites@gmail.com",
+  priceRange: "$$$",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Austin",
+    addressRegion: "TX",
+    addressCountry: "US",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 30.2672,
+    longitude: -97.7431,
+  },
+  areaServed: [
+    {
+      "@type": "City",
+      name: "Austin",
+      sameAs: "https://en.wikipedia.org/wiki/Austin,_Texas",
+    },
+    {
+      "@type": "State",
+      name: "Texas",
+    },
+    {
+      "@type": "Country",
+      name: "United States",
+    },
+  ],
   sameAs: [
     "https://twitter.com/corvix",
     "https://github.com/corvix",
@@ -77,7 +115,7 @@ const jsonLd = {
     "https://instagram.com/corvix",
   ],
   description:
-    "Corvix helps businesses build, deploy, and scale with AI-integrated solutions.",
+    "Corvix is a software development and AI engineering agency in Austin, TX building custom web applications, mobile apps, enterprise RAG AI agents, and Texas business formations.",
 };
 
 export default function RootLayout({
