@@ -9,7 +9,6 @@ import { motion, AnimatePresence } from "framer-motion";
 const navLinks = [
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -98,7 +97,7 @@ export default function Navbar() {
       <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 h-14 flex items-center justify-between">
         <Link href="/" className="font-display font-bold text-lg tracking-widest text-corvix-text hover:text-corvix-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded transition-colors duration-200">CORVIX</Link>
         <div className="hidden md:flex items-center gap-8">
-          {isHome ? <><a href="#services" className={homeLinkClass("services")}>Services</a><a href="#portfolio" className={homeLinkClass("portfolio")}>Portfolio</a><Link href="/blog" className={linkClass("/blog")}>Blog</Link><Link href="/about" className={linkClass("/about")}>About</Link><Link href="/contact" className={linkClass("/contact")}>Contact</Link></> : navLinks.map((link) => <Link key={link.href} href={link.href} className={linkClass(link.href)}>{link.label}</Link>)}
+          {isHome ? <><a href="#services" className={homeLinkClass("services")}>Services</a><a href="#portfolio" className={homeLinkClass("portfolio")}>Portfolio</a><Link href="/about" className={linkClass("/about")}>About</Link><Link href="/contact" className={linkClass("/contact")}>Contact</Link></> : navLinks.map((link) => <Link key={link.href} href={link.href} className={linkClass(link.href)}>{link.label}</Link>)}
           <Link href="/contact" className="bg-white hover:bg-gray-200 text-black text-sm font-medium px-4 py-1.5 rounded-full transition-colors duration-200">Start a Project</Link>
         </div>
         <button type="button" className="md:hidden p-2.5 -mr-2 flex items-center justify-center min-w-11 min-h-11 text-corvix-muted hover:text-corvix-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 transition-colors duration-200" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? "Close menu" : "Open menu"}>{open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}</button>

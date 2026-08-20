@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight, Check, ShieldCheck, Zap } from "lucide-react";
 import PageWrapper from "@/components/PageWrapper";
 import type { Metadata } from "next";
 
@@ -44,13 +44,6 @@ export default function AustinAiDevPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="w-full max-w-[1000px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 pt-40 md:pt-48 pb-20 md:pb-32">
-        <Link
-          href="/locations/austin-tx"
-          className="inline-flex items-center gap-2 text-corvix-muted hover:text-corvix-accent text-sm font-medium mb-8 transition-colors cursor-pointer"
-        >
-          <ArrowLeft size={16} /> Austin Agency Hub
-        </Link>
-
         <p className="text-corvix-accent text-xs font-bold uppercase tracking-[0.25em] mb-4">
           Austin, TX AI Engineering Services
         </p>
