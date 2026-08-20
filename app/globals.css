@@ -9,8 +9,9 @@
   --color-corvix-muted: #B4BCD0;
   --color-corvix-border: rgba(255, 255, 255, 0.08);
 
-  --font-display: "Outfit", sans-serif;
-  --font-body: "Rubik", sans-serif;
+  --font-space: var(--font-space-grotesk), sans-serif;
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-body: var(--font-space-grotesk), sans-serif;
 }
 
 @utility spotlight {

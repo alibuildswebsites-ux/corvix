@@ -1,18 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Rubik } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const outfit = Outfit({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const rubik = Rubik({
-  subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-space-grotesk",
   display: "swap",
 });
 
@@ -94,8 +88,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${rubik.variable} [color-scheme:dark]`}>
-      <body className="bg-corvix-bg text-corvix-text font-body antialiased">
+    <html lang="en" className={`${spaceGrotesk.variable} [color-scheme:dark]`}>
+      <body className="bg-corvix-bg text-corvix-text font-space antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
