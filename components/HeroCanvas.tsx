@@ -2,85 +2,22 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
+const PARTICLE_COUNT = 500;
+const CONNECTION_DISTANCE = 275; // pixels
+const PULSE_RADIUS = 200;         // pixels: cursor proximity boost radius
 const BLOOM_OPACITY = 0.045;
 const BLOOM_LERP = 0.08;
 const FAR_Z_MAX = -1.0;
 const NEAR_Z_MIN = 0.5;
-const TARGET_FRAME_MS = 1000 / 60;
-const QUALITY_DOWNGRADE_WINDOW_MS = 1800;
-const QUALITY_UPGRADE_WINDOW_MS = 7000;
 
 const ACCENT = new THREE.Color("#0077FF");
 const WHITE = new THREE.Color("#F5F5F5");
 
 type Layer = "far" | "mid" | "near";
 
-type HeroQuality = {
-  name: "ultra" | "high" | "medium" | "low";
-  particleCount: number;
-  maxConnections: number;
-  connectionDistance: number;
-  maxDpr: number;
-  simulationHz: number;
-  enableLines: boolean;
-  enableBloom: boolean;
-  enablePointer: boolean;
-};
-
-const QUALITY_PROFILES: HeroQuality[] = [
-  {
-    name: "ultra",
-    particleCount: 500,
-    maxConnections: 2600,
-    connectionDistance: 275,
-    maxDpr: 2,
-    simulationHz: 60,
-    enableLines: true,
-    enableBloom: true,
-    enablePointer: true,
-  },
-  {
-    name: "high",
-    particleCount: 360,
-    maxConnections: 1900,
-    connectionDistance: 245,
-    maxDpr: 1.5,
-    simulationHz: 60,
-    enableLines: true,
-    enableBloom: true,
-    enablePointer: true,
-  },
-  {
-    name: "medium",
-    particleCount: 240,
-    maxConnections: 950,
-    connectionDistance: 220,
-    maxDpr: 1.25,
-    simulationHz: 45,
-    enableLines: true,
-    enableBloom: false,
-    enablePointer: false,
-  },
-  {
-    name: "low",
-    particleCount: 110,
-    maxConnections: 300,
-    connectionDistance: 190,
-    maxDpr: 1,
-    simulationHz: 30,
-    enableLines: true,
-    enableBloom: false,
-    enablePointer: false,
-  },
-];
-
 interface Particle {
-  x: number;
-  y: number;
-  z: number;
-  vx: number;
-  vy: number;
-  vz: number;
+  x: number; y: number; z: number;
+  vx: number; vy: number; vz: number;
   color: THREE.Color;
   opacity: number;
   layer: Layer;
@@ -92,27 +29,6 @@ function layerOf(z: number): Layer {
   return "mid";
 }
 
-function selectInitialQuality(): HeroQuality {
-  if (typeof window === "undefined") return QUALITY_PROFILES[1];
-
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-  const saveData = connection?.saveData === true;
-  const cores = navigator.hardwareConcurrency || 4;
-  const dpr = window.devicePixelRatio || 1;
-  const isTouch = window.matchMedia("(pointer: coarse)").matches;
-  const width = window.innerWidth;
-
-  if (reducedMotion || saveData) return QUALITY_PROFILES[3];
-  if (isTouch || width < 768) return QUALITY_PROFILES[2];
-  if (cores >= 8 && dpr <= 1.5) return QUALITY_PROFILES[0];
-  return QUALITY_PROFILES[1];
-}
-
-function profileIndex(profile: HeroQuality) {
-  return QUALITY_PROFILES.findIndex((item) => item.name === profile.name);
-}
-
 export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
   const mountRef = useRef<HTMLDivElement>(null);
   const readyCalledRef = useRef(false);
@@ -121,6 +37,7 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
     const mount = mountRef.current;
     if (!mount) return;
 
+    // WebGL availability check
     try {
       const testCanvas = document.createElement("canvas");
       const ctx = testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl");
@@ -133,16 +50,10 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
       return;
     }
 
-    const initialQuality = selectInitialQuality();
-    let quality = initialQuality;
-    let qualityIdx = profileIndex(initialQuality);
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      powerPreference: "high-performance",
-    });
+    // Scene setup
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
 
@@ -150,96 +61,86 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
     const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
     camera.position.z = 5;
 
-    let w = 0;
-    let h = 0;
+    // Resize handler
+    let w = 0, h = 0;
     const resize = () => {
       w = mount.clientWidth;
       h = mount.clientHeight;
-      const dpr = Math.min(window.devicePixelRatio || 1, quality.maxDpr);
-      renderer.setPixelRatio(dpr);
-      renderer.setSize(w, h, false);
-      camera.aspect = h === 0 ? 1 : w / h;
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      camera.aspect = w / h;
       camera.updateProjectionMatrix();
     };
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(mount);
 
-    let particles: Particle[] = [];
-    let farParticles: Particle[] = [];
-    let midParticles: Particle[] = [];
-    let nearParticles: Particle[] = [];
+    // ── Particles ──────────────────────────────────────────────────────────
+    const particles: Particle[] = Array.from({ length: PARTICLE_COUNT }, () => {
+      const z = (Math.random() - 0.5) * 4;
+      const layer = layerOf(z);
+      const speedMult = layer === "far" ? 0.4 : layer === "near" ? 1.8 : 1.0;
+      const opacityMult = layer === "far" ? 0.5 : layer === "near" ? 1.2 : 1.0;
+      const rawOpacity = 0.3 + Math.random() * 0.7;
+      return {
+        x: (Math.random() - 0.5) * 25,
+        y: (Math.random() - 0.5) * 10,
+        z,
+        vx: (Math.random() - 0.5) * 0.0006 * speedMult,
+        vy: (Math.random() - 0.5) * 0.0006 * speedMult,
+        vz: (Math.random() - 0.5) * 0.0003 * speedMult,
+        color: Math.random() < 0.6 ? ACCENT.clone() : WHITE.clone(),
+        opacity: Math.min(rawOpacity * opacityMult, 1.0),
+        layer,
+      };
+    });
 
-    function createParticles(count: number) {
-      const created = Array.from({ length: count }, () => {
-        const z = (Math.random() - 0.5) * 4;
-        const layer = layerOf(z);
-        const speedMult = layer === "far" ? 0.4 : layer === "near" ? 1.8 : 1.0;
-        const opacityMult = layer === "far" ? 0.5 : layer === "near" ? 1.2 : 1.0;
-        const rawOpacity = 0.3 + Math.random() * 0.7;
-        return {
-          x: (Math.random() - 0.5) * 25,
-          y: (Math.random() - 0.5) * 10,
-          z,
-          vx: (Math.random() - 0.5) * 0.0006 * speedMult,
-          vy: (Math.random() - 0.5) * 0.0006 * speedMult,
-          vz: (Math.random() - 0.5) * 0.0003 * speedMult,
-          color: Math.random() < 0.6 ? ACCENT.clone() : WHITE.clone(),
-          opacity: Math.min(rawOpacity * opacityMult, 1.0),
-          layer,
-        } satisfies Particle;
-      });
+    // Separate particles by layer for geometry building
+    const farParticles  = particles.filter(p => p.layer === "far");
+    const midParticles  = particles.filter(p => p.layer === "mid");
+    const nearParticles = particles.filter(p => p.layer === "near");
 
-      particles = created;
-      farParticles = created.filter((p) => p.layer === "far");
-      midParticles = created.filter((p) => p.layer === "mid");
-      nearParticles = created.filter((p) => p.layer === "near");
-    }
-
-    function buildPoints(subset: Particle[], size: number) {
+    // Build a Points object for a given subset of particles
+    function buildPoints(
+      subset: Particle[],
+      size: number
+    ): { geo: THREE.BufferGeometry; mat: THREE.PointsMaterial; pts: THREE.Points } {
       const pos = new Float32Array(subset.length * 3);
       const col = new Float32Array(subset.length * 3);
       subset.forEach((p, i) => {
-        pos[i * 3] = p.x;
-        pos[i * 3 + 1] = p.y;
-        pos[i * 3 + 2] = p.z;
-        col[i * 3] = p.color.r * p.opacity;
+        pos[i * 3] = p.x; pos[i * 3 + 1] = p.y; pos[i * 3 + 2] = p.z;
+        col[i * 3]     = p.color.r * p.opacity;
         col[i * 3 + 1] = p.color.g * p.opacity;
         col[i * 3 + 2] = p.color.b * p.opacity;
       });
       const geo = new THREE.BufferGeometry();
       geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-      geo.setAttribute("color", new THREE.BufferAttribute(col, 3));
-      const mat = new THREE.PointsMaterial({
-        size,
-        vertexColors: true,
-        sizeAttenuation: true,
-        transparent: true,
-      });
+      geo.setAttribute("color",    new THREE.BufferAttribute(col, 3));
+      const mat = new THREE.PointsMaterial({ size, vertexColors: true, sizeAttenuation: true, transparent: true });
       const pts = new THREE.Points(geo, mat);
       return { geo, mat, pts };
     }
 
-    createParticles(quality.particleCount);
+    const far  = buildPoints(farParticles,  0.025);
+    const mid  = buildPoints(midParticles,  0.045);
+    const near = buildPoints(nearParticles, 0.065);
+    scene.add(far.pts);
+    scene.add(mid.pts);
+    scene.add(near.pts);
 
-    let far = buildPoints(farParticles, 0.025);
-    let mid = buildPoints(midParticles, 0.045);
-    let near = buildPoints(nearParticles, 0.065);
-    scene.add(far.pts, mid.pts, near.pts);
-
-    const maxLineCapacity = QUALITY_PROFILES[0].maxConnections;
-    const linePositions = new Float32Array(maxLineCapacity * 6);
+    // ── Constellation lines ────────────────────────────────────────────────
+    const maxLines = PARTICLE_COUNT * 15;
+    const linePositions = new Float32Array(maxLines * 6);
+    const lineColors    = new Float32Array(maxLines * 6);
     const lineGeo = new THREE.BufferGeometry();
     lineGeo.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
-    const lineMaterial = new THREE.LineBasicMaterial({
-      color: ACCENT,
-      transparent: true,
-      opacity: 0.28,
-    });
+    lineGeo.setAttribute("color",    new THREE.BufferAttribute(lineColors,    3));
+    const lineMaterial = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true });
     const lineSegments = new THREE.LineSegments(lineGeo, lineMaterial);
     scene.add(lineSegments);
 
-    const bloomGeo = new THREE.CircleGeometry(0.8, 24);
+    // ── Cursor bloom ───────────────────────────────────────────────────────
+    const bloomGeo = new THREE.CircleGeometry(0.8, 32);
     const bloomMat = new THREE.MeshBasicMaterial({
       color: 0x0077ff,
       transparent: true,
@@ -249,278 +150,199 @@ export default function HeroCanvas({ onReady }: { onReady?: () => void }) {
     const bloom = new THREE.Mesh(bloomGeo, bloomMat);
     bloom.position.set(0, 0, 0.5);
     const bloomTarget = new THREE.Vector3();
-    if (quality.enableBloom && !prefersReduced) scene.add(bloom);
+    if (!prefersReduced) scene.add(bloom);
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let camOffsetX = 0;
-    let camOffsetY = 0;
-
+    // ── Mouse & Touch parallax ─────────────────────────────────────────────
+    let mouseX = 0, mouseY = 0;
+    let camOffsetX = 0, camOffsetY = 0;
     const onMouseMove = (e: MouseEvent) => {
-      if (!quality.enablePointer) return;
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseX = (e.clientX / window.innerWidth  - 0.5) * 2;
       mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
     };
-
     const onTouchMove = (e: TouchEvent) => {
-      if (!quality.enablePointer || e.touches.length === 0) return;
-      mouseX = (e.touches[0].clientX / window.innerWidth - 0.5) * 2;
-      mouseY = -(e.touches[0].clientY / window.innerHeight - 0.5) * 2;
+      if (e.touches.length > 0) {
+        mouseX = (e.touches[0].clientX / window.innerWidth  - 0.5) * 2;
+        mouseY = -(e.touches[0].clientY / window.innerHeight - 0.5) * 2;
+      }
     };
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
 
-    if (quality.enablePointer) {
-      window.addEventListener("mousemove", onMouseMove, { passive: true });
-      window.addEventListener("touchmove", onTouchMove, { passive: true });
-    }
-
+    // ── IntersectionObserver ───────────────────────────────────────────────
     let isVisible = true;
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-      },
-      { threshold: 0 },
+      ([entry]) => { isVisible = entry.isIntersecting; },
+      { threshold: 0 }
     );
     observer.observe(mount);
 
-    const _v = new THREE.Vector3();
-    const projected = new Float32Array(QUALITY_PROFILES[0].particleCount * 2);
-    const gridCols = 6;
-    const gridRows = 3;
-    const grid: number[][] = Array.from({ length: gridCols * gridRows }, () => []);
-    const neighborOffsets = [
-      [0, 0],
-      [1, 0],
-      [-1, 1],
-      [0, 1],
-      [1, 1],
-    ] as const;
-
-    let rafId = 0;
-    let lastFrame = performance.now();
-    let lastSimulation = lastFrame;
-    let performanceWindowStart = lastFrame;
-    let poorFrameTime = 0;
-    let goodFrameTime = 0;
-
-    function disposeLayer(layer: {
-      geo: THREE.BufferGeometry;
-      mat: THREE.Material;
-      pts: THREE.Points;
-    }) {
-      layer.geo.dispose();
-      layer.mat.dispose();
-      scene.remove(layer.pts);
-    }
-
-    function rebuildQuality(nextIdx: number) {
-      if (nextIdx === qualityIdx) return;
-      quality = QUALITY_PROFILES[nextIdx];
-      qualityIdx = nextIdx;
-      resize();
-
-      disposeLayer(far);
-      disposeLayer(mid);
-      disposeLayer(near);
-
-      createParticles(quality.particleCount);
-      far = buildPoints(farParticles, 0.025);
-      mid = buildPoints(midParticles, 0.045);
-      near = buildPoints(nearParticles, 0.065);
-      scene.add(far.pts, mid.pts, near.pts);
-      lineGeo.setDrawRange(0, 0);
-      lineSegments.visible = quality.enableLines;
-      bloom.visible = quality.enableBloom && !prefersReduced;
-      mouseX = 0;
-      mouseY = 0;
-    }
-
-    const onVisibilityChange = () => {
-      if (document.visibilityState !== "visible") return;
-      lastFrame = performance.now();
-      lastSimulation = lastFrame;
-      performanceWindowStart = lastFrame;
-    };
-    document.addEventListener("visibilitychange", onVisibilityChange);
-
+    // Helper: update a layer's geometry positions each frame
     function updateLayerPositions(subset: Particle[], geo: THREE.BufferGeometry) {
       const pos = geo.attributes.position as THREE.BufferAttribute;
-      for (let i = 0; i < subset.length; i++) {
-        const p = subset[i];
-        pos.setXYZ(i, p.x, p.y, p.z);
-      }
+      subset.forEach((p, i) => pos.setXYZ(i, p.x, p.y, p.z));
       pos.needsUpdate = true;
     }
 
-    const cleanup = () => {
-      cancelAnimationFrame(rafId);
-      observer.disconnect();
-      ro.disconnect();
-      document.removeEventListener("visibilitychange", onVisibilityChange);
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("touchmove", onTouchMove);
-      disposeLayer(far);
-      disposeLayer(mid);
-      disposeLayer(near);
-      lineGeo.dispose();
-      lineMaterial.dispose();
-      bloomGeo.dispose();
-      bloomMat.dispose();
-      renderer.dispose();
-      if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
-    };
-
+    // ── Static snapshot for reduced motion ─────────────────────────────────
     if (prefersReduced) {
       renderer.render(scene, camera);
       onReady?.();
-      return cleanup;
+      return () => {
+        window.removeEventListener("mousemove", onMouseMove);
+        window.removeEventListener("touchmove", onTouchMove);
+        far.geo.dispose();  far.mat.dispose();
+        mid.geo.dispose();  mid.mat.dispose();
+        near.geo.dispose(); near.mat.dispose();
+        lineGeo.dispose(); lineMaterial.dispose();
+        bloomGeo.dispose(); bloomMat.dispose();
+        renderer.dispose();
+        ro.disconnect();
+        observer.disconnect();
+        if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
+      };
     }
 
-    const animate = (now: number) => {
+    // ── Spatial Grid Pre-allocations ────────────────────────────────────────
+    const GRID_COLS = 6;
+    const GRID_ROWS = 3;
+    const grid: number[][] = Array.from({ length: GRID_COLS * GRID_ROWS }, () => []);
+    
+    // ── Pre-allocated scratch for per-frame projection ─────────────────────
+    const _v = new THREE.Vector3();
+    const projected = new Float32Array(PARTICLE_COUNT * 2);
+
+    // ── Animation loop ─────────────────────────────────────────────────────
+    let rafId: number;
+    const animate = () => {
       rafId = requestAnimationFrame(animate);
-      if (!isVisible) {
-        lastFrame = now;
-        return;
-      }
+      if (!isVisible) return;
 
-      const frameDelta = now - lastFrame;
-      lastFrame = now;
-      if (frameDelta > TARGET_FRAME_MS * 1.35) poorFrameTime += frameDelta;
-      else poorFrameTime = Math.max(0, poorFrameTime - frameDelta * 0.35);
-
-      const performanceWindowElapsed = now - performanceWindowStart;
-      const simulationInterval = 1000 / quality.simulationHz;
-      if (now - lastSimulation < simulationInterval) return;
-      const delta = Math.min(now - lastSimulation, 64);
-      lastSimulation = now;
-
+      // Reset Grid
       for (let i = 0; i < grid.length; i++) grid[i].length = 0;
 
-      for (let i = 0; i < particles.length; i++) {
+      // Move all particles and wrap boundaries + Binning
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
         const p = particles[i];
-        p.x += p.vx * (delta / 16.67);
-        p.y += p.vy * (delta / 16.67);
-        p.z += p.vz * (delta / 16.67);
-        if (p.x > 12.5) p.x = -12.5;
-        if (p.x < -12.5) p.x = 12.5;
-        if (p.y > 5) p.y = -5;
-        if (p.y < -5) p.y = 5;
-        if (p.z > 2) p.z = -2;
-        if (p.z < -2) p.z = 2;
+        p.x += p.vx; p.y += p.vy; p.z += p.vz;
+        if (p.x >  12.5) p.x = -12.5; if (p.x < -12.5) p.x =  12.5;
+        if (p.y >  5) p.y = -5; if (p.y < -5) p.y =  5;
+        if (p.z >  2) p.z = -2; if (p.z < -2) p.z =  2;
 
-        const gx = Math.max(
-          0,
-          Math.min(Math.floor(((p.x + 12.5) / 25) * gridCols), gridCols - 1),
-        );
-        const gy = Math.max(
-          0,
-          Math.min(Math.floor(((p.y + 5) / 10) * gridRows), gridRows - 1),
-        );
-        grid[gy * gridCols + gx].push(i);
+        // Binning Pass
+        const gx = Math.floor(((p.x + 12.5) / 25) * GRID_COLS);
+        const gy = Math.floor(((p.y + 5) / 10) * GRID_ROWS);
+        const clampedX = Math.max(0, Math.min(gx, GRID_COLS - 1));
+        const clampedY = Math.max(0, Math.min(gy, GRID_ROWS - 1));
+        grid[clampedY * GRID_COLS + clampedX].push(i);
       }
 
-      updateLayerPositions(farParticles, far.geo);
-      updateLayerPositions(midParticles, mid.geo);
+      // Update geometry positions per layer
+      updateLayerPositions(farParticles,  far.geo);
+      updateLayerPositions(midParticles,  mid.geo);
       updateLayerPositions(nearParticles, near.geo);
 
-      if (quality.enableLines) {
-        for (let i = 0; i < particles.length; i++) {
-          _v.set(particles[i].x, particles[i].y, particles[i].z).project(camera);
-          projected[i * 2] = (_v.x * 0.5 + 0.5) * w;
-          projected[i * 2 + 1] = (-_v.y * 0.5 + 0.5) * h;
-        }
+      // Project all particles to screen space
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        _v.set(particles[i].x, particles[i].y, particles[i].z).project(camera);
+        projected[i * 2]     = (_v.x *  0.5 + 0.5) * w;
+        projected[i * 2 + 1] = (-_v.y * 0.5 + 0.5) * h;
+      }
 
-        const lp = lineGeo.attributes.position as THREE.BufferAttribute;
-        let lineIdx = 0;
+      const cursorSx = (mouseX *  0.5 + 0.5) * w;
+      const cursorSy = (-mouseY * 0.5 + 0.5) * h;
 
-        outer: for (let gy = 0; gy < gridRows; gy++) {
-          for (let gx = 0; gx < gridCols; gx++) {
-            const cellParticles = grid[gy * gridCols + gx];
-            for (const p1Idx of cellParticles) {
-              for (const [offsetX, offsetY] of neighborOffsets) {
-                const nx = gx + offsetX;
-                const ny = gy + offsetY;
-                if (nx < 0 || nx >= gridCols || ny < 0 || ny >= gridRows) continue;
+      const lp = lineGeo.attributes.position as THREE.BufferAttribute;
+      const lc = lineGeo.attributes.color    as THREE.BufferAttribute;
+      let lineIdx = 0;
 
-                const nextCellParticles = grid[ny * gridCols + nx];
-                for (const p2Idx of nextCellParticles) {
-                  if (p1Idx >= p2Idx) continue;
+      // Optimized Connection Pass using Spatial Grid
+      for (let gy = 0; gy < GRID_ROWS; gy++) {
+        for (let gx = 0; gx < GRID_COLS; gx++) {
+          const cellIdx = gy * GRID_COLS + gx;
+          const cellParticles = grid[cellIdx];
 
-                  const dx = projected[p1Idx * 2] - projected[p2Idx * 2];
-                  const dy = projected[p1Idx * 2 + 1] - projected[p2Idx * 2 + 1];
-                  const distSq = dx * dx + dy * dy;
-                  if (distSq >= quality.connectionDistance * quality.connectionDistance) continue;
+          // Check against particles in same cell and adjacent cells (right, down-left, down, down-right)
+          // This ensures we only check each pair once
+          const neighbors = [
+            [gx, gy], [gx + 1, gy], 
+            [gx - 1, gy + 1], [gx, gy + 1], [gx + 1, gy + 1]
+          ];
+
+          for (const p1Idx of cellParticles) {
+            for (const [nx, ny] of neighbors) {
+              if (nx < 0 || nx >= GRID_COLS || ny >= GRID_ROWS) continue;
+              const nextCellParticles = grid[ny * GRID_COLS + nx];
+              
+              for (const p2Idx of nextCellParticles) {
+                if (p1Idx >= p2Idx) continue; // Skip same particle and avoid double checks
+
+                const dx   = projected[p1Idx * 2]     - projected[p2Idx * 2];
+                const dy   = projected[p1Idx * 2 + 1] - projected[p2Idx * 2 + 1];
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < CONNECTION_DISTANCE && lineIdx < maxLines) {
+                  const midSx = (projected[p1Idx * 2]     + projected[p2Idx * 2])     * 0.5;
+                  const midSy = (projected[p1Idx * 2 + 1] + projected[p2Idx * 2 + 1]) * 0.5;
+                  const cdx = midSx - cursorSx;
+                  const cdy = midSy - cursorSy;
+                  const cursorDist = Math.sqrt(cdx * cdx + cdy * cdy);
+                  const proximityBoost = cursorDist < PULSE_RADIUS
+                    ? (1 - cursorDist / PULSE_RADIUS) * 0.4
+                    : 0;
+                  const alpha = Math.min((1 - dist / CONNECTION_DISTANCE) * 0.25 + proximityBoost, 0.4);
 
                   const p1 = particles[p1Idx];
                   const p2 = particles[p2Idx];
-                  lp.setXYZ(lineIdx * 2, p1.x, p1.y, p1.z);
+                  lp.setXYZ(lineIdx * 2,     p1.x, p1.y, p1.z);
                   lp.setXYZ(lineIdx * 2 + 1, p2.x, p2.y, p2.z);
+                  lc.setXYZ(lineIdx * 2,     ACCENT.r * alpha, ACCENT.g * alpha, ACCENT.b * alpha);
+                  lc.setXYZ(lineIdx * 2 + 1, ACCENT.r * alpha, ACCENT.g * alpha, ACCENT.b * alpha);
                   lineIdx++;
-
-                  if (lineIdx >= quality.maxConnections) break outer;
                 }
               }
             }
           }
         }
-
-        lineGeo.setDrawRange(0, lineIdx * 2);
-        lp.needsUpdate = true;
-      } else {
-        lineGeo.setDrawRange(0, 0);
       }
+      lineGeo.setDrawRange(0, lineIdx * 2);
+      lp.needsUpdate = true;
+      lc.needsUpdate = true;
 
-      if (quality.enablePointer) {
-        if (quality.enableBloom) {
-          bloomTarget.set(mouseX, mouseY, 0.5).unproject(camera);
-          bloom.position.lerp(bloomTarget, BLOOM_LERP);
-        }
-        camOffsetX += (mouseX * 0.2 - camOffsetX) * 0.05;
-        camOffsetY += (mouseY * 0.1 - camOffsetY) * 0.05;
-        camera.position.x = camOffsetX;
-        camera.position.y = camOffsetY;
-      } else {
-        camOffsetX *= 0.9;
-        camOffsetY *= 0.9;
-        camera.position.x = camOffsetX;
-        camera.position.y = camOffsetY;
-      }
+      bloomTarget.set(mouseX, mouseY, 0.5).unproject(camera);
+      bloom.position.lerp(bloomTarget, BLOOM_LERP);
+
+      camOffsetX += (mouseX * 0.2 - camOffsetX) * 0.05;
+      camOffsetY += (mouseY * 0.1 - camOffsetY) * 0.05;
+      camera.position.x = camOffsetX;
+      camera.position.y = camOffsetY;
       camera.lookAt(0, 0, 0);
 
       renderer.render(scene, camera);
-
-      if (performanceWindowElapsed >= QUALITY_DOWNGRADE_WINDOW_MS) {
-        const averagePoorFrameRatio = poorFrameTime / performanceWindowElapsed;
-        if (averagePoorFrameRatio > 0.14 && qualityIdx < QUALITY_PROFILES.length - 1) {
-          rebuildQuality(qualityIdx + 1);
-        }
-
-        if (averagePoorFrameRatio < 0.04) goodFrameTime += performanceWindowElapsed;
-        else goodFrameTime = 0;
-
-        if (goodFrameTime >= QUALITY_UPGRADE_WINDOW_MS && qualityIdx > profileIndex(initialQuality)) {
-          rebuildQuality(qualityIdx - 1);
-          goodFrameTime = 0;
-        }
-
-        poorFrameTime = 0;
-        performanceWindowStart = now;
-      }
-
-      if (!readyCalledRef.current) {
+      if (onReady && !readyCalledRef.current) {
         readyCalledRef.current = true;
-        onReady?.();
+        onReady();
       }
     };
+    animate();
 
-    animate(performance.now());
-
-    const fadeTimeout = window.setTimeout(() => {
-      if (mountRef.current) mountRef.current.style.opacity = "1";
+    const fadeTimeout = setTimeout(() => {
+      if (mountRef.current) mountRef.current.style.opacity = '1';
     }, 50);
 
     return () => {
-      window.clearTimeout(fadeTimeout);
-      cleanup();
+      clearTimeout(fadeTimeout);
+      cancelAnimationFrame(rafId);
+      observer.disconnect();
+      ro.disconnect();
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchmove", onTouchMove);
+      far.geo.dispose();  far.mat.dispose();
+      mid.geo.dispose();  mid.mat.dispose();
+      near.geo.dispose(); near.mat.dispose();
+      lineGeo.dispose(); lineMaterial.dispose();
+      bloomGeo.dispose(); bloomMat.dispose();
+      renderer.dispose();
+      if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
     };
   }, [onReady]);
 
