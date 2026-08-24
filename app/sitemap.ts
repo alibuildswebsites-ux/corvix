@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = "2026-08-20";
 
   // Static routes
-  const routes = ["", "/about", "/services", "/portfolio", "/contact", "/blog"].map((route) => ({
+  const routes = ["", "/about", "/services", "/portfolio", "/contact", "/blog", "/privacy", "/terms", "/disclaimer"].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified,
     changeFrequency: "monthly" as const,

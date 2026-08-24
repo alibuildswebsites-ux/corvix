@@ -7,6 +7,12 @@ const footerLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+const legalLinks = [
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms & Conditions" },
+  { href: "/disclaimer", label: "Disclaimer" },
+];
+
 export default function Footer() {
   return (
     <footer className="border-t border-[rgba(255,255,255,0.08)] mt-24">
@@ -25,6 +31,14 @@ export default function Footer() {
                 href={link.href}
                 className="text-corvix-muted hover:text-corvix-text text-sm transition-colors duration-200 cursor-pointer"
               >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-4 md:ml-auto">
+            {legalLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="text-corvix-muted hover:text-corvix-text text-xs transition-colors duration-200">
                 {link.label}
               </Link>
             ))}
