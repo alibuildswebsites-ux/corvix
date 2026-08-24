@@ -1,33 +1,59 @@
 "use client";
 
-import { useEffect, type RefObject } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import type { RefObject } from "react";
 
 export function useReveal(containerRef: RefObject<HTMLElement | null>) {
-  useEffect(() => {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  useGSAP(() => {
     const container = containerRef.current;
     if (!container) return;
 
     const elements = Array.from(container.querySelectorAll<HTMLElement>("[data-reveal]"));
     if (!elements.length) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    if (prefersReducedMotion) {
+      gsap.set(elements, { clearProps: "all" });
+      return;
+    }
 
-    const observer = new IntersectionObserver(
-      (entries, currentObserver) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          entry.target.classList.add("reveal-visible");
-          currentObserver.unobserve(entry.target);
-        }
-      },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.01 },
-    );
+    elements.forEach((element) => {
+      const y = Number(element.dataset.revealY ?? 18);
+      const blur = Number(element.dataset.revealBlur ?? 8);
+      const delay = Number(element.dataset.revealDelay ?? 0);
+      const duration = Number(element.dataset.revealDuration ?? 1.05);
 
-    elements.forEach((el) => {
-      el.classList.add("reveal-on-scroll");
-      observer.observe(el);
+      gsap.set(element, {
+        autoAlpha: 0,
+        y,
+        filter: `blur(${blur}px)`,
+        willChange: "transform, opacity, filter",
+      });
+
+      gsap.to(element, {
+        autoAlpha: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration,
+        delay,
+        ease: "power2.out",
+        clearProps: "filter,willChange",
+        scrollTrigger: {
+          trigger: element,
+          start: "top 88%",
+          once: true,
+          invalidateOnRefresh: true,
+        },
+      });
     });
 
-    return () => observer.disconnect();
-  }, [containerRef]);
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+  }, {
+    scope: containerRef,
+    dependencies: [prefersReducedMotion],
+    revertOnUpdate: true,
+  });
 }

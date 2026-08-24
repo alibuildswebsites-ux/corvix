@@ -40,11 +40,11 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="border-t border-[rgba(255,255,255,0.08)]" aria-labelledby="testimonials-heading">
       <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-20 py-16 md:py-24 flex flex-col gap-12">
-        <div className="flex items-end justify-between mb-14 gap-6">
+        <div data-reveal className="flex items-end justify-between mb-14 gap-6">
           <div className="flex flex-col gap-4"><p className="text-corvix-accent text-xs font-medium tracking-[0.25em] uppercase mb-3">Happy Clients</p><h2 id="testimonials-heading" className="font-display font-bold text-5xl text-corvix-text">Teams That Ship With Corvix</h2></div>
           <p className="hidden md:block text-corvix-muted text-sm text-right max-w-xs leading-relaxed">Real client experiences from teams that have shipped with Corvix.</p>
         </div>
-        <div className="relative h-[580px] overflow-hidden" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)" }}>
+        <div data-reveal data-reveal-delay="0.08" className="relative h-[580px] overflow-hidden" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)" }}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
             <Column items={columns[0]} duration={18} />
             <Column items={columns[1]} duration={14} className="hidden md:block" />
